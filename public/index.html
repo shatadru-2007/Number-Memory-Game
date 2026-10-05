@@ -309,7 +309,47 @@
                 <span>MediaPipe Hands Landmark Mesh Active</span>
               </div>
               <div style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-muted);">
-                0 <= X <= 9 Supported
+                0 &le; X &le; 9 Supported
+              </div>
+            </div>
+
+            <!-- PROMINENT TARGET POSITION & COUNTDOWN TIMER BAR (ABOVE VIDEO BOX) -->
+            <div class="prominent-target-header">
+              <div class="prominent-target-left">
+                <div class="prominent-place-pill" id="prominent-place-pill">
+                  <span class="place-icon">🎯</span>
+                  <span class="place-title" id="prominent-place-title">POSITION #1</span>
+                </div>
+                <div class="prominent-target-instruction">
+                  <h3 id="prominent-target-heading">Show 1st Number (Place 1 of 5)</h3>
+                  <p id="prominent-target-subtext">Present the 1st digit from memory. Hold the correct number for 0.5s to advance!</p>
+                </div>
+              </div>
+
+              <div class="prominent-timer-box timer-normal" id="prominent-timer-box">
+                <div class="timer-meta">
+                  <span class="timer-title">TIME REMAINING</span>
+                  <span class="timer-countdown" id="prominent-countdown-text">5.0s</span>
+                </div>
+                <div class="timer-bar-track">
+                  <div class="timer-bar-fill" id="prominent-timer-fill"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- PROMINENT HOLD STATUS & CRITERIA RIBBON -->
+            <div class="prominent-criteria-ribbon" id="prominent-criteria-ribbon">
+              <div class="criteria-left">
+                <span class="criteria-status-icon" id="criteria-icon">⏳</span>
+                <span class="criteria-msg" id="criteria-msg">
+                  Hold <strong>correct answer</strong> for <strong>0.5s</strong> to advance immediately &middot; Otherwise, last detected number is submitted at 0.0s
+                </span>
+              </div>
+              <div class="criteria-meter-container">
+                <span class="criteria-meter-label" id="criteria-meter-label">CORRECT HOLD</span>
+                <div class="criteria-meter-track">
+                  <div class="criteria-meter-fill" id="criteria-meter-fill"></div>
+                </div>
               </div>
             </div>
 

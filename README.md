@@ -58,23 +58,36 @@ Gestures are detected via computer vision (MediaPipe Hands landmark mesh + OpenC
 
 ## 🚀 Quick Start Guide
 
-### 1. Launch the Web Application (Node.js)
+### 1. Install Dependencies
 ```bash
-# In the project directory:
-npm start
-# OR
-node server.js
+pip install -r requirements.txt
+```
+
+### 2. Launch the Web Application Server (Python)
+```bash
+# Start the Python async server (REST APIs, WebSockets & Static Frontend):
+python server.py
 ```
 Open your browser at:  
 👉 **`http://localhost:3000`**
 
-### 2. Run the Standalone Desktop Python OpenCV Engine (Optional)
-If you wish to run the interactive OpenCV camera window directly in Python:
+### 3. Run Automated Tests
 ```bash
-python opencv_vision_engine.py
+python test_server.py
+```
+
+### 4. Run the Standalone Desktop Python OpenCV Engine (Optional)
+If you wish to run the interactive OpenCV camera window directly in Python with optional live server sync:
+```bash
+# Sync with your registered roll number:
+python opencv_vision_engine.py --roll YOUR_ROLL_NO
+
+# Or run in offline practice mode:
+python opencv_vision_engine.py --offline
 ```
 - Opens an OpenCV 60-FPS camera feed with real-time hand skeleton overlay and HUD.
 - Runs through the 3-stage memory sequence on desktop with audio cues and keyboard/gesture controls.
+- Automatically syncs scores with the live tournament server leaderboard.
 - Press `q` anytime to exit.
 
 ---
@@ -82,9 +95,10 @@ python opencv_vision_engine.py
 ## 📁 Repository Structure
 
 ```
-├── server.js                   # Express + WebSocket server & REST APIs
-├── package.json                # Project dependencies
-├── opencv_vision_engine.py     # Python OpenCV + MediaPipe desktop game engine
+├── server.py                   # High-performance async Python server (REST APIs, WebSockets & Static Serving)
+├── test_server.py              # Automated test suite for server endpoints & WebSocket sync
+├── requirements.txt            # Python dependencies (aiohttp, opencv-python, mediapipe, numpy)
+├── opencv_vision_engine.py     # Python OpenCV + MediaPipe desktop game engine with live sync
 ├── data/
 │   └── database.json           # Atomic JSON database (teams, participants, runs, settings)
 ├── public/

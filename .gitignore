@@ -1,0 +1,8 @@
+__pycache__/
+*.py[cod]
+*$py.class
+*.tmp
+.env
+.venv/
+env/
+node_modules/

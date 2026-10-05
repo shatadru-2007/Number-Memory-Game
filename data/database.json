@@ -19,8 +19,88 @@
     },
     "adminPassword": "admin2026"
   },
-  "teams": [],
-  "participants": [],
+  "teams": [
+    {
+      "id": "team_1791219992243_pwhl",
+      "name": "team1",
+      "code": "MEM-7M5Y",
+      "leaderRoll": "103",
+      "totalScore": 6,
+      "createdAt": "2026-10-05T17:06:32.243973+00:00"
+    },
+    {
+      "id": "team_1791220177375_k4k4",
+      "name": "team2",
+      "code": "MEM-QXVH",
+      "leaderRoll": "104",
+      "totalScore": 7,
+      "createdAt": "2026-10-05T17:09:37.375425+00:00"
+    },
+    {
+      "id": "team_1791220759992_uezg",
+      "name": "team3",
+      "code": "MEM-HFHM",
+      "leaderRoll": "1045",
+      "totalScore": 7,
+      "createdAt": "2026-10-05T17:19:19.992333+00:00"
+    }
+  ],
+  "participants": [
+    {
+      "id": "part_1791219992244_pwhl",
+      "teamCode": "MEM-7M5Y",
+      "name": "sg",
+      "rollNumber": "103",
+      "email": "abc103@nit.com",
+      "college": "N/A",
+      "isLeader": true,
+      "status": "finished",
+      "scores": {
+        "stage1": 2,
+        "stage2": 2,
+        "stage3": 2,
+        "total": 6
+      },
+      "joinedAt": "2026-10-05T17:06:32.243973+00:00",
+      "lastActive": "2026-10-05T17:08:28.334800+00:00"
+    },
+    {
+      "id": "part_1791220177375_k4k4",
+      "teamCode": "MEM-QXVH",
+      "name": "dn",
+      "rollNumber": "104",
+      "email": "abc104@nit.com",
+      "college": "N/A",
+      "isLeader": true,
+      "status": "finished",
+      "scores": {
+        "stage1": 5,
+        "stage2": 1,
+        "stage3": 1,
+        "total": 7
+      },
+      "joinedAt": "2026-10-05T17:09:37.375425+00:00",
+      "lastActive": "2026-10-05T17:13:30.082696+00:00"
+    },
+    {
+      "id": "part_1791220759992_uezg",
+      "teamCode": "MEM-HFHM",
+      "name": "dn1",
+      "rollNumber": "1045",
+      "email": "abc1045@nit.com",
+      "college": "N/A",
+      "isLeader": true,
+      "status": "finished",
+      "scores": {
+        "stage1": 2,
+        "stage2": 3,
+        "stage3": 2,
+        "total": 7
+      },
+      "joinedAt": "2026-10-05T17:19:19.992333+00:00",
+      "lastActive": "2026-10-05T17:22:01.594378+00:00"
+    }
+  ],
   "audience": [
     {
       "id": "aud_1791212778875",
@@ -28,5 +108,252 @@
       "loginAt": "2026-10-05T15:06:18.875Z"
     }
   ],
-  "gameRuns": []
+  "gameRuns": [
+    {
+      "id": "run_1791220029105",
+      "rollNumber": "103",
+      "teamCode": "MEM-7M5Y",
+      "stageNumber": 1,
+      "sequenceShown": [
+        7,
+        1,
+        3,
+        4,
+        1
+      ],
+      "sequenceEntered": [
+        7,
+        7,
+        4,
+        4,
+        4
+      ],
+      "score": 2,
+      "timestamp": "2026-10-05T17:07:09.105490+00:00"
+    },
+    {
+      "id": "run_1791220066521",
+      "rollNumber": "103",
+      "teamCode": "MEM-7M5Y",
+      "stageNumber": 2,
+      "sequenceShown": [
+        9,
+        1,
+        7,
+        1,
+        6,
+        9,
+        4,
+        5
+      ],
+      "sequenceEntered": [
+        9,
+        2,
+        2,
+        7,
+        2,
+        2,
+        6,
+        5
+      ],
+      "score": 2,
+      "timestamp": "2026-10-05T17:07:46.521253+00:00"
+    },
+    {
+      "id": "run_1791220108334",
+      "rollNumber": "103",
+      "teamCode": "MEM-7M5Y",
+      "stageNumber": 3,
+      "sequenceShown": [
+        4,
+        3,
+        7,
+        2,
+        1,
+        2,
+        9,
+        9,
+        8,
+        4
+      ],
+      "sequenceEntered": [
+        5,
+        5,
+        4,
+        3,
+        3,
+        5,
+        8,
+        9,
+        4,
+        4
+      ],
+      "score": 2,
+      "timestamp": "2026-10-05T17:08:28.334829+00:00"
+    },
+    {
+      "id": "run_1791220260519",
+      "rollNumber": "104",
+      "teamCode": "MEM-QXVH",
+      "stageNumber": 1,
+      "sequenceShown": [
+        1,
+        5,
+        0,
+        2,
+        4
+      ],
+      "sequenceEntered": [
+        1,
+        5,
+        0,
+        2,
+        4
+      ],
+      "score": 5,
+      "timestamp": "2026-10-05T17:11:00.519242+00:00"
+    },
+    {
+      "id": "run_1791220324203",
+      "rollNumber": "104",
+      "teamCode": "MEM-QXVH",
+      "stageNumber": 2,
+      "sequenceShown": [
+        1,
+        5,
+        6,
+        4,
+        4,
+        8,
+        6,
+        4
+      ],
+      "sequenceEntered": [
+        1,
+        2,
+        0,
+        5,
+        2,
+        2,
+        1,
+        1
+      ],
+      "score": 1,
+      "timestamp": "2026-10-05T17:12:04.203523+00:00"
+    },
+    {
+      "id": "run_1791220410082",
+      "rollNumber": "104",
+      "teamCode": "MEM-QXVH",
+      "stageNumber": 3,
+      "sequenceShown": [
+        6,
+        6,
+        1,
+        7,
+        7,
+        5,
+        1,
+        8,
+        5,
+        7
+      ],
+      "sequenceEntered": [
+        5,
+        5,
+        5,
+        0,
+        2,
+        6,
+        8,
+        8,
+        0,
+        0
+      ],
+      "score": 1,
+      "timestamp": "2026-10-05T17:13:30.082725+00:00"
+    },
+    {
+      "id": "run_1791220812558",
+      "rollNumber": "1045",
+      "teamCode": "MEM-HFHM",
+      "stageNumber": 1,
+      "sequenceShown": [
+        0,
+        5,
+        9,
+        7,
+        3
+      ],
+      "sequenceEntered": [
+        5,
+        5,
+        2,
+        3,
+        3
+      ],
+      "score": 2,
+      "timestamp": "2026-10-05T17:20:12.558786+00:00"
+    },
+    {
+      "id": "run_1791220863693",
+      "rollNumber": "1045",
+      "teamCode": "MEM-HFHM",
+      "stageNumber": 2,
+      "sequenceShown": [
+        3,
+        5,
+        0,
+        2,
+        7,
+        3,
+        4,
+        2
+      ],
+      "sequenceEntered": [
+        5,
+        2,
+        2,
+        2,
+        3,
+        3,
+        4,
+        4
+      ],
+      "score": 3,
+      "timestamp": "2026-10-05T17:21:03.693539+00:00"
+    },
+    {
+      "id": "run_1791220921594",
+      "rollNumber": "1045",
+      "teamCode": "MEM-HFHM",
+      "stageNumber": 3,
+      "sequenceShown": [
+        8,
+        1,
+        5,
+        6,
+        1,
+        8,
+        6,
+        4,
+        1,
+        4
+      ],
+      "sequenceEntered": [
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        4,
+        0,
+        0
+      ],
+      "score": 2,
+      "timestamp": "2026-10-05T17:22:01.594401+00:00"
+    }
+  ]
 }

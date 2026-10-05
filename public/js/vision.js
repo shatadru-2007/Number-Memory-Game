@@ -30,6 +30,7 @@ class VisionEngine {
     // Landmark indices
     this.TIP_IDS = [4, 8, 12, 16, 20]; // Thumb, Index, Middle, Ring, Pinky
     this.PIP_IDS = [2, 6, 10, 14, 18];
+    this.recentDetections = [];
   }
 
   async init(videoEl, canvasEl) {
@@ -101,35 +102,63 @@ class VisionEngine {
     }
   }
 
+  smoothDetection(digit) {
+    if (digit === null) {
+      this.recentDetections = [];
+      return null;
+    }
+    this.recentDetections.push(digit);
+    if (this.recentDetections.length > 3) {
+      this.recentDetections.shift();
+    }
+    const counts = {};
+    for (const d of this.recentDetections) {
+      counts[d] = (counts[d] || 0) + 1;
+    }
+    let best = digit;
+    let maxCount = 0;
+    for (const [d, count] of Object.entries(counts)) {
+      if (count > maxCount) {
+        maxCount = count;
+        best = Number(d);
+      }
+    }
+    return best;
+  }
+
   countFingers(landmarks, handedness) {
     const fingers = [];
     const isRightHand = handedness === 'Right';
 
-    // 1. Thumb
-    // In mirror view on canvas: check relative horizontal offset between thumb tip and joint
+    // 1. Thumb: Multi-factor robust detection
     const thumbTip = landmarks[4];
     const thumbIp = landmarks[3];
     const thumbMcp = landmarks[2];
+    const indexMcp = landmarks[5];
     const wrist = landmarks[0];
 
-    // Check angle/distance of thumb tip relative to MCP and wrist
-    const thumbExtended = Math.hypot(thumbTip.x - wrist.x, thumbTip.y - wrist.y) > 
-                          Math.hypot(thumbMcp.x - wrist.x, thumbMcp.y - wrist.y) * 1.25;
-    
-    // Direction check
-    if (isRightHand) {
-      fingers.push(thumbTip.x < thumbIp.x || thumbExtended ? 1 : 0);
+    const distTipToWrist = Math.hypot(thumbTip.x - wrist.x, thumbTip.y - wrist.y);
+    const distMcpToWrist = Math.hypot(thumbMcp.x - wrist.x, thumbMcp.y - wrist.y);
+    const distTipToIndexMcp = Math.hypot(thumbTip.x - indexMcp.x, thumbTip.y - indexMcp.y);
+    const distIpToIndexMcp = Math.hypot(thumbIp.x - indexMcp.x, thumbIp.y - indexMcp.y);
+
+    const isExtendedFromPalm = distTipToWrist > distMcpToWrist * 1.15;
+    const isSeparatedFromHand = distTipToIndexMcp > distIpToIndexMcp * 1.08;
+    const dirCheck = isRightHand ? (thumbTip.x < thumbIp.x) : (thumbTip.x > thumbIp.x);
+
+    if (dirCheck && (isExtendedFromPalm || isSeparatedFromHand)) {
+      fingers.push(1);
     } else {
-      fingers.push(thumbTip.x > thumbIp.x || thumbExtended ? 1 : 0);
+      fingers.push(0);
     }
 
     // 2. Index, Middle, Ring, Pinky
-    // A finger is extended if tip is higher than PIP joint (y is smaller)
+    // Tip must be above PIP joint and MCP joint
     for (let i = 1; i < 5; i++) {
       const tip = landmarks[this.TIP_IDS[i]];
       const pip = landmarks[this.PIP_IDS[i]];
-      // Vertical distance check
-      if (tip.y < pip.y) {
+      const mcp = landmarks[this.PIP_IDS[i] - 1];
+      if (tip.y < pip.y && tip.y < mcp.y) {
         fingers.push(1);
       } else {
         fingers.push(0);
@@ -152,7 +181,7 @@ class VisionEngine {
     ctx.clearRect(0, 0, w, h);
     ctx.drawImage(results.image, 0, 0, w, h);
 
-    let detectedDigit = null;
+    let rawDigit = null;
     let handDetails = [];
     let totalExtended = 0;
 
@@ -168,11 +197,12 @@ class VisionEngine {
       });
 
       // Bound digit between 0 and 9
-      detectedDigit = Math.min(totalExtended, 9);
+      rawDigit = Math.min(totalExtended, 9);
     }
 
     ctx.restore();
 
+    const detectedDigit = this.smoothDetection(rawDigit);
     this.currentDigit = detectedDigit;
 
     // Stability / Hold Detection

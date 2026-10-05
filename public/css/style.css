@@ -977,6 +977,202 @@ header.app-header {
   gap: 8px;
 }
 
+/* ==========================================================================
+   PROMINENT POSITION & TIMER HEADER (DIRECTLY ABOVE VIDEO BOX)
+   ========================================================================== */
+
+.prominent-target-header {
+  background: linear-gradient(135deg, rgba(14, 21, 37, 0.98), rgba(9, 14, 25, 0.98));
+  padding: 16px 24px;
+  border-bottom: 1px solid rgba(0, 245, 212, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  box-shadow: inset 0 -10px 20px -10px rgba(0, 0, 0, 0.5);
+}
+
+.prominent-target-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex: 1;
+  min-width: 280px;
+}
+
+.prominent-place-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(0, 245, 212, 0.12);
+  border: 1.5px solid var(--accent-cyan);
+  padding: 8px 18px;
+  border-radius: var(--radius-md);
+  box-shadow: 0 0 15px rgba(0, 245, 212, 0.25);
+}
+
+.prominent-place-pill .place-icon {
+  font-size: 1.3rem;
+}
+
+.prominent-place-pill .place-title {
+  font-family: var(--font-mono);
+  font-weight: 800;
+  font-size: 1.15rem;
+  color: var(--accent-cyan);
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+
+.prominent-target-instruction h3 {
+  font-family: var(--font-main);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 2px;
+}
+
+.prominent-target-instruction p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.prominent-timer-box {
+  background: rgba(5, 8, 15, 0.9);
+  border: 1.5px solid var(--accent-cyan);
+  border-radius: var(--radius-md);
+  padding: 10px 22px;
+  min-width: 230px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  box-shadow: 0 0 20px rgba(0, 245, 212, 0.2);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.prominent-timer-box.timer-urgent {
+  border-color: var(--accent-red);
+  box-shadow: 0 0 25px rgba(239, 68, 68, 0.45);
+  animation: timer-pulse 0.6s infinite alternate;
+}
+
+@keyframes timer-pulse {
+  from { box-shadow: 0 0 15px rgba(239, 68, 68, 0.3); }
+  to { box-shadow: 0 0 35px rgba(239, 68, 68, 0.7); }
+}
+
+.prominent-timer-box.timer-warning {
+  border-color: var(--accent-gold);
+  box-shadow: 0 0 20px rgba(255, 183, 3, 0.35);
+}
+
+.prominent-timer-box.timer-normal {
+  border-color: var(--accent-cyan);
+  box-shadow: 0 0 20px rgba(0, 245, 212, 0.25);
+}
+
+.timer-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.timer-title {
+  font-size: 0.72rem;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+  font-weight: 700;
+}
+
+.timer-countdown {
+  font-family: var(--font-mono);
+  font-size: 1.85rem;
+  font-weight: 900;
+  line-height: 1;
+  color: #fff;
+}
+
+.timer-bar-track {
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.timer-bar-fill {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(90deg, var(--accent-cyan), #00b4d8);
+  border-radius: var(--radius-full);
+  transition: width 0.05s linear, background 0.3s ease;
+}
+
+.prominent-timer-box.timer-warning .timer-bar-fill {
+  background: linear-gradient(90deg, var(--accent-gold), #f77f00);
+}
+
+.prominent-timer-box.timer-urgent .timer-bar-fill {
+  background: linear-gradient(90deg, var(--accent-red), #d90429);
+}
+
+/* Criteria & Hold Status Ribbon */
+.prominent-criteria-ribbon {
+  background: rgba(10, 15, 26, 0.95);
+  border-bottom: 1px solid var(--border-color);
+  padding: 9px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  font-size: 0.85rem;
+}
+
+.criteria-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-muted);
+}
+
+.criteria-status-icon {
+  font-size: 1.15rem;
+}
+
+.criteria-meter-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.criteria-meter-label {
+  font-size: 0.72rem;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+.criteria-meter-track {
+  width: 140px;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.criteria-meter-fill {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, #10b981, #00f5d4);
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+  transition: width 0.05s ease;
+}
+
 .opencv-viewport {
   position: relative;
   width: 100%;
