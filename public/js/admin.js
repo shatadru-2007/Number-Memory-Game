@@ -156,6 +156,8 @@ class AdminManager {
         });
       }
     });
+
+    window.app?.setupTableScrollIndicators();
   }
 
   async resetParticipant(rollNumber) {

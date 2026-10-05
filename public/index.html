@@ -162,13 +162,13 @@
       </div>
 
       <!-- Action Panel -->
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 12px;">
-        <div>
+      <div class="lobby-action-bar">
+        <div class="action-btn-group">
           <button class="btn btn-secondary" onclick="window.app.openPracticeModal()">
             📷 Camera & Gesture Calibration
           </button>
           <button class="btn btn-secondary" onclick="window.app.openModal('modal-gesture-guide')">
-            🖐️ Gesture Rules (0-9)
+            🖐️ Gesture Rules (1-9)
           </button>
         </div>
 
@@ -181,27 +181,36 @@
 
       <!-- Team Members Roster -->
       <div class="card-panel">
-        <div class="panel-header">
-          <h3>Team Members Roster</h3>
-          <span style="font-size: 0.85rem; color: var(--text-muted);">
-            Each member plays individually · Team Score = Sum of all members
-          </span>
+        <div class="panel-header" style="flex-wrap: wrap; gap: 8px;">
+          <div>
+            <h3>Team Members Roster</h3>
+            <span style="font-size: 0.85rem; color: var(--text-muted);">
+              Each member plays individually · Team Score = Sum of all members
+            </span>
+          </div>
+          <div class="table-scroll-hint">
+            <span>↔ Scroll table</span>
+          </div>
         </div>
 
-        <table class="custom-table">
-          <thead>
-            <tr>
-              <th>Member Name</th>
-              <th>Roll Number</th>
-              <th>Status</th>
-              <th>Stage Breakdown</th>
-              <th>Total Points</th>
-            </tr>
-          </thead>
-          <tbody id="lobby-members-tbody">
-            <!-- Populated via JS -->
-          </tbody>
-        </table>
+        <div class="table-scroll-container">
+          <div class="table-responsive">
+            <table class="custom-table" id="team-roster-table">
+              <thead>
+                <tr>
+                  <th>Member</th>
+                  <th><span class="desktop-text">Roll Number</span><span class="mobile-text">Roll</span></th>
+                  <th>Status</th>
+                  <th><span class="desktop-text">Stage Breakdown</span><span class="mobile-text">Stages</span></th>
+                  <th style="text-align: right;"><span class="desktop-text">Total Points</span><span class="mobile-text">Total</span></th>
+                </tr>
+              </thead>
+              <tbody id="lobby-members-tbody">
+                <!-- Populated via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -573,21 +582,23 @@
           </div>
         </div>
 
-        <div class="leaderboard-table-wrapper">
-          <table class="custom-table">
-            <thead>
-              <tr>
-                <th style="width: 80px;">Rank</th>
-                <th>Team Info</th>
-                <th>Members</th>
-                <th>Total Score</th>
-                <th style="text-align: right;">Action</th>
-              </tr>
-            </thead>
-            <tbody id="leaderboard-tbody">
-              <!-- Populated via JS -->
-            </tbody>
-          </table>
+        <div class="table-scroll-container">
+          <div class="table-responsive leaderboard-table-wrapper">
+            <table class="custom-table">
+              <thead>
+                <tr>
+                  <th style="width: 70px;">Rank</th>
+                  <th>Team Info</th>
+                  <th><span class="desktop-text">Members</span><span class="mobile-text">Players</span></th>
+                  <th><span class="desktop-text">Total Score</span><span class="mobile-text">Score</span></th>
+                  <th style="text-align: right;">Action</th>
+                </tr>
+              </thead>
+              <tbody id="leaderboard-tbody">
+                <!-- Populated via JS -->
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
 
@@ -655,26 +666,33 @@
 
         <!-- Right: Live Participants Monitor Table -->
         <div class="card-panel">
-          <div class="panel-header">
+          <div class="panel-header" style="flex-wrap: wrap; gap: 8px;">
             <h3>Registered Teams & Participants Live Monitor</h3>
-            <button class="btn btn-secondary btn-sm" onclick="window.adminManager.renderAdminMonitor()">Refresh</button>
+            <div style="display: flex; gap: 8px; align-items: center;">
+              <div class="table-scroll-hint"><span>↔ Scroll table</span></div>
+              <button class="btn btn-secondary btn-sm" onclick="window.adminManager.renderAdminMonitor()">Refresh</button>
+            </div>
           </div>
 
-          <table class="custom-table">
-            <thead>
-              <tr>
-                <th>Team</th>
-                <th>Participant</th>
-                <th>Roll Number</th>
-                <th>Status</th>
-                <th>Scores</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody id="admin-teams-tbody">
-              <!-- Populated via JS -->
-            </tbody>
-          </table>
+          <div class="table-scroll-container">
+            <div class="table-responsive">
+              <table class="custom-table">
+                <thead>
+                  <tr>
+                    <th>Team</th>
+                    <th>Participant</th>
+                    <th><span class="desktop-text">Roll Number</span><span class="mobile-text">Roll</span></th>
+                    <th>Status</th>
+                    <th>Scores</th>
+                    <th style="text-align: right;">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-teams-tbody">
+                  <!-- Populated via JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
 
       </div>
@@ -793,7 +811,7 @@
   <div class="modal-overlay" id="modal-practice">
     <div class="modal-box" style="max-width: 720px;">
       <div class="modal-header">
-        <h3>Camera & Gesture Calibration (Practice 0-9)</h3>
+        <h3>Camera & Gesture Calibration (Practice 1-9)</h3>
         <button class="modal-close" onclick="window.app.closePracticeModal()">&times;</button>
       </div>
       <div class="modal-body" style="text-align: center;">

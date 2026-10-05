@@ -169,7 +169,7 @@ class LeaderboardManager {
               <span style="color: var(--accent-cyan);">${m.scores?.total || 0} pts</span>
             </h5>
             <div style="font-size: 0.78rem; color: var(--text-dim); margin-bottom: 6px;">
-              Roll: <strong>${m.rollNumber}</strong> | ${m.college || 'N/A'}
+              Roll: <strong>${m.rollNumber}</strong> ${m.phone ? ' | 📞 ' + m.phone : (m.college ? ' | ' + m.college : '')}
             </div>
             <div class="member-stage-scores">
               <span>S1: <strong>${m.scores?.stage1 !== null ? m.scores.stage1 : '-'}</strong></span>
@@ -196,6 +196,8 @@ class LeaderboardManager {
       `;
       tbody.appendChild(detailTr);
     });
+
+    window.app?.setupTableScrollIndicators();
   }
 
   toggleTeamDetails(code) {

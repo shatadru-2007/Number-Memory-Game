@@ -28,6 +28,7 @@ class App {
 
     // Bind forms and events
     this.bindEvents();
+    this.setupTableScrollIndicators();
 
     // Route view
     const hash = window.location.hash.replace('#', '');
@@ -55,6 +56,7 @@ class App {
     if (target) {
       target.classList.add('active');
       window.scrollTo(0, 0);
+      requestAnimationFrame(() => this.setupTableScrollIndicators());
     }
 
     // Update active nav button
@@ -294,16 +296,18 @@ class App {
 
         tr.innerHTML = `
           <td>
-            <strong>${m.name}</strong> ${m.isLeader ? '<span class="badge-tag">Leader</span>' : ''} ${isCurrent ? '<span class="badge-tag" style="background:rgba(255,255,255,0.1); color:#fff;">You</span>' : ''}<br>
-            <span style="font-size:0.75rem; color:var(--text-dim);">${m.phone ? '📞 ' + m.phone : (m.college || '')}</span>
+            <div style="font-weight: 700; color: #fff;">${m.name} ${m.isLeader ? '<span class="badge-tag">Leader</span>' : ''} ${isCurrent ? '<span class="badge-tag" style="background:rgba(255,255,255,0.1); color:#fff;">You</span>' : ''}</div>
+            <div style="font-size:0.75rem; color:var(--text-dim); margin-top: 2px;">${m.phone ? '📞 ' + m.phone : (m.college || '')}</div>
           </td>
-          <td><code style="color:var(--text-main);">${m.rollNumber}</code></td>
+          <td><code style="color:var(--text-main); font-size: 0.85rem;">${m.rollNumber}</code></td>
           <td><span class="badge-status ${m.status}">${m.status}</span></td>
-          <td>S1: ${s1} | S2: ${s2} | S3: ${s3}</td>
-          <td><strong style="color:var(--accent-cyan); font-family:var(--font-mono); font-size:1.1rem;">${m.scores?.total || 0} pts</strong></td>
+          <td style="white-space: nowrap;"><span class="score-pill">S1: ${s1}</span> <span class="score-pill">S2: ${s2}</span> <span class="score-pill">S3: ${s3}</span></td>
+          <td style="text-align: right; padding-right: 18px;"><strong style="color:var(--accent-cyan); font-family:var(--font-mono); font-size:1.02rem; white-space: nowrap;">${m.scores?.total || 0} pts</strong></td>
         `;
         tbody.appendChild(tr);
       });
+
+      this.setupTableScrollIndicators();
 
       // Update Game Start Button Status
       const startBtn = document.getElementById('btn-lobby-start-game');
@@ -373,6 +377,24 @@ class App {
   closePracticeModal() {
     window.visionEngine.stopCamera();
     this.closeModal('modal-practice');
+  }
+
+  setupTableScrollIndicators() {
+    document.querySelectorAll('.table-responsive').forEach(el => {
+      const parent = el.closest('.table-scroll-container');
+      if (!parent) return;
+      const checkScroll = () => {
+        if (el.scrollWidth <= el.clientWidth + 4 || el.scrollLeft + el.clientWidth >= el.scrollWidth - 8) {
+          parent.classList.add('scrolled-end');
+        } else {
+          parent.classList.remove('scrolled-end');
+        }
+      };
+      el.removeEventListener('scroll', checkScroll);
+      el.addEventListener('scroll', checkScroll, { passive: true });
+      requestAnimationFrame(checkScroll);
+      window.addEventListener('resize', checkScroll, { passive: true });
+    });
   }
 }
 

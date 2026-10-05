@@ -550,6 +550,28 @@
       ],
       "score": 5,
       "timestamp": "2026-10-05T19:00:28.126210+00:00"
+    },
+    {
+      "id": "run_1791228308031",
+      "rollNumber": "TEST-ROLL-001",
+      "teamCode": "MEM-P92Z",
+      "stageNumber": 1,
+      "sequenceShown": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "sequenceEntered": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "score": 5,
+      "timestamp": "2026-10-05T19:25:08.031440+00:00"
     }
   ]
 }
