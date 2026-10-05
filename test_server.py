@@ -7,6 +7,13 @@ class ServerTestCase(AioHTTPTestCase):
     async def get_application(self):
         return server.create_app()
 
+    async def test_health_check(self):
+        resp = await self.client.get('/api/health')
+        self.assertEqual(resp.status, 200)
+        data = await resp.json()
+        self.assertEqual(data.get('status'), 'healthy')
+        self.assertEqual(data.get('service'), 'aarohan-number-memory')
+
     async def test_get_config(self):
         resp = await self.client.get('/api/config')
         self.assertEqual(resp.status, 200)

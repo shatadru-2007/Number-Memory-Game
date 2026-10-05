@@ -31,9 +31,7 @@ class App {
 
     // Route view
     const hash = window.location.hash.replace('#', '');
-    if (hash === 'audience') {
-      this.switchView('audience-hub');
-    } else if (hash === 'admin' && window.adminManager.isLoggedIn()) {
+    if (hash === 'admin' && window.adminManager.isLoggedIn()) {
       this.switchView('admin-hub');
       window.adminManager.loadAdminView();
     } else if (this.participant && this.team) {
@@ -44,6 +42,12 @@ class App {
   }
 
   switchView(viewId) {
+    // Restrict Admin Hub to Admin Only
+    if (viewId === 'admin-hub' && !window.adminManager.isLoggedIn()) {
+      this.openModal('modal-admin-login');
+      return;
+    }
+
     this.currentView = viewId;
     document.querySelectorAll('.view-section').forEach(sec => sec.classList.remove('active'));
 
@@ -206,33 +210,6 @@ class App {
           this.switchView('team-lobby');
         } catch (err) {
           alert('Network or server error while joining team');
-        }
-      });
-    }
-
-    // Audience Sign-in Form
-    const audienceForm = document.getElementById('form-audience-login');
-    if (audienceForm) {
-      audienceForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const email = document.getElementById('aud-email').value;
-
-        try {
-          const res = await fetch('/api/audience/login', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email })
-          });
-          const data = await res.json();
-          if (data.success) {
-            this.closeModal('modal-audience-login');
-            this.switchView('audience-hub');
-            this.showToast(`Welcome! Live Leaderboard streaming for ${email}`, 'success');
-          } else {
-            alert(data.error);
-          }
-        } catch (err) {
-          alert('Error signing in as audience');
         }
       });
     }

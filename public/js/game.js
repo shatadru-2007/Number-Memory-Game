@@ -129,20 +129,29 @@ class GameEngine {
     document.getElementById('stage-brief-screen').style.display = 'none';
     document.getElementById('memorize-phase-screen').style.display = 'flex';
 
+    // Render sequence step slots strip
+    this.renderMemorizeSlotsStrip();
+
     let count = 3;
     const bigDigit = document.getElementById('memorize-digit');
     const label = document.getElementById('memorize-stage-indicator');
+    const heading = document.getElementById('memorize-heading');
     const progFill = document.getElementById('memorize-progress-fill');
+    const countdownText = document.getElementById('memorize-countdown-text');
 
-    label.textContent = `Get Ready! Sequence starting in...`;
-    bigDigit.textContent = count;
-    progFill.style.width = '100%';
+    if (label) label.textContent = `GET READY! SEQUENCE STARTING`;
+    if (heading) heading.textContent = `Sequence starting in ${count}...`;
+    if (bigDigit) bigDigit.textContent = count;
+    if (progFill) progFill.style.width = '100%';
+    if (countdownText) countdownText.textContent = `${count}s`;
     window.soundEngine.playCountdownTick();
 
     const interval = setInterval(() => {
       count--;
       if (count > 0) {
-        bigDigit.textContent = count;
+        if (bigDigit) bigDigit.textContent = count;
+        if (heading) heading.textContent = `Sequence starting in ${count}...`;
+        if (countdownText) countdownText.textContent = `${count}s`;
         window.soundEngine.playCountdownTick();
       } else {
         clearInterval(interval);
@@ -152,7 +161,21 @@ class GameEngine {
     }, 1000);
   }
 
-  // 3. Play the numbers sequence one-by-one
+  renderMemorizeSlotsStrip() {
+    const strip = document.getElementById('memorize-slots-strip');
+    if (!strip) return;
+    strip.innerHTML = '';
+    const total = this.activeSequence.length;
+    for (let i = 0; i < total; i++) {
+      const slot = document.createElement('div');
+      slot.className = 'mem-slot-item';
+      slot.id = `mem-slot-${i}`;
+      slot.textContent = `#${i + 1}`;
+      strip.appendChild(slot);
+    }
+  }
+
+  // 3. Play the numbers sequence one-by-one (Ultra Prominent Sequence Display)
   runMemorizationSequence() {
     const config = this.stageConfigs[this.currentStage];
     let index = 0;
@@ -160,7 +183,7 @@ class GameEngine {
 
     const showNext = () => {
       if (index >= total) {
-        // Memorization finished -> Transition to OpenCV Output Box
+        // Memorization finished -> Transition to Split Gesture Arena
         this.openOpenCVOutputBox();
         return;
       }
@@ -168,23 +191,40 @@ class GameEngine {
       const num = this.activeSequence[index];
       const bigDigit = document.getElementById('memorize-digit');
       const label = document.getElementById('memorize-stage-indicator');
+      const heading = document.getElementById('memorize-heading');
       const progFill = document.getElementById('memorize-progress-fill');
+      const countdownText = document.getElementById('memorize-countdown-text');
 
-      label.textContent = `Memorize Sequence: Number ${index + 1} of ${total}`;
-      bigDigit.textContent = num;
-      bigDigit.parentElement.style.animation = 'none';
-      bigDigit.parentElement.offsetHeight; // trigger reflow
-      bigDigit.parentElement.style.animation = 'scale-pop 0.3s ease';
+      // Update prominent sequence badges
+      if (label) label.textContent = `SEQUENCE NUMBER ${index + 1} OF ${total}`;
+      if (heading) heading.textContent = `Observe & Memorize Digit #${index + 1} of ${total}`;
+      if (countdownText) countdownText.textContent = `${(config.displayInterval / 1000).toFixed(1)}s`;
+
+      if (bigDigit) {
+        bigDigit.textContent = num;
+        bigDigit.parentElement.style.animation = 'none';
+        bigDigit.parentElement.offsetHeight; // trigger reflow
+        bigDigit.parentElement.style.animation = 'scale-pop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+      }
+
+      // Update memorization slots strip
+      document.querySelectorAll('.mem-slot-item').forEach((slot, i) => {
+        slot.classList.remove('active');
+        if (i < index) slot.classList.add('passed');
+        if (i === index) slot.classList.add('active');
+      });
 
       window.soundEngine.playDigitBeep();
 
       // Animate progress bar fill over displayInterval
-      progFill.style.transition = 'none';
-      progFill.style.width = '100%';
-      setTimeout(() => {
-        progFill.style.transition = `width ${config.displayInterval}ms linear`;
-        progFill.style.width = '0%';
-      }, 50);
+      if (progFill) {
+        progFill.style.transition = 'none';
+        progFill.style.width = '100%';
+        setTimeout(() => {
+          progFill.style.transition = `width ${config.displayInterval}ms linear`;
+          progFill.style.width = '0%';
+        }, 40);
+      }
 
       index++;
       this.memorizeTimer = setTimeout(showNext, config.displayInterval);
@@ -198,6 +238,21 @@ class GameEngine {
     document.getElementById('memorize-phase-screen').style.display = 'none';
     document.getElementById('opencv-box-screen').style.display = 'block';
 
+    // Populate Top Left: Team Name and Active Participant Name
+    const tName = this.team ? this.team.name : (localStorage.getItem('aarohan_team') ? JSON.parse(localStorage.getItem('aarohan_team')).name : 'Team Alpha');
+    const pName = this.participant ? this.participant.name : (localStorage.getItem('aarohan_participant') ? JSON.parse(localStorage.getItem('aarohan_participant')).name : 'Participant');
+    const pRoll = this.participant ? this.participant.rollNumber : (localStorage.getItem('aarohan_participant') ? JSON.parse(localStorage.getItem('aarohan_participant')).rollNumber : '');
+
+    const teamEl = document.getElementById('arena-team-name');
+    const memberEl = document.getElementById('arena-member-name');
+    const rollEl = document.getElementById('arena-member-roll');
+    const stagePill = document.getElementById('arena-stage-title-pill');
+
+    if (teamEl) teamEl.textContent = tName;
+    if (memberEl) memberEl.textContent = pName;
+    if (rollEl) rollEl.textContent = pRoll ? `(Roll: ${pRoll})` : '';
+    if (stagePill) stagePill.innerHTML = `<span class="status-dot"></span> <span>STAGE ${this.currentStage} IN PROGRESS</span>`;
+
     const videoEl = document.getElementById('webcam-video');
     const canvasEl = document.getElementById('vision-canvas');
 
@@ -205,11 +260,11 @@ class GameEngine {
     const camStarted = await window.visionEngine.startCamera();
 
     if (!camStarted) {
-      alert('Camera is required for OpenCV Gesture detection. Please verify permissions.');
+      alert('Camera is required for OpenCV Gesture detection. Please verify camera permissions.');
       return;
     }
 
-    // Manual Confirm Digit Button
+    // Manual Confirm Digit Button (Fallback)
     const lockBtn = document.getElementById('btn-manual-lock');
     if (lockBtn) {
       lockBtn.onclick = () => {
@@ -230,28 +285,39 @@ class GameEngine {
     };
     document.addEventListener('keydown', this._keyListener);
 
-    // Frame update for HUD elements & 0.5s correct hold detection
+    // Frame update for HUD elements & instant correct gesture detection
     window.visionEngine.onDigitLocked = null; // Controlled by game engine
     window.visionEngine.onFrameUpdate = (data) => {
       this.updateHudOverlay(data);
     };
 
-    // Setup sequence trail
-    this.renderSequenceTrail();
+    // Render Bottom Right: Stage Sequence Grid
+    this.renderStageSequenceGrid();
     this.startAnswerStep(0);
   }
 
-  renderSequenceTrail() {
-    const trailEl = document.getElementById('sequence-trail');
-    trailEl.innerHTML = '';
+  // Bottom Right Grid of Sequence Numbers of this specific stage
+  renderStageSequenceGrid() {
+    const grid = document.getElementById('stage-sequence-grid');
+    if (!grid) return;
+    grid.innerHTML = '';
     const total = this.activeSequence.length;
 
+    const subtitle = document.getElementById('sequence-grid-subtitle');
+    if (subtitle) {
+      subtitle.textContent = `Stage ${this.currentStage} (${total} Numbers)`;
+    }
+
     for (let i = 0; i < total; i++) {
-      const box = document.createElement('div');
-      box.className = 'trail-digit';
-      box.id = `trail-digit-${i}`;
-      box.textContent = `#${i + 1}`;
-      trailEl.appendChild(box);
+      const item = document.createElement('div');
+      item.className = 'stage-grid-item';
+      item.id = `stage-slot-${i}`;
+      item.innerHTML = `
+        <div class="slot-idx">#${i + 1}</div>
+        <div class="slot-icon" id="stage-slot-icon-${i}">⏳</div>
+        <div class="slot-val" id="stage-slot-val-${i}">?</div>
+      `;
+      grid.appendChild(item);
     }
   }
 
@@ -274,67 +340,57 @@ class GameEngine {
 
     this.currentInputIndex = index;
     this.expectedDigit = this.activeSequence[index];
-    this.correctHoldStartTime = null;
     this.lastDetectedDigit = null;
     this.isStepLocked = false;
 
-    // Highlight current trail slot
-    document.querySelectorAll('.trail-digit').forEach((el, i) => {
-      el.classList.toggle('current', i === index);
+    // Highlight current slot in bottom-right grid
+    document.querySelectorAll('.stage-grid-item').forEach((el, i) => {
+      if (i === index) {
+        el.classList.add('slot-active');
+      } else {
+        el.classList.remove('slot-active');
+      }
     });
 
     const ordinalStr = this.getOrdinal(index + 1);
 
-    // Update Prominent Position Header directly above video box
-    const placePill = document.getElementById('prominent-place-pill');
-    if (placePill) {
-      placePill.innerHTML = `<span class="place-icon">🎯</span> <span class="place-title">POSITION #${index + 1}</span>`;
+    // 1. Central Top: Prominently show current sequence position
+    const posNumber = document.getElementById('central-pos-number');
+    if (posNumber) {
+      posNumber.textContent = `SHOW SEQUENCE #${index + 1} OF ${total}`;
     }
 
-    const targetHeading = document.getElementById('prominent-target-heading');
-    if (targetHeading) {
-      targetHeading.textContent = `Show ${ordinalStr} Number (Place ${index + 1} of ${total})`;
+    const posInstruction = document.getElementById('central-pos-instruction');
+    if (posInstruction) {
+      posInstruction.textContent = `Present the ${ordinalStr} number from memory`;
     }
 
-    const targetSubtext = document.getElementById('prominent-target-subtext');
-    if (targetSubtext) {
-      targetSubtext.textContent = `Present the ${ordinalStr} digit from memory. Hold the correct number for 0.5s to advance!`;
-    }
+    // Reset status ribbon
+    const statusIcon = document.getElementById('central-status-icon');
+    const statusText = document.getElementById('central-status-text');
+    if (statusIcon) statusIcon.textContent = '⚡';
+    if (statusText) statusText.textContent = 'Correct answer immediately locks and advances · Else waits for timer';
 
-    // Floating overlay pill
-    const targetStepPill = document.getElementById('hud-target-step');
-    if (targetStepPill) {
-      targetStepPill.textContent = `Place ${index + 1} of ${total}`;
-    }
+    // Reset central detected digit and clear green tick mark
+    const centralCard = document.getElementById('central-detected-card');
+    if (centralCard) centralCard.classList.remove('match-correct');
+    const digitDisplay = document.getElementById('central-detected-digit');
+    if (digitDisplay) digitDisplay.textContent = '--';
 
-    // Reset Ribbon state
-    const criteriaIcon = document.getElementById('criteria-icon');
-    if (criteriaIcon) criteriaIcon.textContent = '⏳';
-    const criteriaMsg = document.getElementById('criteria-msg');
-    if (criteriaMsg) {
-      criteriaMsg.innerHTML = `Hold <strong>correct answer</strong> for <strong>0.5s</strong> to advance immediately &middot; Otherwise, last detected number is submitted at 0.0s`;
-    }
-    const criteriaFill = document.getElementById('criteria-meter-fill');
-    if (criteriaFill) criteriaFill.style.width = '0%';
-    const hudHoldBar = document.getElementById('hud-hold-progress-bar');
-    if (hudHoldBar) hudHoldBar.style.width = '0%';
-
-    // Start step countdown timer
+    // 2. Below that: Show the Timer
     const startTime = Date.now();
     const duration = config.responseInterval;
     this.inputTimeLeft = duration / 1000;
 
     if (this.inputTimer) clearInterval(this.inputTimer);
 
-    const timerDigits = document.getElementById('prominent-countdown-text');
-    const timerFill = document.getElementById('prominent-timer-fill');
-    const timerBox = document.getElementById('prominent-timer-box');
-    const timerBadge = document.getElementById('hud-timer-badge');
+    const timerDigits = document.getElementById('central-countdown-text');
+    const timerFill = document.getElementById('central-timer-fill');
+    const timerCard = document.getElementById('central-timer-card');
 
     if (timerDigits) timerDigits.textContent = `${this.inputTimeLeft.toFixed(1)}s`;
-    if (timerBadge) timerBadge.textContent = `${this.inputTimeLeft.toFixed(1)}s`;
     if (timerFill) timerFill.style.width = '100%';
-    if (timerBox) timerBox.className = 'prominent-timer-box timer-normal';
+    if (timerCard) timerCard.className = 'central-timer-card timer-normal';
 
     this.inputTimer = setInterval(() => {
       const elapsed = Date.now() - startTime;
@@ -342,18 +398,17 @@ class GameEngine {
       this.inputTimeLeft = left;
 
       if (timerDigits) timerDigits.textContent = `${left.toFixed(1)}s`;
-      if (timerBadge) timerBadge.textContent = `${left.toFixed(1)}s`;
 
       const pct = Math.max(0, Math.min(100, (left / (duration / 1000)) * 100));
       if (timerFill) timerFill.style.width = `${pct}%`;
 
-      if (timerBox) {
+      if (timerCard) {
         if (left <= 1.5) {
-          timerBox.className = 'prominent-timer-box timer-urgent';
+          timerCard.className = 'central-timer-card timer-urgent';
         } else if (left <= 2.5) {
-          timerBox.className = 'prominent-timer-box timer-warning';
+          timerCard.className = 'central-timer-card timer-warning';
         } else {
-          timerBox.className = 'prominent-timer-box timer-normal';
+          timerCard.className = 'central-timer-card timer-normal';
         }
       }
 
@@ -362,120 +417,118 @@ class GameEngine {
         if (this.isStepLocked) return;
         this.isStepLocked = true;
 
-        // Timer expired! User did NOT hold correct answer for 0.5s
-        // "The number at the last should be considered as answer then."
-        const finalDigit = (this.lastDetectedDigit !== null) 
-          ? this.lastDetectedDigit 
+        // Timer expired! User did NOT show correct answer
+        // "if correct answer not detected wait till the timer ends. The number at the last should be considered as answer then."
+        const finalDigit = (this.lastDetectedDigit !== null)
+          ? this.lastDetectedDigit
           : (window.visionEngine.currentDigit !== null ? window.visionEngine.currentDigit : 0);
 
-        if (criteriaMsg) {
-          criteriaMsg.innerHTML = `<span style="color: var(--accent-gold); font-weight: 700;">⏱️ Time expired! Locked in final gesture: ${finalDigit}</span>`;
+        if (statusText) {
+          statusText.innerHTML = `<span style="color: var(--accent-gold); font-weight: 700;">⏱️ Time up! Submitting last gesture: ${finalDigit}</span>`;
         }
 
-        this.handleDigitLocked(finalDigit, false);
+        const isCorrect = (finalDigit === this.expectedDigit);
+        this.handleDigitLocked(finalDigit, isCorrect);
       }
     }, 40);
   }
 
+  // Frame update from camera stream
   updateHudOverlay(data) {
-    const digitBadge = document.getElementById('hud-detected-digit');
-    const breakdownEl = document.getElementById('hud-hands-breakdown');
+    const digitDisplay = document.getElementById('central-detected-digit');
+    const handsBreakdown = document.getElementById('central-hands-breakdown');
+    const cameraHandStatus = document.getElementById('camera-hand-status');
     const lockBtn = document.getElementById('btn-manual-lock');
-    const criteriaIcon = document.getElementById('criteria-icon');
-    const criteriaMsg = document.getElementById('criteria-msg');
-    const criteriaFill = document.getElementById('criteria-meter-fill');
-    const hudHoldBar = document.getElementById('hud-hold-progress-bar');
+    const statusIcon = document.getElementById('central-status-icon');
+    const statusText = document.getElementById('central-status-text');
 
     const detected = data.detectedDigit;
+
     if (detected !== null) {
       this.lastDetectedDigit = detected;
-      if (digitBadge) digitBadge.textContent = detected;
+      if (digitDisplay) digitDisplay.textContent = detected;
+      if (cameraHandStatus) cameraHandStatus.textContent = `Hand: ${detected}`;
+
       const handStr = data.handDetails.map(h => `${h.label}: ${h.count}`).join(' | ');
-      if (breakdownEl) breakdownEl.textContent = `${handStr} (Fingers: ${data.totalExtended})`;
+      if (handsBreakdown) handsBreakdown.textContent = `${handStr} (Fingers: ${data.totalExtended})`;
       if (lockBtn) lockBtn.textContent = `Confirm Digit (${detected})`;
     } else {
-      if (digitBadge) digitBadge.textContent = '--';
-      if (breakdownEl) breakdownEl.textContent = 'Show hand in camera view (0 to 9)';
+      if (digitDisplay && !this.isStepLocked) digitDisplay.textContent = '--';
+      if (cameraHandStatus) cameraHandStatus.textContent = 'Waiting for hand';
+      if (handsBreakdown) handsBreakdown.textContent = 'Show hand in camera view (0 to 9)';
       if (lockBtn) lockBtn.textContent = 'Confirm Digit (0)';
     }
 
-    // Check 0.5s Correct Answer Hold Rule
-    if (!this.isStepLocked && this.expectedDigit !== undefined) {
-      const isCorrect = (detected !== null && detected === this.expectedDigit);
+    // User rule:
+    // "also remove the threshold parameter
+    // if the correct number is detected mark it as correct and move to next number , if correct answer not detected wait till the timer ends"
+    if (!this.isStepLocked && this.expectedDigit !== undefined && detected !== null) {
+      if (detected === this.expectedDigit) {
+        // INSTANT ADVANCE ON CORRECT GESTURE! No threshold delay!
+        this.isStepLocked = true;
+        if (this.inputTimer) clearInterval(this.inputTimer);
 
-      if (isCorrect) {
-        if (!this.correctHoldStartTime) {
-          this.correctHoldStartTime = Date.now();
-        }
-        const elapsed = Date.now() - this.correctHoldStartTime;
-        const holdProgress = Math.min(elapsed / 500, 1.0); // 0.5s = 500ms
-
-        if (criteriaFill) criteriaFill.style.width = `${holdProgress * 100}%`;
-        if (hudHoldBar) hudHoldBar.style.width = `${holdProgress * 100}%`;
-        if (criteriaIcon) criteriaIcon.textContent = '🎯';
-        if (criteriaMsg) {
-          criteriaMsg.innerHTML = `<strong style="color: var(--accent-green); font-size: 0.95rem;">CORRECT NUMBER (${detected})!</strong> Holding: ${(elapsed / 1000).toFixed(1)}s / 0.5s to advance...`;
+        if (statusIcon) statusIcon.textContent = '✅';
+        if (statusText) {
+          statusText.innerHTML = `<strong style="color: var(--accent-green); font-size: 0.95rem;">CORRECT NUMBER (${detected})!</strong> Moving to next number...`;
         }
 
-        if (elapsed >= 500) {
-          // Lock in early!
-          this.isStepLocked = true;
-          if (this.inputTimer) clearInterval(this.inputTimer);
-
-          if (criteriaFill) criteriaFill.style.width = '100%';
-          if (hudHoldBar) hudHoldBar.style.width = '100%';
-          if (criteriaIcon) criteriaIcon.textContent = '✅';
-          if (criteriaMsg) {
-            criteriaMsg.innerHTML = `<strong style="color: var(--accent-cyan); font-size: 1rem;">PERFECT MATCH! Locked in ${detected} & Advancing...</strong>`;
-          }
-
-          this.handleDigitLocked(detected, true);
-        }
+        this.handleDigitLocked(detected, true);
       } else {
-        // Not correct answer (wrong digit or no hand shown)
-        this.correctHoldStartTime = null;
-        if (criteriaFill) criteriaFill.style.width = '0%';
-        if (hudHoldBar) hudHoldBar.style.width = '0%';
-
-        if (detected !== null) {
-          if (criteriaIcon) criteriaIcon.textContent = '✋';
-          if (criteriaMsg) {
-            criteriaMsg.innerHTML = `Showing: <strong>${detected}</strong> &middot; (Waiting for timer expiry or correct gesture)`;
-          }
-        } else {
-          if (criteriaIcon) criteriaIcon.textContent = '⏳';
-          if (criteriaMsg) {
-            criteriaMsg.innerHTML = `Hold <strong>correct answer</strong> for <strong>0.5s</strong> to advance &middot; Otherwise, last detected number is submitted at 0.0s`;
-          }
+        if (statusIcon) statusIcon.textContent = '✋';
+        if (statusText) {
+          statusText.innerHTML = `Showing: <strong>${detected}</strong> &middot; Waiting for correct number or timer expiry`;
         }
       }
     }
   }
 
-  // 6. Handle Digit Locked
-  handleDigitLocked(digit, isEarlyCorrect = false) {
+  // 6. Handle Digit Locked & Update Stage Sequence Grid (Green if correct, Red if wrong)
+  handleDigitLocked(digit, isCorrect = false) {
     if (this.inputTimer) clearInterval(this.inputTimer);
     this.isStepLocked = true;
 
     window.soundEngine.playLockIn();
     this.userSequence.push(digit);
 
-    // Update visual trail box
-    const trailBox = document.getElementById(`trail-digit-${this.currentInputIndex}`);
-    if (trailBox) {
-      trailBox.textContent = digit;
-      trailBox.classList.remove('current');
-      if (digit === this.expectedDigit) {
-        trailBox.classList.add('correct');
+    // Update central detected card visual state
+    const centralCard = document.getElementById('central-detected-card');
+    const digitDisplay = document.getElementById('central-detected-digit');
+    if (digitDisplay) digitDisplay.textContent = digit;
+
+    if (isCorrect) {
+      // User rule: "if the shown digit is correct, make the digit icon green, show a large tick mark and then move to the next number"
+      if (centralCard) centralCard.classList.add('match-correct');
+    } else {
+      if (centralCard) centralCard.classList.remove('match-correct');
+    }
+
+    // Update the slot in the Bottom Right stage sequence grid
+    const slotItem = document.getElementById(`stage-slot-${this.currentInputIndex}`);
+    const slotIcon = document.getElementById(`stage-slot-icon-${this.currentInputIndex}`);
+    const slotVal = document.getElementById(`stage-slot-val-${this.currentInputIndex}`);
+
+    if (slotItem) {
+      slotItem.classList.remove('slot-active');
+      if (isCorrect) {
+        // User rule: "if answered correctly make the number icon green"
+        slotItem.classList.add('slot-correct');
+        if (slotIcon) slotIcon.textContent = '✓';
+        if (slotVal) slotVal.textContent = digit;
       } else {
-        trailBox.classList.add('entered');
+        // User rule: "if wrong then red"
+        slotItem.classList.add('slot-wrong');
+        if (slotIcon) slotIcon.textContent = '✗';
+        if (slotVal) slotVal.textContent = digit;
       }
     }
 
-    // Small delay before advancing to next digit
+    // Brief delay before advancing to next step (allows user to see large green tick mark)
+    const delay = isCorrect ? 420 : 280;
     setTimeout(() => {
+      if (centralCard) centralCard.classList.remove('match-correct');
       this.startAnswerStep(this.currentInputIndex + 1);
-    }, 280);
+    }, delay);
   }
 
   // 7. Finish Stage, Calculate Score, and Submit

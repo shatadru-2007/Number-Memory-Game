@@ -811,10 +811,24 @@ async def root_or_spa_handler(request):
     return web.Response(text="Frontend index.html not found.", status=404)
 
 
+# ======================== HEALTH CHECK (RENDER) ========================
+
+async def api_health(request):
+    """Zero-overhead healthcheck route for cloud hosting platforms like Render."""
+    return web.json_response({
+        "status": "healthy",
+        "service": "aarohan-number-memory",
+        "timestamp": datetime.now(timezone.utc).isoformat()
+    })
+
+
 # ======================== APPLICATION SETUP ========================
 
 def create_app():
     app = web.Application(middlewares=[cors_middleware])
+
+    # Health check for Render / Cloud
+    app.router.add_get("/api/health", api_health)
 
     # WebSocket endpoints
     app.router.add_get("/ws", websocket_handler)

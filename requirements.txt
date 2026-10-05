@@ -1,5 +1,3 @@
+# Requirements for Render Cloud Deployment (Pure Python Async Web Server)
+# MediaPipe & OpenCV run client-side in the browser via WebAssembly/CDN for ultra-low latency.
 aiohttp>=3.9.0
-opencv-python>=4.8.0
-mediapipe>=0.10.0
-numpy>=1.24.0
-pillow>=10.0.0

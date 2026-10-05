@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: aarohan-number-memory
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: python server.py
+    healthCheckPath: /api/health
+    autoDeploy: true
+    envVars:
+      - key: PORT
+        value: 10000
+      - key: ADMIN_PASSWORD
+        value: admin2026
+      - key: HOST
+        value: 0.0.0.0

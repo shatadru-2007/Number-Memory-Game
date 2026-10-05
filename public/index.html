@@ -39,7 +39,6 @@
         <nav class="nav-links">
           <button class="btn-nav active" data-view="landing">Arena Home</button>
           <button class="btn-nav" data-view="team-lobby" id="nav-team-lobby">My Team Lobby</button>
-          <button class="btn-nav" data-view="audience-hub">Live Leaderboard</button>
           <button class="btn-nav" data-view="admin-hub">Host Admin</button>
         </nav>
       </div>
@@ -88,8 +87,8 @@
           <p>Select your entry point to participate, watch live scores, or manage the event</p>
         </div>
 
-        <!-- 3 Role Panels Grid -->
-        <div class="roles-grid">
+        <!-- 2 Role Panels Grid -->
+        <div class="roles-grid" style="grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));">
           
           <!-- Panel 1: Participant -->
           <div class="role-card participant">
@@ -98,7 +97,7 @@
             <p class="role-desc">
               Step into the arena! Leaders create a team to receive a unique Team Code. 
               Teammates join with that code. Each member plays separately on their own device, 
-              and individual scores sum up into the total Team Score.
+              and individual scores sum up into your team's total score.
             </p>
             <div style="font-size: 0.78rem; color: #a5f3fc; background: rgba(0,245,212,0.08); padding: 8px 12px; border-radius: 8px; margin-bottom: 20px; border: 1px solid rgba(0,245,212,0.2);">
               ℹ️ Note: Team names can be duplicated, but a student with one roll number cannot register in any other team.
@@ -113,41 +112,21 @@
             </div>
           </div>
 
-          <!-- Panel 2: Audience -->
-          <div class="role-card audience">
-            <div class="role-icon-box">👥</div>
-            <h4 class="role-title">Audience</h4>
-            <p class="role-desc">
-              Watch the action unfold live! Sign in with your Email ID to access real-time event analytics, 
-              total registered teams, live active players, and the dynamic tournament leaderboard.
-            </p>
-            <div style="font-size: 0.78rem; color: #e9d5ff; background: rgba(121,40,202,0.08); padding: 8px 12px; border-radius: 8px; margin-bottom: 20px; border: 1px solid rgba(121,40,202,0.2);">
-              👁️ Instant entry: Simple email sign-in with live WebSocket score broadcasting.
-            </div>
-            <div class="role-actions">
-              <button class="btn btn-purple" onclick="window.app.openModal('modal-audience-login')">
-                📊 Enter Audience Hub
-              </button>
-              <button class="btn btn-secondary" onclick="window.app.switchView('audience-hub')">
-                📈 View Live Leaderboard
-              </button>
-            </div>
-          </div>
-
-          <!-- Panel 3: Admin (Host) -->
+          <!-- Panel 2: Admin (Host) -->
           <div class="role-card admin">
             <div class="role-icon-box">🛡️</div>
             <h4 class="role-title">Admin (Host)</h4>
             <p class="role-desc">
-              Secure event management for organizers. Adjust stage numbers and display timers, monitor live 
-              participant status, reset glitch runs, export official results to CSV, or initialize a fresh round.
+              Secure event management for organizers. Access the live tournament leaderboard, 
+              view event metrics, tune stage parameters, monitor participants, reset runs, 
+              or export official results to CSV.
             </p>
             <div style="font-size: 0.78rem; color: #fde68a; background: rgba(255,183,3,0.08); padding: 8px 12px; border-radius: 8px; margin-bottom: 20px; border: 1px solid rgba(255,183,3,0.2);">
-              🔒 Host access protected by secure authentication key.
+              🔒 Host access protected by secure authentication key (Leaderboard & Stats restricted to Admin).
             </div>
             <div class="role-actions">
               <button class="btn btn-secondary" onclick="window.app.openModal('modal-admin-login')">
-                ⚙️ Host Login
+                ⚙️ Host Login & Leaderboard
               </button>
             </div>
           </div>
@@ -279,135 +258,170 @@
           </button>
         </div>
 
-        <!-- 3.2 Memorization Phase Screen -->
+        <!-- 3.2 Memorization Phase Screen (Prominent Sequence Display) -->
         <div id="memorize-phase-screen" class="memorize-screen" style="display: none;">
-          <div class="memorize-counter" id="memorize-stage-indicator">
-            Memorize Sequence: Number 1 of 5
+          <div class="memorize-banner-badge">
+            <span class="status-dot"></span>
+            <span>MEMORIZATION PHASE ACTIVE</span>
           </div>
 
-          <div class="big-digit-circle">
+          <div class="memorize-prominent-header">
+            <div class="memorize-counter-chip" id="memorize-stage-indicator">
+              SEQUENCE NUMBER 1 OF 5
+            </div>
+            <h2 class="memorize-heading" id="memorize-heading">Observe and Memorize the Digit Order</h2>
+          </div>
+
+          <!-- Sequence Step Slots Tracker Strip -->
+          <div class="memorize-slots-strip" id="memorize-slots-strip">
+            <!-- Dynamically populated via JS -->
+          </div>
+
+          <!-- Massive Ultra-Prominent Glowing Digit Display -->
+          <div class="big-digit-circle prominent-glow-circle">
             <span id="memorize-digit">?</span>
           </div>
 
-          <div class="memorize-progress-bar">
-            <div class="memorize-progress-fill" id="memorize-progress-fill"></div>
+          <!-- Prominent Interval Timer Bar -->
+          <div class="memorize-timer-box">
+            <div class="memorize-timer-meta">
+              <span class="memorize-timer-label">INTERVAL WINDOW</span>
+              <span class="memorize-timer-val" id="memorize-countdown-text">3.0s</span>
+            </div>
+            <div class="memorize-progress-bar">
+              <div class="memorize-progress-fill" id="memorize-progress-fill"></div>
+            </div>
           </div>
 
-          <p style="font-size: 0.85rem; color: var(--text-dim); margin-top: 20px;">
-            Commit each digit and its sequential order to memory. Answer phase begins automatically.
+          <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 18px;">
+            Commit each digit and its sequential order to memory. Answering phase begins automatically!
           </p>
         </div>
 
-        <!-- 3.3 OpenCV Output Box (Hand Gesture Answering Phase) -->
+        <!-- 3.3 OpenCV Output Box (Hand Gesture Answering Phase - Split Layout) -->
         <div id="opencv-box-screen" style="display: none;">
-          <div class="opencv-box-container">
+          
+          <!-- TOP-LEFT IDENTITY BAR: Team Name + Current Participating Member Name -->
+          <div class="arena-top-bar">
+            <div class="arena-identity-left">
+              <div class="arena-team-row">
+                <span class="identity-tag">TEAM</span>
+                <span class="arena-team-name" id="arena-team-name">Loading...</span>
+              </div>
+              <div class="arena-member-row">
+                <span class="identity-tag member">ACTIVE PLAYER</span>
+                <span class="arena-member-name" id="arena-member-name">Loading...</span>
+                <span class="arena-member-roll" id="arena-member-roll"></span>
+              </div>
+            </div>
+            <div class="arena-top-badge" id="arena-stage-title-pill">
+              <span class="status-dot"></span>
+              <span>STAGE 1 IN PROGRESS</span>
+            </div>
+          </div>
+
+          <div class="gesture-arena-container">
             
-            <div class="opencv-header">
-              <div class="opencv-title">
-                <span>[OPENCV_VISION_STREAM]</span>
-                <span class="status-dot"></span>
-                <span>MediaPipe Hands Landmark Mesh Active</span>
+            <!-- CENTRAL PART: Target Sequence Position, Timer, and Large Detected Digit -->
+            <div class="gesture-center-panel">
+              
+              <!-- 1. Central Top: Current Sequence Number Prominently Displayed -->
+              <div class="central-target-header">
+                <div class="central-position-badge" id="central-position-pill">
+                  <span class="badge-icon">🎯</span>
+                  <span class="badge-text" id="central-pos-number">SHOW SEQUENCE #1 OF 5</span>
+                </div>
+                <h2 class="central-target-title" id="central-pos-instruction">
+                  Present the 1st number from memory
+                </h2>
               </div>
-              <div style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-muted);">
-                0 &le; X &le; 9 Supported
+
+              <!-- 2. Below that: Show the Timer Prominently -->
+              <div class="central-timer-card" id="central-timer-card">
+                <div class="central-timer-row">
+                  <div class="central-timer-label">
+                    <span class="timer-icon">⏱️</span>
+                    <span>TIME REMAINING FOR THIS NUMBER</span>
+                  </div>
+                  <div class="central-timer-digits" id="central-countdown-text">5.0s</div>
+                </div>
+                <div class="central-timer-track">
+                  <div class="central-timer-fill" id="central-timer-fill"></div>
+                </div>
               </div>
+
+              <!-- 3. Below that: Show Detected Digit Clearly in Large Size + Large Green Tick Mark -->
+              <div class="central-detected-card" id="central-detected-card">
+                <div class="detected-badge-label">LIVE DETECTED GESTURE DIGIT</div>
+                
+                <div class="detected-display-wrapper" id="detected-display-wrapper">
+                  <div class="central-giant-digit" id="central-detected-digit">--</div>
+                  <div class="giant-tick-overlay" id="giant-tick-overlay">✓</div>
+                </div>
+
+                <div class="detected-hands-text" id="central-hands-breakdown">
+                  Show your hand in the camera (0 to 9)
+                </div>
+                <div class="detected-prompt-ribbon" id="central-status-ribbon">
+                  <span class="ribbon-icon" id="central-status-icon">⚡</span>
+                  <span class="ribbon-msg" id="central-status-text">Correct answer immediately locks and advances &middot; Else waits for timer</span>
+                </div>
+              </div>
+
+              <!-- Bottom Fallback & Controls -->
+              <div class="central-bottom-bar">
+                <div class="central-fallback-tip">
+                  💡 <strong>Tip:</strong> If camera is not detecting, press keyboard keys <strong>0-9</strong> for immediate fallback.
+                </div>
+                <button class="btn btn-secondary btn-sm" id="btn-manual-lock">
+                  Lock Current Digit
+                </button>
+              </div>
+
             </div>
 
-            <!-- PROMINENT TARGET POSITION & COUNTDOWN TIMER BAR (ABOVE VIDEO BOX) -->
-            <div class="prominent-target-header">
-              <div class="prominent-target-left">
-                <div class="prominent-place-pill" id="prominent-place-pill">
-                  <span class="place-icon">🎯</span>
-                  <span class="place-title" id="prominent-place-title">POSITION #1</span>
+            <!-- RIGHT COLUMN: Camera Top Right + Sequence Grid Bottom Right -->
+            <div class="gesture-right-sidebar">
+              
+              <!-- Top Right: Camera View -->
+              <div class="camera-feed-card">
+                <div class="camera-feed-header">
+                  <div class="camera-feed-title">
+                    <span class="status-dot"></span>
+                    <span>OPENCV CAMERA VIEW</span>
+                  </div>
+                  <span class="camera-status-pill" id="camera-hand-status">Waiting for hand</span>
                 </div>
-                <div class="prominent-target-instruction">
-                  <h3 id="prominent-target-heading">Show 1st Number (Place 1 of 5)</h3>
-                  <p id="prominent-target-subtext">Present the 1st digit from memory. Hold the correct number for 0.5s to advance!</p>
+
+                <div class="camera-viewport-box">
+                  <video id="webcam-video" autoplay playsinline muted></video>
+                  <canvas id="vision-canvas"></canvas>
+                </div>
+
+                <div class="camera-feed-footer">
+                  <span>0=Fist &middot; 1-5=One Hand &middot; 6-9=Two Hands</span>
                 </div>
               </div>
 
-              <div class="prominent-timer-box timer-normal" id="prominent-timer-box">
-                <div class="timer-meta">
-                  <span class="timer-title">TIME REMAINING</span>
-                  <span class="timer-countdown" id="prominent-countdown-text">5.0s</span>
-                </div>
-                <div class="timer-bar-track">
-                  <div class="timer-bar-fill" id="prominent-timer-fill"></div>
-                </div>
-              </div>
-            </div>
-
-            <!-- PROMINENT HOLD STATUS & CRITERIA RIBBON -->
-            <div class="prominent-criteria-ribbon" id="prominent-criteria-ribbon">
-              <div class="criteria-left">
-                <span class="criteria-status-icon" id="criteria-icon">⏳</span>
-                <span class="criteria-msg" id="criteria-msg">
-                  Hold <strong>correct answer</strong> for <strong>0.5s</strong> to advance immediately &middot; Otherwise, last detected number is submitted at 0.0s
-                </span>
-              </div>
-              <div class="criteria-meter-container">
-                <span class="criteria-meter-label" id="criteria-meter-label">CORRECT HOLD</span>
-                <div class="criteria-meter-track">
-                  <div class="criteria-meter-fill" id="criteria-meter-fill"></div>
-                </div>
-              </div>
-            </div>
-
-            <div class="opencv-viewport">
-              <video id="webcam-video" autoplay playsinline muted></video>
-              <canvas id="vision-canvas"></canvas>
-
-              <!-- Floating Vision HUD Overlay -->
-              <div class="vision-hud-overlay">
-                <div class="hud-top-bar">
-                  <div class="hud-pill target-digit" id="hud-target-step">
-                    Input 1 of 5
-                  </div>
-                  <div class="hud-pill timer" id="hud-timer-badge">
-                    5.0s
-                  </div>
-                </div>
-
-                <div class="hud-center-detect">
-                  <div class="detected-digit-badge">
-                    <span class="detect-label">Detected Gesture Digit</span>
-                    <span class="digit-display" id="hud-detected-digit">--</span>
-                    <span class="hands-breakdown" id="hud-hands-breakdown">Show hand in camera view (0-9)</span>
-                  </div>
-
-                  <!-- Hold to confirm progress bar -->
-                  <div style="margin-top: 10px; width: 200px; height: 6px; background: rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden; margin-left: auto; margin-right: auto;">
-                    <div id="hud-hold-progress-bar" style="height: 100%; width: 0%; background: var(--accent-green); transition: width 0.1s linear;"></div>
-                  </div>
-                  <span style="font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em;">Hold steady to lock in</span>
-                </div>
-
-                <div class="hud-bottom-bar">
-                  <div class="sequence-trail" id="sequence-trail">
-                    <!-- Populated dynamically -->
-                  </div>
-
+              <!-- Bottom Right: Grid of Sequence Numbers of Specific Stage -->
+              <div class="sequence-grid-card">
+                <div class="sequence-grid-header">
                   <div>
-                    <button class="btn btn-primary btn-sm" id="btn-manual-lock">
-                      Confirm Digit
-                    </button>
+                    <h4 style="font-size: 1.05rem; font-weight: 700; color: #fff;">Stage Sequence Grid</h4>
+                    <span style="font-size: 0.78rem; color: var(--text-muted);" id="sequence-grid-subtitle">Stage 1 (5 Numbers)</span>
                   </div>
+                  <div class="sequence-legend">
+                    <span class="legend-dot green"></span> <span>Correct</span>
+                    <span class="legend-dot red" style="margin-left: 6px;"></span> <span>Wrong</span>
+                  </div>
+                </div>
+
+                <!-- Dynamically populated sequence slots: Green if correct, Red if wrong -->
+                <div class="stage-sequence-grid" id="stage-sequence-grid">
+                  <!-- Generated by gameEngine.renderStageSequenceGrid() -->
                 </div>
               </div>
 
-            </div>
-
-            <!-- OpenCV Controls & Gesture Quick Guide -->
-            <div class="opencv-controls-bar">
-              <div class="gesture-guide-pill">
-                <strong>Gesture Guide:</strong> 
-                <span>0 = Fist</span> · 
-                <span>1-5 = Fingers on 1 hand</span> · 
-                <span>6-9 = Open Hand (5) + 1-4 fingers on other hand</span>
-              </div>
-              <div style="font-size: 0.78rem; color: var(--text-dim);">
-                💡 Tip: You can also press keys 0-9 on your keyboard as an instant fallback.
-              </div>
             </div>
 
           </div>
@@ -474,11 +488,8 @@
           </div>
 
           <div style="display: flex; justify-content: center; gap: 16px;">
-            <button class="btn btn-secondary" onclick="window.app.switchView('team-lobby')">
-              Back to Team Lobby
-            </button>
-            <button class="btn btn-primary" onclick="window.app.switchView('audience-hub')">
-              View Live Leaderboard 📊
+            <button class="btn btn-primary btn-lg" onclick="window.app.switchView('team-lobby')">
+              Return to My Team Lobby 🏠
             </button>
           </div>
         </div>
@@ -487,21 +498,34 @@
     </section>
 
     <!-- ====================================================================
-         VIEW 4: AUDIENCE LIVE LEADERBOARD
+         VIEW 4: ADMIN COMMAND CENTER (LEADERBOARD & METRICS RESTRICTED TO ADMIN)
          ==================================================================== -->
-    <section id="view-audience-hub" class="view-section">
-      <div style="text-align: center; margin-bottom: 36px;">
-        <div class="hero-badge">LIVE EVENT BROADCAST</div>
-        <h2 style="font-family: var(--font-main); font-size: 2.2rem; font-weight: 800;">
-          AAROHAN 2026 Live Leaderboard
-        </h2>
-        <p style="color: var(--text-muted);">
-          Real-time score sync streaming live across all participating teams
-        </p>
+    <section id="view-admin-hub" class="view-section">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 16px;">
+        <div>
+          <div class="hero-badge" style="margin-bottom: 8px;">ADMINISTRATIVE ACCESS ONLY</div>
+          <h2 style="font-family: var(--font-main); font-size: 2.2rem; font-weight: 800;">
+            Host Admin Command Center
+          </h2>
+          <p style="color: var(--text-muted); font-size: 0.9rem;">
+            Official tournament leaderboard, live event telemetry, stage controls, and data export
+          </p>
+        </div>
+        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+          <button class="btn btn-secondary btn-sm" onclick="window.adminManager.exportCSV()">
+            📥 Export CSV Results
+          </button>
+          <button class="btn btn-danger btn-sm" onclick="window.adminManager.purgeAll()">
+            ⚠️ Reset Entire Event
+          </button>
+          <button class="btn btn-secondary btn-sm" onclick="window.adminManager.logout()">
+            Log Out
+          </button>
+        </div>
       </div>
 
-      <!-- 4 Live Metric Stat Cards -->
-      <div class="metrics-strip">
+      <!-- 4 Live Metric Stat Cards (Admin Only) -->
+      <div class="metrics-strip" style="margin-bottom: 30px;">
         <div class="metric-card">
           <div class="metric-icon">🛡️</div>
           <div class="metric-info">
@@ -532,58 +556,35 @@
         </div>
       </div>
 
-      <!-- Search & Filter Bar -->
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 12px;">
-        <div style="font-weight: 700; font-size: 1.2rem;">
-          Ranked Teams Standing
+      <!-- Live Tournament Leaderboard (Admin Only) -->
+      <div class="card-panel" style="margin-bottom: 36px;">
+        <div class="panel-header" style="flex-wrap: wrap; gap: 12px;">
+          <div>
+            <h3>Official Tournament Leaderboard</h3>
+            <span style="font-size: 0.85rem; color: var(--text-muted);">
+              Live real-time ranking computed from participant stage runs (Admin view)
+            </span>
+          </div>
+          <div style="width: 300px;">
+            <input type="text" class="form-control" id="leaderboard-search" placeholder="Search team or roll no...">
+          </div>
         </div>
-        <div style="width: 320px;">
-          <input type="text" class="form-control" id="leaderboard-search" placeholder="Search team name, code, or roll no...">
-        </div>
-      </div>
 
-      <!-- Leaderboard Table -->
-      <div class="leaderboard-table-wrapper">
-        <table class="custom-table">
-          <thead>
-            <tr>
-              <th style="width: 80px;">Rank</th>
-              <th>Team Info</th>
-              <th>Members</th>
-              <th>Total Score</th>
-              <th style="text-align: right;">Action</th>
-            </tr>
-          </thead>
-          <tbody id="leaderboard-tbody">
-            <!-- Populated via JS -->
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <!-- ====================================================================
-         VIEW 5: ADMIN COMMAND CENTER
-         ==================================================================== -->
-    <section id="view-admin-hub" class="view-section">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; flex-wrap: wrap; gap: 16px;">
-        <div>
-          <h2 style="font-family: var(--font-main); font-size: 2rem; font-weight: 800;">
-            Host Admin Command Center
-          </h2>
-          <p style="color: var(--text-muted); font-size: 0.9rem;">
-            Configure stage parameters, monitor participants, reset runs, and export results
-          </p>
-        </div>
-        <div style="display: flex; gap: 12px;">
-          <button class="btn btn-secondary btn-sm" onclick="window.adminManager.exportCSV()">
-            📥 Export CSV Results
-          </button>
-          <button class="btn btn-danger btn-sm" onclick="window.adminManager.purgeAll()">
-            ⚠️ Reset Entire Event
-          </button>
-          <button class="btn btn-secondary btn-sm" onclick="window.adminManager.logout()">
-            Log Out
-          </button>
+        <div class="leaderboard-table-wrapper">
+          <table class="custom-table">
+            <thead>
+              <tr>
+                <th style="width: 80px;">Rank</th>
+                <th>Team Info</th>
+                <th>Members</th>
+                <th>Total Score</th>
+                <th style="text-align: right;">Action</th>
+              </tr>
+            </thead>
+            <tbody id="leaderboard-tbody">
+              <!-- Populated via JS -->
+            </tbody>
+          </table>
         </div>
       </div>
 
@@ -762,30 +763,6 @@
     </div>
   </div>
 
-  <!-- Modal: Audience Login -->
-  <div class="modal-overlay" id="modal-audience-login">
-    <div class="modal-box">
-      <div class="modal-header">
-        <h3>Audience Login</h3>
-        <button class="modal-close" onclick="window.app.closeModal('modal-audience-login')">&times;</button>
-      </div>
-      <form id="form-audience-login">
-        <div class="modal-body">
-          <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px;">
-            Audience members sign in with their email address only to view live match statistics and dynamic leaderboards.
-          </p>
-          <div class="form-group">
-            <label for="aud-email">Your Email Address *</label>
-            <input type="email" class="form-control" id="aud-email" placeholder="e.g. audience@aarohan.edu" required>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" onclick="window.app.closeModal('modal-audience-login')">Cancel</button>
-          <button type="submit" class="btn btn-purple">Enter Live Hub</button>
-        </div>
-      </form>
-    </div>
-  </div>
 
   <!-- Modal: Admin Login -->
   <div class="modal-overlay" id="modal-admin-login">

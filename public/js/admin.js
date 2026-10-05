@@ -65,6 +65,9 @@ class AdminManager {
     }
 
     this.renderAdminMonitor();
+    if (window.leaderboardManager) {
+      window.leaderboardManager.fetchData();
+    }
   }
 
   async saveConfig() {
