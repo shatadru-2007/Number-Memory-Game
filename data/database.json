@@ -1,0 +1,32 @@
+{
+  "settings": {
+    "stages": {
+      "stage1": {
+        "numbersCount": 5,
+        "displayIntervalSeconds": 3,
+        "responseIntervalSeconds": 5
+      },
+      "stage2": {
+        "numbersCount": 8,
+        "displayIntervalSeconds": 2,
+        "responseIntervalSeconds": 4
+      },
+      "stage3": {
+        "numbersCount": 10,
+        "displayIntervalSeconds": 1.5,
+        "responseIntervalSeconds": 3
+      }
+    },
+    "adminPassword": "admin2026"
+  },
+  "teams": [],
+  "participants": [],
+  "audience": [
+    {
+      "id": "aud_1791212778875",
+      "email": "spectator1@aarohan.org",
+      "loginAt": "2026-10-05T15:06:18.875Z"
+    }
+  ],
+  "gameRuns": []
+}
