@@ -20,7 +20,7 @@ class VisionEngine {
     this.currentDigit = null;
     this.lastDetectedDigit = null;
     this.stableStartTime = null;
-    this.holdThreshold = 800; // 0.8s hold to confirm
+    this.holdThreshold = 1000; // 1.0s hold to confirm
     this.holdProgress = 0.0;
 
     // Callback when gesture is locked

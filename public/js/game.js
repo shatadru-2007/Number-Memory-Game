@@ -353,6 +353,8 @@ class GameEngine {
     this.expectedDigit = this.activeSequence[index];
     this.lastDetectedDigit = null;
     this.isStepLocked = false;
+    this.correctHoldStartTime = null;
+    this.currentHoldDigit = null;
 
     // Highlight current slot in bottom-right grid
     document.querySelectorAll('.stage-grid-item').forEach((el, i) => {
@@ -376,11 +378,26 @@ class GameEngine {
       posInstruction.textContent = `Present the ${ordinalStr} number from memory`;
     }
 
+    // Reset hold meter box
+    const holdBox = document.getElementById('gesture-hold-meter-box');
+    const holdFill = document.getElementById('hold-meter-fill');
+    const holdTimer = document.getElementById('hold-meter-timer');
+    const holdTitle = document.getElementById('hold-meter-title');
+    const cameraHudHoldFill = document.getElementById('camera-hud-hold-fill');
+    const cameraHandStatus = document.getElementById('camera-hand-status');
+
+    if (holdBox) holdBox.classList.remove('holding-correct', 'holding-wrong', 'hold-complete');
+    if (holdFill) holdFill.style.width = '0%';
+    if (cameraHudHoldFill) cameraHudHoldFill.style.width = '0%';
+    if (holdTimer) holdTimer.textContent = '0.0s / 1.0s';
+    if (holdTitle) holdTitle.textContent = '⏱️ Hold correct gesture for 1.0s to confirm';
+    if (cameraHandStatus) cameraHandStatus.classList.remove('status-pill-holding');
+
     // Reset status ribbon
     const statusIcon = document.getElementById('central-status-icon');
     const statusText = document.getElementById('central-status-text');
-    if (statusIcon) statusIcon.textContent = '⚡';
-    if (statusText) statusText.textContent = 'Correct answer immediately locks and advances · Else waits for timer';
+    if (statusIcon) statusIcon.textContent = '⏱️';
+    if (statusText) statusText.innerHTML = 'Hold <strong>correct gesture</strong> continuously for <strong>1.0s</strong> to confirm & advance &middot; Else waits for timer';
 
     // Reset central detected digit and clear green tick mark
     const centralCard = document.getElementById('central-detected-card');
@@ -453,12 +470,18 @@ class GameEngine {
     const statusIcon = document.getElementById('central-status-icon');
     const statusText = document.getElementById('central-status-text');
 
+    const holdBox = document.getElementById('gesture-hold-meter-box');
+    const holdFill = document.getElementById('hold-meter-fill');
+    const holdTimer = document.getElementById('hold-meter-timer');
+    const holdTitle = document.getElementById('hold-meter-title');
+    const cameraHudHoldFill = document.getElementById('camera-hud-hold-fill');
+
     const detected = data.detectedDigit;
 
     if (detected !== null) {
       this.lastDetectedDigit = detected;
       if (digitDisplay) digitDisplay.textContent = detected;
-      if (cameraHandStatus) cameraHandStatus.textContent = `Hand: ${detected}`;
+      if (cameraHandStatus && !this.correctHoldStartTime) cameraHandStatus.textContent = `Hand: ${detected}`;
 
       const handStr = data.handDetails.map(h => `${h.label}: ${h.count}`).join(' | ');
       if (handsBreakdown) handsBreakdown.textContent = `${handStr} (Fingers: ${data.totalExtended})`;
@@ -470,25 +493,95 @@ class GameEngine {
       if (lockBtn) lockBtn.textContent = 'Confirm Digit (0)';
     }
 
-    // User rule:
-    // "also remove the threshold parameter
-    // if the correct number is detected mark it as correct and move to next number , if correct answer not detected wait till the timer ends"
-    if (!this.isStepLocked && this.expectedDigit !== undefined && detected !== null) {
-      if (detected === this.expectedDigit) {
-        // INSTANT ADVANCE ON CORRECT GESTURE! No threshold delay!
-        this.isStepLocked = true;
-        if (this.inputTimer) clearInterval(this.inputTimer);
+    // 1-second continuous hold threshold requirement:
+    // The participant must hold the correct gesture continuously for 1.0s to confirm & advance.
+    // If an incorrect gesture is held, do not advance early (let them keep trying until the timer expires).
+    if (!this.isStepLocked && this.expectedDigit !== undefined) {
+      const isCorrect = (detected !== null && detected === this.expectedDigit);
 
-        if (statusIcon) statusIcon.textContent = '✅';
-        if (statusText) {
-          statusText.innerHTML = `<strong style="color: var(--accent-green); font-size: 0.95rem;">CORRECT NUMBER (${detected})!</strong> Moving to next number...`;
+      if (isCorrect) {
+        if (this.currentHoldDigit !== detected || !this.correctHoldStartTime) {
+          this.correctHoldStartTime = Date.now();
+          this.currentHoldDigit = detected;
         }
 
-        this.handleDigitLocked(detected, true);
-      } else {
-        if (statusIcon) statusIcon.textContent = '✋';
+        const elapsed = Date.now() - this.correctHoldStartTime;
+        const holdProgress = Math.min(elapsed / 1000, 1.0); // 1.0s = 1000ms
+        const pctStr = `${(holdProgress * 100).toFixed(1)}%`;
+        const timeStr = `${(Math.min(elapsed, 1000) / 1000).toFixed(1)}s`;
+
+        if (holdBox) {
+          holdBox.classList.add('holding-correct');
+          holdBox.classList.remove('holding-wrong');
+        }
+        if (holdFill) holdFill.style.width = pctStr;
+        if (cameraHudHoldFill) cameraHudHoldFill.style.width = pctStr;
+        if (holdTimer) holdTimer.textContent = `${timeStr} / 1.0s`;
+        if (holdTitle) {
+          holdTitle.innerHTML = `🎯 <strong>Target Match (${detected})!</strong> Holding to confirm...`;
+        }
+
+        if (cameraHandStatus) {
+          cameraHandStatus.textContent = `Match! ${timeStr}/1.0s`;
+          cameraHandStatus.classList.add('status-pill-holding');
+        }
+        if (statusIcon) statusIcon.textContent = '🎯';
         if (statusText) {
-          statusText.innerHTML = `Showing: <strong>${detected}</strong> &middot; Waiting for correct number or timer expiry`;
+          statusText.innerHTML = `<strong style="color: var(--accent-green); font-size: 0.95rem;">CORRECT GESTURE (${detected})!</strong> Holding continuously: ${timeStr} / 1.0s to confirm...`;
+        }
+
+        if (elapsed >= 1000) {
+          // 1.0s continuous threshold reached! Lock in early & advance!
+          this.isStepLocked = true;
+          if (this.inputTimer) clearInterval(this.inputTimer);
+
+          if (holdBox) holdBox.classList.add('hold-complete');
+          if (holdFill) holdFill.style.width = '100%';
+          if (cameraHudHoldFill) cameraHudHoldFill.style.width = '100%';
+          if (holdTimer) holdTimer.textContent = '1.0s / 1.0s ✓';
+          if (statusIcon) statusIcon.textContent = '✅';
+          if (statusText) {
+            statusText.innerHTML = `<strong style="color: var(--accent-green); font-size: 1rem;">CONFIRMED CORRECT NUMBER (${detected})!</strong> Moving to next number...`;
+          }
+          if (cameraHandStatus) {
+            cameraHandStatus.textContent = `Confirmed (${detected}) ✓`;
+          }
+
+          this.handleDigitLocked(detected, true);
+        }
+      } else {
+        // Not correct answer (wrong digit or no hand shown)
+        this.correctHoldStartTime = null;
+        this.currentHoldDigit = null;
+
+        if (holdBox) {
+          holdBox.classList.remove('holding-correct', 'hold-complete');
+        }
+        if (holdFill) holdFill.style.width = '0%';
+        if (cameraHudHoldFill) cameraHudHoldFill.style.width = '0%';
+        if (holdTimer) holdTimer.textContent = '0.0s / 1.0s';
+        if (cameraHandStatus) {
+          cameraHandStatus.classList.remove('status-pill-holding');
+        }
+
+        if (detected !== null) {
+          if (holdBox) holdBox.classList.add('holding-wrong');
+          if (holdTitle) {
+            holdTitle.innerHTML = `Showing: <strong>${detected}</strong> &middot; (Waiting for target gesture or timer expiry)`;
+          }
+          if (statusIcon) statusIcon.textContent = '✋';
+          if (statusText) {
+            statusText.innerHTML = `Showing: <strong>${detected}</strong> &middot; Keep trying until timer expires or show target gesture`;
+          }
+        } else {
+          if (holdBox) holdBox.classList.remove('holding-wrong');
+          if (holdTitle) {
+            holdTitle.innerHTML = `⏱️ Hold correct answer for 1.0s to confirm`;
+          }
+          if (statusIcon) statusIcon.textContent = '⏱️';
+          if (statusText) {
+            statusText.innerHTML = `Hold <strong>correct answer</strong> for <strong>1.0s</strong> to confirm & advance &middot; Else waits for timer`;
+          }
         }
       }
     }
@@ -498,6 +591,16 @@ class GameEngine {
   handleDigitLocked(digit, isCorrect = false) {
     if (this.inputTimer) clearInterval(this.inputTimer);
     this.isStepLocked = true;
+    this.correctHoldStartTime = null;
+    this.currentHoldDigit = null;
+
+    const holdBox = document.getElementById('gesture-hold-meter-box');
+    const cameraHudHoldFill = document.getElementById('camera-hud-hold-fill');
+    const cameraHandStatus = document.getElementById('camera-hand-status');
+
+    if (holdBox) holdBox.classList.remove('holding-correct', 'holding-wrong');
+    if (cameraHudHoldFill) cameraHudHoldFill.style.width = '0%';
+    if (cameraHandStatus) cameraHandStatus.classList.remove('status-pill-holding');
 
     window.soundEngine.playLockIn();
     this.userSequence.push(digit);

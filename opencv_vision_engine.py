@@ -445,15 +445,15 @@ def run_opencv_standalone_game(roll_number=None, server_url="http://localhost:30
                 if current_digit is not None:
                     last_detected = current_digit
 
-                # 0.5s Correct Answer Hold Rule
+                # 1.0s Correct Answer Continuous Hold Rule
                 is_holding_correct = (current_digit is not None and current_digit == expected_num)
                 if is_holding_correct:
                     if correct_hold_start is None:
                         correct_hold_start = time.time()
                     hold_duration = time.time() - correct_hold_start
-                    hold_progress = min(hold_duration / 0.5, 1.0)
-                    if hold_duration >= 0.5:
-                        # User held correct answer for 0.5s! Lock in early and advance!
+                    hold_progress = min(hold_duration / 1.0, 1.0)
+                    if hold_duration >= 1.0:
+                        # User held correct answer for 1.0s! Lock in early and advance!
                         user_sequence.append(expected_num)
                         break
                 else:

@@ -374,9 +374,21 @@
                 <div class="detected-hands-text" id="central-hands-breakdown">
                   Show your hand in the camera (1 to 9)
                 </div>
+
+                <!-- 1s Threshold Continuous Hold Progress Meter -->
+                <div class="gesture-hold-meter-box" id="gesture-hold-meter-box">
+                  <div class="hold-meter-header">
+                    <span class="hold-meter-title" id="hold-meter-title">⏱️ Hold correct gesture for 1.0s to confirm</span>
+                    <span class="hold-meter-timer" id="hold-meter-timer">0.0s / 1.0s</span>
+                  </div>
+                  <div class="hold-meter-track">
+                    <div class="hold-meter-fill" id="hold-meter-fill"></div>
+                  </div>
+                </div>
+
                 <div class="detected-prompt-ribbon" id="central-status-ribbon">
-                  <span class="ribbon-icon" id="central-status-icon">⚡</span>
-                  <span class="ribbon-msg" id="central-status-text">Correct answer immediately locks and advances &middot; Else waits for timer</span>
+                  <span class="ribbon-icon" id="central-status-icon">⏱️</span>
+                  <span class="ribbon-msg" id="central-status-text">Hold correct gesture continuously for 1.0s to confirm &middot; Else waits for timer</span>
                 </div>
               </div>
 
@@ -395,7 +407,7 @@
             <!-- RIGHT COLUMN: Camera Top Right + Sequence Grid Bottom Right -->
             <div class="gesture-right-sidebar">
               
-              <!-- Top Right: Camera View -->
+              <!-- Top Right: Camera View (Covering ~20% of screen) -->
               <div class="camera-feed-card">
                 <div class="camera-feed-header">
                   <div class="camera-feed-title">
@@ -408,6 +420,9 @@
                 <div class="camera-viewport-box">
                   <video id="webcam-video" autoplay playsinline muted></video>
                   <canvas id="vision-canvas"></canvas>
+                  <div class="camera-hud-bottom-bar">
+                    <div class="camera-hud-hold-fill" id="camera-hud-hold-fill"></div>
+                  </div>
                 </div>
 
                 <div class="camera-feed-footer">
