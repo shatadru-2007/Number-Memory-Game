@@ -60,7 +60,7 @@ def get_default_db():
                     "responseIntervalSeconds": 4.0
                 },
                 "stage3": {
-                    "numbersCount": 10,
+                    "numbersCount": 9,
                     "displayIntervalSeconds": 1.5,
                     "responseIntervalSeconds": 3.0
                 }
@@ -153,6 +153,7 @@ def get_live_stats(db):
                 {
                     "name": m.get("name"),
                     "rollNumber": m.get("rollNumber"),
+                    "phone": m.get("phone", "N/A"),
                     "college": m.get("college"),
                     "isLeader": m.get("isLeader", False),
                     "status": m.get("status"),
@@ -273,11 +274,11 @@ async def api_participant_create_team(request):
     leader_name = body.get("leaderName")
     roll_number = body.get("rollNumber")
     email = body.get("email")
-    college = body.get("college")
+    phone = body.get("phone")
 
-    if not team_name or not leader_name or not roll_number or not email:
+    if not team_name or not leader_name or not roll_number or not email or not phone:
         return web.json_response({
-            "error": "Please provide all required fields (Team Name, Name, Roll Number, Email)."
+            "error": "Please provide all required fields (Team Name, Name, Roll Number, Email, Phone Number)."
         }, status=400)
 
     cleaned_roll = str(roll_number).strip().upper()
@@ -316,7 +317,7 @@ async def api_participant_create_team(request):
             "name": str(leader_name).strip(),
             "rollNumber": cleaned_roll,
             "email": str(email).strip().lower(),
-            "college": str(college).strip() if college else "N/A",
+            "phone": str(phone).strip(),
             "isLeader": True,
             "status": "ready",
             "scores": {"stage1": None, "stage2": None, "stage3": None, "total": 0},
@@ -348,11 +349,11 @@ async def api_participant_join_team(request):
     member_name = body.get("memberName")
     roll_number = body.get("rollNumber")
     email = body.get("email")
-    college = body.get("college")
+    phone = body.get("phone")
 
-    if not team_code or not member_name or not roll_number or not email:
+    if not team_code or not member_name or not roll_number or not email or not phone:
         return web.json_response({
-            "error": "Please provide Team Code, Name, Roll Number, and Email."
+            "error": "Please provide Team Code, Name, Roll Number, Email, and Phone Number."
         }, status=400)
 
     cleaned_code = str(team_code).strip().upper()
@@ -388,7 +389,7 @@ async def api_participant_join_team(request):
             "name": str(member_name).strip(),
             "rollNumber": cleaned_roll,
             "email": str(email).strip().lower(),
-            "college": str(college).strip() if college else "N/A",
+            "phone": str(phone).strip(),
             "isLeader": False,
             "status": "ready",
             "scores": {"stage1": None, "stage2": None, "stage3": None, "total": 0},
@@ -744,7 +745,7 @@ async def api_admin_export_csv(request):
     writer = csv.writer(output, quoting=csv.QUOTE_MINIMAL)
     writer.writerow([
         "Team Name", "Team Code", "Participant Name", "Roll Number", "Email",
-        "College", "Is Leader", "Status", "Stage 1", "Stage 2", "Stage 3",
+        "Phone Number", "Is Leader", "Status", "Stage 1", "Stage 2", "Stage 3",
         "Player Total", "Team Total"
     ])
 
@@ -770,7 +771,7 @@ async def api_admin_export_csv(request):
                     m.get("name", ""),
                     m.get("rollNumber", ""),
                     m.get("email", ""),
-                    m.get("college", ""),
+                    m.get("phone", ""),
                     "YES" if m.get("isLeader") else "NO",
                     m.get("status", ""),
                     s1,

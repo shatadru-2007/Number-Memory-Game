@@ -142,7 +142,7 @@ class App {
           leaderName: document.getElementById('ct-leader-name').value,
           rollNumber: document.getElementById('ct-roll-number').value,
           email: document.getElementById('ct-email').value,
-          college: document.getElementById('ct-college').value
+          phone: document.getElementById('ct-phone').value
         };
 
         try {
@@ -183,7 +183,7 @@ class App {
           memberName: document.getElementById('jt-member-name').value,
           rollNumber: document.getElementById('jt-roll-number').value,
           email: document.getElementById('jt-email').value,
-          college: document.getElementById('jt-college').value
+          phone: document.getElementById('jt-phone').value
         };
 
         try {
@@ -295,7 +295,7 @@ class App {
         tr.innerHTML = `
           <td>
             <strong>${m.name}</strong> ${m.isLeader ? '<span class="badge-tag">Leader</span>' : ''} ${isCurrent ? '<span class="badge-tag" style="background:rgba(255,255,255,0.1); color:#fff;">You</span>' : ''}<br>
-            <span style="font-size:0.75rem; color:var(--text-dim);">${m.college || 'N/A'}</span>
+            <span style="font-size:0.75rem; color:var(--text-dim);">${m.phone ? '📞 ' + m.phone : (m.college || '')}</span>
           </td>
           <td><code style="color:var(--text-main);">${m.rollNumber}</code></td>
           <td><span class="badge-status ${m.status}">${m.status}</span></td>

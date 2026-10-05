@@ -215,17 +215,20 @@
         <div class="stage-tracker-bar">
           <div class="stage-step active" id="step-pill-1">
             <span class="step-number">1</span>
-            <span>Stage 1 (5 Numbers)</span>
+            <span class="step-label-full">Stage 1 (5 Numbers)</span>
+            <span class="step-label-short">Stage 1 (5)</span>
           </div>
-          <div style="color: var(--border-color); font-size: 1.2rem;">→</div>
+          <div class="step-divider" style="color: var(--border-color); font-size: 1.1rem;">→</div>
           <div class="stage-step" id="step-pill-2">
             <span class="step-number">2</span>
-            <span>Stage 2 (8 Numbers)</span>
+            <span class="step-label-full">Stage 2 (8 Numbers)</span>
+            <span class="step-label-short">Stage 2 (8)</span>
           </div>
-          <div style="color: var(--border-color); font-size: 1.2rem;">→</div>
+          <div class="step-divider" style="color: var(--border-color); font-size: 1.1rem;">→</div>
           <div class="stage-step" id="step-pill-3">
             <span class="step-number">3</span>
-            <span>Stage 3 (10 Numbers)</span>
+            <span class="step-label-full">Stage 3 (9 Numbers)</span>
+            <span class="step-label-short">Stage 3 (9)</span>
           </div>
         </div>
 
@@ -360,7 +363,7 @@
                 </div>
 
                 <div class="detected-hands-text" id="central-hands-breakdown">
-                  Show your hand in the camera (0 to 9)
+                  Show your hand in the camera (1 to 9)
                 </div>
                 <div class="detected-prompt-ribbon" id="central-status-ribbon">
                   <span class="ribbon-icon" id="central-status-icon">⚡</span>
@@ -371,7 +374,7 @@
               <!-- Bottom Fallback & Controls -->
               <div class="central-bottom-bar">
                 <div class="central-fallback-tip">
-                  💡 <strong>Tip:</strong> If camera is not detecting, press keyboard keys <strong>0-9</strong> for immediate fallback.
+                  💡 <strong>Tip:</strong> If camera is not detecting, press keyboard keys <strong>1-9</strong> for immediate fallback.
                 </div>
                 <button class="btn btn-secondary btn-sm" id="btn-manual-lock">
                   Lock Current Digit
@@ -399,7 +402,7 @@
                 </div>
 
                 <div class="camera-feed-footer">
-                  <span>0=Fist &middot; 1-5=One Hand &middot; 6-9=Two Hands</span>
+                  <span>1-5=One Hand &middot; 6-9=Two Hands</span>
                 </div>
               </div>
 
@@ -598,8 +601,8 @@
           <div class="config-stage-block">
             <h4>Stage 1 Configuration</h4>
             <div class="form-group" style="margin-bottom: 10px;">
-              <label>Numbers Count</label>
-              <input type="number" class="form-control" id="cfg-s1-count" value="5" min="1" max="15">
+              <label>Numbers Count (1-9 distinct digits)</label>
+              <input type="number" class="form-control" id="cfg-s1-count" value="5" min="1" max="9">
             </div>
             <div class="form-group" style="margin-bottom: 10px;">
               <label>Display Interval (seconds)</label>
@@ -615,8 +618,8 @@
           <div class="config-stage-block">
             <h4>Stage 2 Configuration</h4>
             <div class="form-group" style="margin-bottom: 10px;">
-              <label>Numbers Count</label>
-              <input type="number" class="form-control" id="cfg-s2-count" value="8" min="1" max="20">
+              <label>Numbers Count (1-9 distinct digits)</label>
+              <input type="number" class="form-control" id="cfg-s2-count" value="8" min="1" max="9">
             </div>
             <div class="form-group" style="margin-bottom: 10px;">
               <label>Display Interval (seconds)</label>
@@ -632,8 +635,8 @@
           <div class="config-stage-block">
             <h4>Stage 3 Configuration</h4>
             <div class="form-group" style="margin-bottom: 10px;">
-              <label>Numbers Count</label>
-              <input type="number" class="form-control" id="cfg-s3-count" value="10" min="1" max="25">
+              <label>Numbers Count (1-9 distinct digits)</label>
+              <input type="number" class="form-control" id="cfg-s3-count" value="9" min="1" max="9">
             </div>
             <div class="form-group" style="margin-bottom: 10px;">
               <label>Display Interval (seconds)</label>
@@ -711,8 +714,8 @@
             <input type="email" class="form-control" id="ct-email" placeholder="e.g. rahul@example.com" required>
           </div>
           <div class="form-group">
-            <label for="ct-college">College / Department</label>
-            <input type="text" class="form-control" id="ct-college" placeholder="e.g. Dept of Computer Science">
+            <label for="ct-phone">Phone Number *</label>
+            <input type="tel" class="form-control" id="ct-phone" placeholder="e.g. 9876543210" pattern="[0-9]{10}" maxlength="10" inputmode="numeric" title="Please enter a valid 10-digit mobile number" required>
           </div>
         </div>
         <div class="modal-footer">
@@ -751,8 +754,8 @@
             <input type="email" class="form-control" id="jt-email" placeholder="e.g. priya@example.com" required>
           </div>
           <div class="form-group">
-            <label for="jt-college">College / Department</label>
-            <input type="text" class="form-control" id="jt-college" placeholder="e.g. Dept of IT">
+            <label for="jt-phone">Phone Number *</label>
+            <input type="tel" class="form-control" id="jt-phone" placeholder="e.g. 9876543210" pattern="[0-9]{10}" maxlength="10" inputmode="numeric" title="Please enter a valid 10-digit mobile number" required>
           </div>
         </div>
         <div class="modal-footer">

@@ -11,11 +11,11 @@ Built following the competition protocol and landing page aesthetics of [https:/
 
 ### 1. Landing Page (2 Dedicated Roles / Panels)
 - **🧠 Participant Panel**:
-  - **Create Team (Leader)**: Enter Team Name, Leader Full Name, Roll Number, Email, and College. The system automatically generates a unique 6-character Team Code (e.g. `MEM-8LK5`).
-  - **Join Team (Teammate)**: Enter Team Code, Full Name, Roll Number, Email, and College to join an existing team.
+  - **Create Team (Leader)**: Enter Team Name, Leader Full Name, Roll Number, Email, and Phone Number. The system automatically generates a unique 6-character Team Code (e.g. `MEM-8LK5`).
+  - **Join Team (Teammate)**: Enter Team Code, Full Name, Roll Number, Email, and Phone Number to join an existing team.
   - **Strict Roll Number Constraint**: A team name can be duplicated, but **a student with one roll number cannot register in any other team**. Any duplicate roll number attempt is immediately blocked with a clear notice showing where they are already registered.
   - **Private Team Lobby**: Participants **only see the scores and roster of their own team**. Shows team code (with copy button), team roster, player statuses (`ready`, `playing_stage_1/2/3`, `finished`), individual stage breakdowns, and total team score.
-  - **Camera Calibration Mode**: Allows players to test their webcam and practice hand gestures for digits 0 to 9 before their scored attempt.
+  - **Camera Calibration Mode**: Allows players to test their webcam and practice hand gestures for digits 1 to 9 before their scored attempt.
 - **🛡️ Admin / Host Panel**:
   - Secure login with Host Password (default: `admin2026`).
   - **Restricted Tournament Leaderboard & Live Telemetry**: The full tournament leaderboard and the 4 live event statistics (Total Teams, Total Participants, Playing Now, Finished) are **strictly restricted to Admin view**.

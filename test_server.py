@@ -56,7 +56,7 @@ class ServerTestCase(AioHTTPTestCase):
             'leaderName': 'Alice Roy',
             'rollNumber': 'TEST-ROLL-001',
             'email': 'alice@college.edu',
-            'college': 'AAROHAN Tech'
+            'phone': '9876543210'
         })
         self.assertEqual(res.status, 200)
         c_data = await res.json()
@@ -69,7 +69,8 @@ class ServerTestCase(AioHTTPTestCase):
             'teamName': 'AnotherTeam',
             'leaderName': 'Alice Roy Duplicate',
             'rollNumber': 'TEST-ROLL-001',
-            'email': 'alice2@college.edu'
+            'email': 'alice2@college.edu',
+            'phone': '9876543211'
         })
         self.assertEqual(dup_res.status, 400)
         dup_data = await dup_res.json()
@@ -81,7 +82,7 @@ class ServerTestCase(AioHTTPTestCase):
             'memberName': 'Bob Smith',
             'rollNumber': 'TEST-ROLL-002',
             'email': 'bob@college.edu',
-            'college': 'AAROHAN Tech'
+            'phone': '9876543212'
         })
         self.assertEqual(join_res.status, 200)
         j_data = await join_res.json()

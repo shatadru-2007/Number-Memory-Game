@@ -12,7 +12,7 @@
         "responseIntervalSeconds": 4
       },
       "stage3": {
-        "numbersCount": 10,
+        "numbersCount": 9,
         "displayIntervalSeconds": 1.5,
         "responseIntervalSeconds": 3
       }
@@ -506,6 +506,50 @@
       ],
       "score": 6,
       "timestamp": "2026-10-05T18:27:12.065271+00:00"
+    },
+    {
+      "id": "run_1791226569855",
+      "rollNumber": "TEST-ROLL-001",
+      "teamCode": "MEM-JFXA",
+      "stageNumber": 1,
+      "sequenceShown": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "sequenceEntered": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "score": 5,
+      "timestamp": "2026-10-05T18:56:09.855240+00:00"
+    },
+    {
+      "id": "run_1791226828126",
+      "rollNumber": "TEST-ROLL-001",
+      "teamCode": "MEM-BG6Q",
+      "stageNumber": 1,
+      "sequenceShown": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "sequenceEntered": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "score": 5,
+      "timestamp": "2026-10-05T19:00:28.126210+00:00"
     }
   ]
 }

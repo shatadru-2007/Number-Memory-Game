@@ -324,13 +324,13 @@ def run_opencv_standalone_game(roll_number=None, server_url="http://localhost:30
         stages = [
             {"stage": 1, "count": s1.get("numbersCount", 5), "display_time": float(s1.get("displayIntervalSeconds", 3.0)), "answer_time": float(s1.get("responseIntervalSeconds", 5.0))},
             {"stage": 2, "count": s2.get("numbersCount", 8), "display_time": float(s2.get("displayIntervalSeconds", 2.0)), "answer_time": float(s2.get("responseIntervalSeconds", 4.0))},
-            {"stage": 3, "count": s3.get("numbersCount", 10), "display_time": float(s3.get("displayIntervalSeconds", 1.5)), "answer_time": float(s3.get("responseIntervalSeconds", 3.0))},
+            {"stage": 3, "count": s3.get("numbersCount", 9), "display_time": float(s3.get("displayIntervalSeconds", 1.5)), "answer_time": float(s3.get("responseIntervalSeconds", 3.0))},
         ]
     else:
         stages = [
             {"stage": 1, "count": 5, "display_time": 3.0, "answer_time": 5.0},
             {"stage": 2, "count": 8, "display_time": 2.0, "answer_time": 4.0},
-            {"stage": 3, "count": 10, "display_time": 1.5, "answer_time": 3.0},
+            {"stage": 3, "count": 9, "display_time": 1.5, "answer_time": 3.0},
         ]
 
     total_game_score = 0
@@ -340,12 +340,12 @@ def run_opencv_standalone_game(roll_number=None, server_url="http://localhost:30
 
     print("\n=======================================================")
     print(" AAROHAN 2026 - (DS) OPENCV MEMORY GAME (DESKTOP MODE) ")
-    print(" 0: Fist | 1-5: Fingers on one hand | 6-9: Both hands  ")
+    print(" 1-5: Fingers on one hand | 6-9: Both hands (digits 1-9)")
     if roll_number:
         print(f" Synced Participant Roll: {roll_number}")
     else:
         print(" Mode: Offline Practice")
-    print(" Fallback: Keyboard keys '0' to '9'")
+    print(" Fallback: Keyboard keys '1' to '9'")
     print(" Press 'q' anytime to exit.                            ")
     print("=======================================================\n")
 
@@ -358,8 +358,10 @@ def run_opencv_standalone_game(roll_number=None, server_url="http://localhost:30
         if roll_number:
             update_server_status(roll_number, f"playing_stage_{stage_num}", server_url)
 
-        # Generate sequence of random numbers (0 to 9)
-        sequence = [random.randint(0, 9) for _ in range(count)]
+        # Generate sequence of random numbers (1 to 9, strictly no duplicate numbers)
+        digit_pool = list(range(1, 10))
+        random.SystemRandom().shuffle(digit_pool)
+        sequence = digit_pool[:min(count, 9)]
         print(f"\n--- STAGE {stage_num}: Memorize {count} numbers ({disp_time}s each) ---")
 
         # 1. Countdown to Memorization Phase

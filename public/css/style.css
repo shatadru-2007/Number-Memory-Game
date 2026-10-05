@@ -98,9 +98,9 @@ header.app-header {
   top: 0;
   z-index: 100;
   backdrop-filter: blur(16px);
-  background: rgba(9, 13, 22, 0.85);
+  background: rgba(9, 13, 22, 0.9);
   border-bottom: 1px solid var(--border-color);
-  padding: 16px 0;
+  padding: 8px 0;
   transition: var(--transition-normal);
 }
 
@@ -113,26 +113,27 @@ header.app-header {
 .brand {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   cursor: pointer;
   text-decoration: none;
 }
 
 .brand-icon {
-  width: 42px;
-  height: 42px;
-  border-radius: 12px;
+  width: 34px;
+  height: 34px;
+  border-radius: 9px;
   background: linear-gradient(135deg, var(--accent-cyan), var(--accent-violet));
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 20px;
-  box-shadow: 0 0 20px rgba(0, 245, 212, 0.35);
+  font-size: 17px;
+  box-shadow: 0 0 16px rgba(0, 245, 212, 0.35);
+  flex-shrink: 0;
 }
 
 .brand-text h1 {
   font-family: var(--font-main);
-  font-size: 1.25rem;
+  font-size: 1.15rem;
   font-weight: 700;
   letter-spacing: -0.02em;
   background: linear-gradient(90deg, #fff, #94a3b8);
@@ -140,7 +141,7 @@ header.app-header {
   -webkit-text-fill-color: transparent;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
 }
 
 .badge-tag {
@@ -226,7 +227,7 @@ header.app-header {
 .view-section {
   display: none;
   animation: fadeIn 0.3s ease-out;
-  padding: 40px 0 80px 0;
+  padding: 16px 0 32px 0;
 }
 
 .view-section.active {
@@ -812,8 +813,13 @@ header.app-header {
    GAME ARENA (OpenCV Output Box & Memorization Screen)
    ========================================================================== */
 
+#view-game-arena.view-section {
+  padding: 8px 0;
+}
+
 .game-arena-wrapper {
-  max-width: 960px;
+  max-width: 1240px;
+  width: 100%;
   margin: 0 auto;
 }
 
@@ -823,17 +829,23 @@ header.app-header {
   justify-content: space-between;
   background: var(--bg-card);
   border: 1px solid var(--border-color);
-  padding: 16px 24px;
-  border-radius: var(--radius-md);
-  margin-bottom: 24px;
+  padding: 6px 18px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 8px;
+  flex-shrink: 0;
 }
 
 .stage-step {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   font-weight: 600;
+  font-size: 0.82rem;
   color: var(--text-muted);
+}
+
+.step-label-short {
+  display: none;
 }
 
 .stage-step.active {
@@ -841,14 +853,14 @@ header.app-header {
 }
 
 .step-number {
-  width: 28px;
-  height: 28px;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
   border: 2px solid currentColor;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.85rem;
+  font-size: 0.74rem;
   font-family: var(--font-mono);
 }
 
@@ -863,21 +875,21 @@ header.app-header {
   text-align: center;
   background: var(--bg-card);
   border: 1px solid var(--border-color);
-  border-radius: var(--radius-lg);
-  padding: 50px 30px;
+  border-radius: var(--radius-md);
+  padding: 24px 20px;
 }
 
 .stage-brief-card h2 {
   font-family: var(--font-main);
-  font-size: 2.4rem;
-  margin-bottom: 12px;
+  font-size: 1.8rem;
+  margin-bottom: 8px;
 }
 
 .stage-rules-pills {
   display: flex;
   justify-content: center;
-  gap: 16px;
-  margin: 24px 0 36px 0;
+  gap: 12px;
+  margin: 14px 0 20px 0;
   flex-wrap: wrap;
 }
 
@@ -889,17 +901,17 @@ header.app-header {
 .memorize-screen {
   background: radial-gradient(circle at center, #10192e 0%, #060911 100%);
   border: 2px solid var(--accent-cyan);
-  box-shadow: 0 0 60px rgba(0, 245, 212, 0.25);
-  border-radius: var(--radius-lg);
-  padding: 44px 24px;
+  box-shadow: 0 0 35px rgba(0, 245, 212, 0.2);
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
   text-align: center;
   position: relative;
-  min-height: 520px;
+  min-height: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 16px;
+  gap: 8px;
 }
 
 .memorize-banner-badge {
@@ -981,22 +993,22 @@ header.app-header {
 
 /* Massive Glowing Digit Circle */
 .big-digit-circle.prominent-glow-circle {
-  width: 210px;
-  height: 210px;
+  width: clamp(120px, 20vh, 180px);
+  height: clamp(120px, 20vh, 180px);
   border-radius: 50%;
   background: radial-gradient(circle, rgba(0, 245, 212, 0.25) 0%, rgba(121, 40, 202, 0.25) 65%, transparent 100%);
   border: 4px solid var(--accent-cyan);
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 0 50px rgba(0, 245, 212, 0.5), inset 0 0 30px rgba(0, 245, 212, 0.25);
-  margin: 6px 0;
+  box-shadow: 0 0 35px rgba(0, 245, 212, 0.4), inset 0 0 20px rgba(0, 245, 212, 0.2);
+  margin: 4px 0;
   animation: scale-pop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .big-digit-circle.prominent-glow-circle span {
   font-family: var(--font-mono);
-  font-size: 7.5rem;
+  font-size: clamp(3.6rem, 10vh, 5.8rem);
   font-weight: 900;
   color: #ffffff;
   line-height: 1;
@@ -1046,27 +1058,28 @@ header.app-header {
 .arena-top-bar {
   background: linear-gradient(135deg, rgba(14, 21, 38, 0.96), rgba(9, 14, 25, 0.96));
   border: 1.5px solid rgba(0, 245, 212, 0.3);
-  border-radius: var(--radius-md);
-  padding: 14px 20px;
+  border-radius: var(--radius-sm);
+  padding: 6px 14px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
-  gap: 16px;
+  margin-bottom: 8px;
+  gap: 10px;
   flex-wrap: wrap;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+  flex-shrink: 0;
 }
 
 .arena-identity-left {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 3px;
 }
 
 .arena-team-row, .arena-member-row {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   flex-wrap: wrap;
 }
 
@@ -1075,11 +1088,11 @@ header.app-header {
   border: 1px solid var(--accent-cyan);
   color: var(--accent-cyan);
   font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: 0.62rem;
   font-weight: 800;
-  padding: 3px 8px;
-  border-radius: 6px;
-  letter-spacing: 0.06em;
+  padding: 2px 6px;
+  border-radius: 4px;
+  letter-spacing: 0.05em;
 }
 
 .identity-tag.member {
@@ -1090,34 +1103,34 @@ header.app-header {
 
 .arena-team-name {
   font-family: var(--font-main);
-  font-size: 1.25rem;
+  font-size: 1.05rem;
   font-weight: 800;
   color: #ffffff;
 }
 
 .arena-member-name {
   font-family: var(--font-body);
-  font-size: 1rem;
+  font-size: 0.88rem;
   font-weight: 600;
   color: #e2e8f0;
 }
 
 .arena-member-roll {
   font-family: var(--font-mono);
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   color: var(--accent-cyan);
 }
 
 .arena-top-badge {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   background: rgba(0, 0, 0, 0.5);
   border: 1px solid var(--border-color);
-  padding: 7px 16px;
+  padding: 4px 12px;
   border-radius: var(--radius-full);
   font-family: var(--font-mono);
-  font-size: 0.8rem;
+  font-size: 0.74rem;
   color: var(--text-muted);
 }
 
@@ -1127,27 +1140,21 @@ header.app-header {
 
 .gesture-arena-container {
   display: grid;
-  grid-template-columns: minmax(0, 1.15fr) 380px;
-  gap: 24px;
+  grid-template-columns: minmax(0, 1.25fr) 340px;
+  gap: 12px;
   align-items: stretch;
-}
-
-@media (max-width: 960px) {
-  .gesture-arena-container {
-    grid-template-columns: 1fr;
-  }
 }
 
 /* CENTRAL PANEL (TARGET POSITION, TIMER, LARGE DETECTED DIGIT) */
 .gesture-center-panel {
   background: var(--bg-card);
   border: 1.5px solid var(--border-glow);
-  border-radius: var(--radius-lg);
-  padding: 30px;
+  border-radius: var(--radius-md);
+  padding: 12px 18px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 20px;
+  gap: 8px;
   box-shadow: var(--shadow-md);
   position: relative;
   overflow: hidden;
@@ -1159,7 +1166,7 @@ header.app-header {
   top: 0;
   left: 0;
   right: 0;
-  height: 4px;
+  height: 3px;
   background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple));
 }
 
@@ -1171,30 +1178,30 @@ header.app-header {
 .central-position-badge {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: 6px;
   background: rgba(0, 245, 212, 0.12);
-  border: 2px solid var(--accent-cyan);
-  padding: 8px 22px;
+  border: 1.5px solid var(--accent-cyan);
+  padding: 4px 16px;
   border-radius: var(--radius-full);
-  box-shadow: 0 0 20px rgba(0, 245, 212, 0.3);
-  margin-bottom: 10px;
+  box-shadow: 0 0 16px rgba(0, 245, 212, 0.25);
+  margin-bottom: 4px;
 }
 
 .central-position-badge .badge-icon {
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
 
 .central-position-badge .badge-text {
   font-family: var(--font-mono);
-  font-size: 1.15rem;
+  font-size: 0.92rem;
   font-weight: 800;
   color: var(--accent-cyan);
-  letter-spacing: 0.06em;
+  letter-spacing: 0.05em;
 }
 
 .central-target-title {
   font-family: var(--font-main);
-  font-size: 1.4rem;
+  font-size: 1.12rem;
   font-weight: 700;
   color: #fff;
   margin: 0;
@@ -1204,48 +1211,48 @@ header.app-header {
 .central-timer-card {
   background: rgba(6, 10, 20, 0.85);
   border: 1.5px solid rgba(0, 245, 212, 0.3);
-  border-radius: var(--radius-md);
-  padding: 14px 22px;
+  border-radius: var(--radius-sm);
+  padding: 6px 14px;
   transition: all 0.25s ease;
 }
 
 .central-timer-card.timer-urgent {
   border-color: var(--accent-red);
-  box-shadow: 0 0 25px rgba(239, 68, 68, 0.45);
+  box-shadow: 0 0 20px rgba(239, 68, 68, 0.45);
   animation: timer-pulse 0.6s infinite alternate;
 }
 
 .central-timer-card.timer-warning {
   border-color: var(--accent-gold);
-  box-shadow: 0 0 20px rgba(255, 183, 3, 0.35);
+  box-shadow: 0 0 16px rgba(255, 183, 3, 0.35);
 }
 
 .central-timer-card.timer-normal {
   border-color: var(--accent-cyan);
-  box-shadow: 0 0 20px rgba(0, 245, 212, 0.2);
+  box-shadow: 0 0 16px rgba(0, 245, 212, 0.2);
 }
 
 .central-timer-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
 }
 
 .central-timer-label {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   font-family: var(--font-mono);
-  font-size: 0.78rem;
+  font-size: 0.72rem;
   color: var(--text-muted);
   font-weight: 700;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.05em;
 }
 
 .central-timer-digits {
   font-family: var(--font-mono);
-  font-size: 2.2rem;
+  font-size: 1.6rem;
   font-weight: 900;
   line-height: 1;
   color: #fff;
@@ -1253,7 +1260,7 @@ header.app-header {
 
 .central-timer-track {
   width: 100%;
-  height: 8px;
+  height: 6px;
   background: rgba(255, 255, 255, 0.1);
   border-radius: var(--radius-full);
   overflow: hidden;
@@ -1279,19 +1286,22 @@ header.app-header {
 .central-detected-card {
   background: rgba(8, 13, 24, 0.95);
   border: 2px solid var(--accent-cyan);
-  border-radius: var(--radius-lg);
-  padding: 24px;
+  border-radius: var(--radius-md);
+  padding: 10px 16px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  box-shadow: 0 0 35px rgba(0, 245, 212, 0.3);
+  justify-content: center;
+  box-shadow: 0 0 25px rgba(0, 245, 212, 0.25);
   transition: all 0.25s ease;
   position: relative;
+  flex: 1;
+  min-height: 0;
 }
 
 .detected-badge-label {
   font-family: var(--font-mono);
-  font-size: 0.8rem;
+  font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   color: var(--text-muted);
@@ -1303,17 +1313,17 @@ header.app-header {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  margin: 6px 0;
-  min-width: 170px;
-  min-height: 120px;
+  margin: 2px 0;
+  min-width: 140px;
+  min-height: 80px;
 }
 
 .central-giant-digit {
   font-family: var(--font-mono);
-  font-size: 6.8rem;
+  font-size: clamp(3.2rem, 7vh, 4.8rem);
   font-weight: 900;
   color: #ffffff;
-  line-height: 1.05;
+  line-height: 1;
   text-shadow: 0 0 35px var(--accent-cyan), 0 0 10px #ffffff;
   transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
@@ -1325,7 +1335,7 @@ header.app-header {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 6rem;
+  font-size: clamp(3.2rem, 7vh, 4.8rem);
   font-weight: 900;
   color: #10b981;
   text-shadow: 0 0 40px #10b981, 0 0 15px #ffffff;
@@ -1338,7 +1348,7 @@ header.app-header {
 .central-detected-card.match-correct {
   border-color: #10b981 !important;
   background: rgba(6, 28, 20, 0.95) !important;
-  box-shadow: 0 0 50px rgba(16, 185, 129, 0.6) !important;
+  box-shadow: 0 0 40px rgba(16, 185, 129, 0.5) !important;
 }
 
 .central-detected-card.match-correct .central-giant-digit {
@@ -1350,25 +1360,25 @@ header.app-header {
 
 .central-detected-card.match-correct .giant-tick-overlay {
   opacity: 1 !important;
-  transform: scale(1.2) !important;
+  transform: scale(1.15) !important;
 }
 
 .detected-hands-text {
-  font-size: 0.86rem;
+  font-size: 0.78rem;
   color: var(--accent-cyan);
   font-family: var(--font-mono);
-  margin-bottom: 12px;
+  margin-bottom: 6px;
 }
 
 .detected-prompt-ribbon {
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid var(--border-color);
-  padding: 8px 18px;
+  padding: 4px 14px;
   border-radius: var(--radius-full);
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 0.82rem;
+  gap: 6px;
+  font-size: 0.74rem;
   color: var(--text-muted);
 }
 
@@ -1378,13 +1388,13 @@ header.app-header {
   justify-content: space-between;
   align-items: center;
   border-top: 1px solid var(--border-color);
-  padding-top: 16px;
+  padding-top: 8px;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 8px;
 }
 
 .central-fallback-tip {
-  font-size: 0.82rem;
+  font-size: 0.74rem;
   color: var(--text-dim);
 }
 
@@ -1399,21 +1409,22 @@ header.app-header {
 .gesture-right-sidebar {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 10px;
 }
 
 /* TOP RIGHT: Camera Feed Card */
 .camera-feed-card {
   background: var(--bg-card);
   border: 1.5px solid var(--border-color);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-md);
   overflow: hidden;
   box-shadow: var(--shadow-md);
+  flex-shrink: 0;
 }
 
 .camera-feed-header {
   background: #0d1424;
-  padding: 10px 16px;
+  padding: 6px 12px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -1423,25 +1434,25 @@ header.app-header {
 .camera-feed-title {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   font-family: var(--font-mono);
-  font-size: 0.78rem;
+  font-size: 0.74rem;
   font-weight: 700;
   color: var(--accent-cyan);
 }
 
 .camera-status-pill {
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   color: var(--text-muted);
   background: rgba(255, 255, 255, 0.06);
-  padding: 3px 8px;
+  padding: 2px 6px;
   border-radius: var(--radius-full);
   font-family: var(--font-mono);
 }
 
 .camera-viewport-box {
   width: 100%;
-  height: 230px;
+  height: clamp(140px, 20vh, 185px);
   background: #03060c;
   position: relative;
   overflow: hidden;
@@ -1460,8 +1471,8 @@ header.app-header {
 
 .camera-feed-footer {
   background: #090e1a;
-  padding: 8px 14px;
-  font-size: 0.74rem;
+  padding: 4px 10px;
+  font-size: 0.7rem;
   color: var(--text-dim);
   text-align: center;
   border-top: 1px solid var(--border-color);
@@ -1471,12 +1482,14 @@ header.app-header {
 .sequence-grid-card {
   background: var(--bg-card);
   border: 1.5px solid var(--border-color);
-  border-radius: var(--radius-lg);
-  padding: 18px;
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
   box-shadow: var(--shadow-md);
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 8px;
+  flex: 1;
+  min-height: 0;
 }
 
 .sequence-grid-header {
@@ -1488,13 +1501,13 @@ header.app-header {
 .sequence-legend {
   display: flex;
   align-items: center;
-  font-size: 0.74rem;
+  font-size: 0.7rem;
   color: var(--text-muted);
 }
 
 .legend-dot {
-  width: 8px;
-  height: 8px;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
   display: inline-block;
   margin-right: 4px;
@@ -1513,37 +1526,39 @@ header.app-header {
 /* GRID OF SEQUENCE NUMBERS FOR SPECIFIC STAGE */
 .stage-sequence-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(62px, 1fr));
-  gap: 10px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  flex: 1;
+  align-content: start;
 }
 
 .stage-grid-item {
   background: rgba(10, 16, 28, 0.85);
   border: 1.5px solid var(--border-color);
-  border-radius: 10px;
-  padding: 10px 4px;
+  border-radius: 8px;
+  padding: 6px 2px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 3px;
+  gap: 2px;
   font-family: var(--font-mono);
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .stage-grid-item .slot-idx {
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   color: var(--text-dim);
   text-transform: uppercase;
 }
 
 .stage-grid-item .slot-icon {
-  font-size: 1.05rem;
+  font-size: 0.85rem;
   line-height: 1;
 }
 
 .stage-grid-item .slot-val {
-  font-size: 1.25rem;
+  font-size: 1.1rem;
   font-weight: 800;
   line-height: 1;
   color: #fff;
@@ -1606,44 +1621,46 @@ header.app-header {
 .results-card {
   background: var(--bg-card);
   border: 1px solid var(--border-glow);
-  border-radius: var(--radius-lg);
-  padding: 40px;
+  border-radius: var(--radius-md);
+  padding: 24px;
   text-align: center;
   box-shadow: var(--shadow-lg);
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
 }
 
 .score-display-ring {
-  width: 140px;
-  height: 140px;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
-  border: 4px solid var(--accent-green);
+  border: 3px solid var(--accent-green);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: 20px auto 30px auto;
+  margin: 12px auto 16px auto;
   background: rgba(16, 185, 129, 0.1);
-  box-shadow: 0 0 30px rgba(16, 185, 129, 0.3);
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
 }
 
 .score-display-ring .score-num {
   font-family: var(--font-mono);
-  font-size: 3rem;
+  font-size: 2.2rem;
   font-weight: 800;
   color: #fff;
   line-height: 1;
 }
 
 .score-display-ring .score-denom {
-  font-size: 0.85rem;
+  font-size: 0.78rem;
   color: var(--text-muted);
 }
 
 .sequence-compare-grid {
   display: flex;
   justify-content: center;
-  gap: 12px;
-  margin: 30px 0;
+  gap: 8px;
+  margin: 16px 0;
   flex-wrap: wrap;
 }
 
@@ -1852,52 +1869,186 @@ header.app-header {
 .text-red { color: var(--accent-red); }
 
 /* ==========================================================================
-   SMARTPHONE & MOBILE BROWSER RESPONSIVENESS
+   DESKTOP ZERO-SCROLL WORKFLOW (Screen Auto-Adjustment, No Scrollbar)
    ========================================================================== */
 
-@media (max-width: 960px) {
+@media (min-width: 961px) {
+  #view-game-arena.view-section.active {
+    display: flex !important;
+    flex-direction: column;
+    height: calc(100vh - 52px);
+    max-height: calc(100vh - 52px);
+    overflow: hidden;
+    padding: 6px 0;
+    box-sizing: border-box;
+  }
+
+  .game-arena-wrapper {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  #opencv-box-screen {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
   .gesture-arena-container {
-    grid-template-columns: 1fr;
-    gap: 18px;
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+    grid-template-columns: minmax(0, 1.25fr) 340px;
+    gap: 12px;
   }
 
-  .camera-viewport-box {
-    height: 220px;
-  }
-
-  .stage-sequence-grid {
-    grid-template-columns: repeat(auto-fill, minmax(55px, 1fr));
+  .gesture-center-panel {
+    height: 100%;
+    min-height: 0;
+    overflow: hidden;
+    padding: 10px 16px;
     gap: 8px;
   }
 
-  .central-giant-digit {
-    font-size: 5.6rem;
+  .gesture-right-sidebar {
+    height: 100%;
+    min-height: 0;
+    overflow: hidden;
+    gap: 10px;
   }
 
-  .giant-tick-overlay {
+  .camera-viewport-box {
+    height: clamp(130px, 19vh, 180px);
+  }
+
+  .sequence-grid-card {
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .stage-sequence-grid {
+    overflow-y: auto;
+    max-height: 100%;
+  }
+
+  .memorize-screen {
+    max-height: calc(100vh - 110px);
+    overflow: hidden;
+  }
+
+  .stage-brief-card {
+    max-height: calc(100vh - 110px);
+    overflow-y: auto;
+  }
+
+  .results-card {
+    max-height: calc(100vh - 110px);
+    overflow-y: auto;
+  }
+}
+
+/* ==========================================================================
+   TABLET & MOBILE RESPONSIVENESS
+   ========================================================================== */
+
+@media (max-width: 960px) {
+  #view-game-arena.view-section.active {
+    display: block !important;
+    height: auto;
+    max-height: none;
+    overflow-y: visible;
+    padding: 10px 0 24px 0;
+  }
+
+  .game-arena-wrapper {
+    height: auto;
+    max-width: 100%;
+  }
+
+  #opencv-box-screen {
+    height: auto;
+  }
+
+  .gesture-arena-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    height: auto;
+  }
+
+  /* On phone/tablet, show camera view first so user can check framing */
+  .gesture-right-sidebar {
+    order: 1;
+    gap: 10px;
+    height: auto;
+  }
+
+  .camera-viewport-box {
+    height: 185px;
+  }
+
+  .sequence-grid-card {
+    padding: 10px 14px;
+    height: auto;
+  }
+
+  .stage-sequence-grid {
+    grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
+    gap: 6px;
+  }
+
+  .gesture-center-panel {
+    order: 2;
+    padding: 14px 14px;
+    gap: 10px;
+    height: auto;
+  }
+
+  .central-giant-digit {
     font-size: 5rem;
   }
 
+  .giant-tick-overlay {
+    font-size: 4.6rem;
+  }
+
   .arena-top-bar {
-    padding: 12px 16px;
+    padding: 8px 12px;
   }
 }
+
+/* ==========================================================================
+   SMARTPHONE BROWSER OPTIMIZATIONS (< 640px)
+   ========================================================================== */
 
 @media (max-width: 640px) {
   body {
     font-size: 14px;
+    min-height: 100dvh;
   }
 
   .container {
-    padding: 0 12px;
+    padding: 0 10px;
   }
 
   header.app-header {
-    padding: 10px 0;
+    padding: 6px 0;
+  }
+
+  .brand-icon {
+    width: 28px;
+    height: 28px;
+    font-size: 14px;
   }
 
   .brand-text h1 {
-    font-size: 1.1rem;
+    font-size: 0.98rem;
   }
 
   .brand-text p {
@@ -1905,131 +2056,174 @@ header.app-header {
   }
 
   .nav-links {
-    gap: 6px;
+    gap: 4px;
   }
 
   .btn-nav {
-    padding: 6px 12px;
-    font-size: 0.8rem;
+    padding: 5px 10px;
+    font-size: 0.76rem;
   }
 
-  .roles-grid {
-    grid-template-columns: 1fr !important;
-    gap: 16px;
+  .status-pill {
+    display: none;
   }
 
-  .role-card {
-    padding: 24px 18px;
+  /* Responsive Stage Tracker Pills on Phone */
+  .stage-tracker-bar {
+    padding: 6px 8px;
+    margin-bottom: 8px;
+  }
+
+  .stage-step {
+    font-size: 0.72rem;
+    gap: 4px;
+  }
+
+  .step-label-full {
+    display: none;
+  }
+
+  .step-label-short {
+    display: inline;
+  }
+
+  .step-divider {
+    font-size: 0.85rem !important;
+  }
+
+  .step-number {
+    width: 18px;
+    height: 18px;
+    font-size: 0.65rem;
   }
 
   /* Memorization phase on small phones */
   .memorize-screen {
-    padding: 30px 14px;
-    min-height: 400px;
+    padding: 20px 12px;
+    min-height: 340px;
   }
 
   .memorize-counter-chip {
-    font-size: 1.05rem;
-    padding: 6px 16px;
+    font-size: 1rem;
+    padding: 4px 14px;
   }
 
   .memorize-heading {
-    font-size: 1.1rem;
+    font-size: 1.05rem;
   }
 
   .big-digit-circle.prominent-glow-circle {
-    width: 170px;
-    height: 170px;
+    width: 140px;
+    height: 140px;
   }
 
   .big-digit-circle.prominent-glow-circle span {
-    font-size: 5.5rem;
+    font-size: 4.4rem;
   }
 
   .mem-slot-item {
-    width: 32px;
-    height: 32px;
-    font-size: 0.75rem;
+    width: 26px;
+    height: 26px;
+    font-size: 0.7rem;
   }
 
   /* Gesture Arena on smartphones */
   .arena-top-bar {
     flex-direction: column;
     align-items: flex-start;
-    gap: 10px;
-    padding: 12px;
+    gap: 5px;
+    padding: 8px 10px;
   }
 
   .arena-team-name {
-    font-size: 1.05rem;
-  }
-
-  .arena-member-name {
-    font-size: 0.9rem;
-  }
-
-  .gesture-center-panel {
-    padding: 18px 14px;
-    gap: 16px;
-  }
-
-  .central-position-badge {
-    padding: 6px 16px;
-  }
-
-  .central-position-badge .badge-text {
     font-size: 0.95rem;
   }
 
+  .arena-member-name {
+    font-size: 0.82rem;
+  }
+
+  .central-position-badge {
+    padding: 3px 12px;
+  }
+
+  .central-position-badge .badge-text {
+    font-size: 0.82rem;
+  }
+
   .central-target-title {
-    font-size: 1.15rem;
+    font-size: 0.98rem;
   }
 
   .central-timer-card {
-    padding: 10px 14px;
+    padding: 6px 10px;
   }
 
   .central-timer-digits {
-    font-size: 1.8rem;
+    font-size: 1.35rem;
   }
 
   .central-detected-card {
-    padding: 16px 12px;
+    padding: 8px;
   }
 
   .central-giant-digit {
-    font-size: 4.8rem;
+    font-size: 3.8rem;
   }
 
   .giant-tick-overlay {
-    font-size: 4.2rem;
+    font-size: 3.5rem;
   }
 
   .camera-viewport-box {
-    height: 180px;
+    height: 155px;
   }
 
   .stage-sequence-grid {
-    grid-template-columns: repeat(auto-fill, minmax(48px, 1fr));
-    gap: 6px;
+    grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
+    gap: 4px;
   }
 
   .stage-grid-item {
-    padding: 6px 2px;
+    padding: 4px 2px;
   }
 
   .stage-grid-item .slot-idx {
-    font-size: 0.65rem;
+    font-size: 0.58rem;
   }
 
   .stage-grid-item .slot-val {
-    font-size: 1.05rem;
+    font-size: 0.9rem;
+  }
+
+  #btn-manual-lock {
+    width: 100%;
+    padding: 8px 12px;
+    font-size: 0.85rem;
+  }
+
+  /* Forms & Modals on mobile */
+  .roles-grid {
+    grid-template-columns: 1fr !important;
+    gap: 14px;
+  }
+
+  .role-card {
+    padding: 20px 16px;
+  }
+
+  /* 16px font-size prevents iOS Safari from automatically zooming into inputs */
+  .form-control {
+    font-size: 16px !important;
+    padding: 10px 12px;
   }
 
   .modal-box {
     max-width: 95vw !important;
-    padding: 20px 16px;
-    margin: 10px;
+    max-height: 90dvh;
+    overflow-y: auto;
+    padding: 16px 14px;
+    margin: 8px;
   }
 }
 

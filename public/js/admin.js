@@ -136,7 +136,7 @@ class AdminManager {
             </td>
             <td>
               ${m.name} ${m.isLeader ? '<span class="badge-tag">Leader</span>' : ''}<br>
-              <span style="font-size:0.78rem; color:var(--text-muted);">${m.college || 'N/A'}</span>
+              <span style="font-size:0.78rem; color:var(--text-muted);">${m.phone ? '📞 ' + m.phone : (m.college || '')}</span>
             </td>
             <td><code style="color:#fff;">${m.rollNumber}</code></td>
             <td><span class="badge-status ${m.status}">${m.status}</span></td>

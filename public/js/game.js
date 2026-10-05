@@ -10,7 +10,7 @@ class GameEngine {
     this.stageConfigs = {
       1: { count: 5, displayInterval: 3000, responseInterval: 5000 },
       2: { count: 8, displayInterval: 2000, responseInterval: 4000 },
-      3: { count: 10, displayInterval: 1500, responseInterval: 3000 }
+      3: { count: 9, displayInterval: 1500, responseInterval: 3000 }
     };
 
     this.activeSequence = [];
@@ -47,7 +47,7 @@ class GameEngine {
         }
         if (data.stages.stage3) {
           this.stageConfigs[3] = {
-            count: data.stages.stage3.numbersCount || 10,
+            count: data.stages.stage3.numbersCount || 9,
             displayInterval: (data.stages.stage3.displayIntervalSeconds || 1.5) * 1000,
             responseInterval: (data.stages.stage3.responseIntervalSeconds || 3) * 1000
           };
@@ -70,11 +70,22 @@ class GameEngine {
   }
 
   generateSequence(count) {
-    const seq = [];
-    for (let i = 0; i < count; i++) {
-      seq.push(Math.floor(Math.random() * 10)); // 0 <= X <= 9
+    // Only numbers 1 to 9, no 2 numbers shall repeat, cryptographically secure Fisher-Yates shuffle
+    const pool = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+    const n = Math.min(count || 5, pool.length);
+    const randBuffer = new Uint32Array(pool.length);
+    if (window.crypto && window.crypto.getRandomValues) {
+      window.crypto.getRandomValues(randBuffer);
+    } else {
+      for (let i = 0; i < randBuffer.length; i++) {
+        randBuffer[i] = Math.floor(Math.random() * 1000000);
+      }
     }
-    return seq;
+    for (let i = pool.length - 1; i > 0; i--) {
+      const j = randBuffer[i] % (i + 1);
+      [pool[i], pool[j]] = [pool[j], pool[i]];
+    }
+    return pool.slice(0, n);
   }
 
   // Update status on server (e.g. playing_stage_1)
@@ -275,10 +286,10 @@ class GameEngine {
       };
     }
 
-    // Keyboard Fallback (0-9)
+    // Keyboard Fallback (1-9)
     if (this._keyListener) document.removeEventListener('keydown', this._keyListener);
     this._keyListener = (e) => {
-      if (e.key >= '0' && e.key <= '9' && !this.isStepLocked) {
+      if (e.key >= '1' && e.key <= '9' && !this.isStepLocked) {
         const val = parseInt(e.key);
         this.handleDigitLocked(val, val === this.expectedDigit);
       }
