@@ -246,8 +246,12 @@ class GameEngine {
 
   // 4. Open OpenCV Output Box & Start Hand Gesture Answering
   async openOpenCVOutputBox() {
-    document.getElementById('memorize-phase-screen').style.display = 'none';
-    document.getElementById('opencv-box-screen').style.display = 'block';
+    const briefEl = document.getElementById('stage-brief-screen');
+    if (briefEl) briefEl.style.display = 'none';
+    const memEl = document.getElementById('memorize-phase-screen');
+    if (memEl) memEl.style.display = 'none';
+    const cvEl = document.getElementById('opencv-box-screen');
+    if (cvEl) cvEl.style.display = 'block';
 
     // Populate Top Left: Team Name and Active Participant Name
     const tName = this.team ? this.team.name : (localStorage.getItem('aarohan_team') ? JSON.parse(localStorage.getItem('aarohan_team')).name : 'Team Alpha');
@@ -264,16 +268,9 @@ class GameEngine {
     if (rollEl) rollEl.textContent = pRoll ? `(Roll: ${pRoll})` : '';
     if (stagePill) stagePill.innerHTML = `<span class="status-dot"></span> <span>STAGE ${this.currentStage} IN PROGRESS</span>`;
 
-    const videoEl = document.getElementById('webcam-video');
-    const canvasEl = document.getElementById('vision-canvas');
-
-    await window.visionEngine.init(videoEl, canvasEl);
-    const camStarted = await window.visionEngine.startCamera();
-
-    if (!camStarted) {
-      alert('Camera is required for OpenCV Gesture detection. Please verify camera permissions.');
-      return;
-    }
+    // Render Left Panel: Stage Sequence Grid & Start Answer Step immediately
+    this.renderStageSequenceGrid();
+    this.startAnswerStep(0);
 
     // Manual Confirm Digit Button (Fallback)
     const lockBtn = document.getElementById('btn-manual-lock');
@@ -302,12 +299,24 @@ class GameEngine {
       this.updateHudOverlay(data);
     };
 
-    // Render Bottom Right: Stage Sequence Grid
-    this.renderStageSequenceGrid();
-    this.startAnswerStep(0);
+    // Initialize Camera asynchronously so page renders spontaneously without blocking
+    const videoEl = document.getElementById('webcam-video');
+    const canvasEl = document.getElementById('vision-canvas');
+
+    window.visionEngine.init(videoEl, canvasEl).then(() => {
+      return window.visionEngine.startCamera();
+    }).then((camStarted) => {
+      if (!camStarted) {
+        console.warn('Camera could not be started or permission denied. Fallback keyboard controls active.');
+        const statusPill = document.getElementById('camera-hand-status');
+        if (statusPill) statusPill.textContent = 'Fallback Mode (Keys 1-9)';
+      }
+    }).catch((err) => {
+      console.warn('Camera initialization error:', err);
+    });
   }
 
-  // Bottom Right Grid of Sequence Numbers of this specific stage
+  // Left Panel Grid of Sequence Numbers of this specific stage (Colourless until answered)
   renderStageSequenceGrid() {
     const grid = document.getElementById('stage-sequence-grid');
     if (!grid) return;
@@ -316,7 +325,12 @@ class GameEngine {
 
     const subtitle = document.getElementById('sequence-grid-subtitle');
     if (subtitle) {
-      subtitle.textContent = `Stage ${this.currentStage} (${total} Numbers)`;
+      subtitle.textContent = `Stage ${this.currentStage} (${total} Digits)`;
+    }
+
+    const progCount = document.getElementById('sequence-progress-count');
+    if (progCount) {
+      progCount.textContent = `Answered: 0 / ${total}`;
     }
 
     for (let i = 0; i < total; i++) {
@@ -325,8 +339,8 @@ class GameEngine {
       item.id = `stage-slot-${i}`;
       item.innerHTML = `
         <div class="slot-idx">#${i + 1}</div>
-        <div class="slot-icon" id="stage-slot-icon-${i}">⏳</div>
-        <div class="slot-val" id="stage-slot-val-${i}">?</div>
+        <div class="slot-icon" id="stage-slot-icon-${i}">—</div>
+        <div class="slot-val" id="stage-slot-val-${i}">—</div>
       `;
       grid.appendChild(item);
     }
@@ -356,7 +370,7 @@ class GameEngine {
     this.correctHoldStartTime = null;
     this.currentHoldDigit = null;
 
-    // Highlight current slot in bottom-right grid
+    // Highlight current slot in Left Panel sequence grid (remains colourless until answered)
     document.querySelectorAll('.stage-grid-item').forEach((el, i) => {
       if (i === index) {
         el.classList.add('slot-active');
@@ -364,6 +378,11 @@ class GameEngine {
         el.classList.remove('slot-active');
       }
     });
+
+    const progCount = document.getElementById('sequence-progress-count');
+    if (progCount) {
+      progCount.textContent = `Answered: ${index} / ${total}`;
+    }
 
     const ordinalStr = this.getOrdinal(index + 1);
 
@@ -617,7 +636,7 @@ class GameEngine {
       if (centralCard) centralCard.classList.remove('match-correct');
     }
 
-    // Update the slot in the Bottom Right stage sequence grid
+    // Update the slot in the Left stage sequence grid (Green if correct, Red if wrong)
     const slotItem = document.getElementById(`stage-slot-${this.currentInputIndex}`);
     const slotIcon = document.getElementById(`stage-slot-icon-${this.currentInputIndex}`);
     const slotVal = document.getElementById(`stage-slot-val-${this.currentInputIndex}`);
@@ -625,16 +644,23 @@ class GameEngine {
     if (slotItem) {
       slotItem.classList.remove('slot-active');
       if (isCorrect) {
-        // User rule: "if answered correctly make the number icon green"
+        // User rule: "If answered correctly make the cell corresponding to it green"
         slotItem.classList.add('slot-correct');
+        slotItem.classList.remove('slot-wrong');
         if (slotIcon) slotIcon.textContent = '✓';
         if (slotVal) slotVal.textContent = digit;
       } else {
-        // User rule: "if wrong then red"
+        // User rule: "if answered wrong then make it red"
         slotItem.classList.add('slot-wrong');
+        slotItem.classList.remove('slot-correct');
         if (slotIcon) slotIcon.textContent = '✗';
         if (slotVal) slotVal.textContent = digit;
       }
+    }
+
+    const progCount = document.getElementById('sequence-progress-count');
+    if (progCount) {
+      progCount.textContent = `Answered: ${this.userSequence.length} / ${this.activeSequence.length}`;
     }
 
     // Brief delay before advancing to next step (allows user to see large green tick mark)

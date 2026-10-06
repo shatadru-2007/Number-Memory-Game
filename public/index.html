@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>(DS) OpenCV Memory Game | AAROHAN 2026</title>
-  <meta name="description" content="AAROHAN 2026 - (DS) OpenCV Memory Game: An interactive computer vision memory arena where players memorize sequential numbers and cast answers via hand gestures.">
+  <title>Number Memory Game | AAROHAN 2026</title>
+  <meta name="description"
+    content="AAROHAN 2026 - (DS) OpenCV Memory Game: An interactive computer vision memory arena where players memorize sequential numbers and cast answers via hand gestures.">
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700;800&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700;800&family=Outfit:wght@500;600;700;800;900&display=swap"
+    rel="stylesheet">
 
   <!-- Stylesheet -->
   <link rel="stylesheet" href="css/style.css">
@@ -18,6 +22,7 @@
   <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
 </head>
+
 <body>
 
   <!-- Top Navigation Header -->
@@ -26,8 +31,8 @@
       <div class="brand" onclick="window.app.switchView('landing')">
         <div class="brand-icon">👁️</div>
         <div class="brand-text">
-          <h1>(DS) OpenCV Memory Game <span class="badge-tag">AAROHAN 2026</span></h1>
-          <p>Vision Gesture Memory Arena · IEEE Event Architecture</p>
+          <h1>Number Memory Game <span class="badge-tag">AAROHAN 2026</span></h1>
+          <p>Vision Gesture Memory Arena</p>
         </div>
       </div>
 
@@ -46,18 +51,18 @@
   </header>
 
   <main class="container">
-    
+
     <!-- ====================================================================
          VIEW 1: LANDING PAGE (Hero & 3 Panels as on ieee-event-math)
          ==================================================================== -->
     <section id="view-landing" class="view-section active">
       <div class="hero-section">
-        <div class="hero-badge">⚡ AAROHAN 2026 ANNUAL TECH FEST · DATA SCIENCE ARENA</div>
+        <div class="hero-badge">Number Memory Game</div>
         <h2 class="hero-title">
           Think. Memorize. <span class="gradient-text">Gesture.</span> Compete.
         </h2>
         <p class="hero-desc">
-          Test your cognitive recall and precision under pressure. Memorize rapidly flashing numbers, 
+          Test your cognitive recall and precision under pressure. Memorize rapidly flashing numbers,
           then present the sequential numbers into the OpenCV Computer Vision box using hand gestures (0 to 9).
         </p>
 
@@ -89,18 +94,20 @@
 
         <!-- 2 Role Panels Grid -->
         <div class="roles-grid" style="grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));">
-          
+
           <!-- Panel 1: Participant -->
           <div class="role-card participant">
             <div class="role-icon-box">🧠</div>
             <h4 class="role-title">Participant</h4>
             <p class="role-desc">
-              Step into the arena! Leaders create a team to receive a unique Team Code. 
-              Teammates join with that code. Each member plays separately on their own device, 
+              Step into the arena! Leaders create a team to receive a unique Team Code.
+              Teammates join with that code. Each member plays separately on their own device,
               and individual scores sum up into your team's total score.
             </p>
-            <div style="font-size: 0.78rem; color: #a5f3fc; background: rgba(0,245,212,0.08); padding: 8px 12px; border-radius: 8px; margin-bottom: 20px; border: 1px solid rgba(0,245,212,0.2);">
-              ℹ️ Note: Team names can be duplicated, but a student with one roll number cannot register in any other team.
+            <div
+              style="font-size: 0.78rem; color: #a5f3fc; background: rgba(0,245,212,0.08); padding: 8px 12px; border-radius: 8px; margin-bottom: 20px; border: 1px solid rgba(0,245,212,0.2);">
+              ℹ️ Note: Team names can be duplicated, but a student with one roll number cannot register in any other
+              team.
             </div>
             <div class="role-actions">
               <button class="btn btn-primary" onclick="window.app.openModal('modal-create-team')">
@@ -117,11 +124,12 @@
             <div class="role-icon-box">🛡️</div>
             <h4 class="role-title">Admin (Host)</h4>
             <p class="role-desc">
-              Secure event management for organizers. Access the live tournament leaderboard, 
-              view event metrics, tune stage parameters, monitor participants, reset runs, 
+              Secure event management for organizers. Access the live tournament leaderboard,
+              view event metrics, tune stage parameters, monitor participants, reset runs,
               or export official results to CSV.
             </p>
-            <div style="font-size: 0.78rem; color: #fde68a; background: rgba(255,183,3,0.08); padding: 8px 12px; border-radius: 8px; margin-bottom: 20px; border: 1px solid rgba(255,183,3,0.2);">
+            <div
+              style="font-size: 0.78rem; color: #fde68a; background: rgba(255,183,3,0.08); padding: 8px 12px; border-radius: 8px; margin-bottom: 20px; border: 1px solid rgba(255,183,3,0.2);">
               🔒 Host access protected by secure authentication key (Leaderboard & Stats restricted to Admin).
             </div>
             <div class="role-actions">
@@ -143,7 +151,8 @@
         <div class="team-meta">
           <h2>
             <span id="lobby-team-name">Team Alpha</span>
-            <span class="team-code-pill" id="lobby-team-code-btn" onclick="window.app.copyTeamCode()" title="Click to Copy Team Code">
+            <span class="team-code-pill" id="lobby-team-code-btn" onclick="window.app.copyTeamCode()"
+              title="Click to Copy Team Code">
               Code: <span id="lobby-team-code">MEM-0000</span> 📋
             </span>
           </h2>
@@ -155,7 +164,8 @@
         <div style="display: flex; gap: 16px; align-items: center;">
           <div class="team-score-card">
             <div class="score-label">Team Total Points</div>
-            <div class="score-val"><span id="lobby-team-score">0</span> <small style="font-size: 1rem;">pts</small></div>
+            <div class="score-val"><span id="lobby-team-score">0</span> <small style="font-size: 1rem;">pts</small>
+            </div>
           </div>
           <button class="btn btn-secondary btn-sm" onclick="window.app.leaveTeam()">Sign Out</button>
         </div>
@@ -202,7 +212,8 @@
                   <th><span class="desktop-text">Roll Number</span><span class="mobile-text">Roll</span></th>
                   <th>Status</th>
                   <th><span class="desktop-text">Stage Breakdown</span><span class="mobile-text">Stages</span></th>
-                  <th style="text-align: right;"><span class="desktop-text">Total Points</span><span class="mobile-text">Total</span></th>
+                  <th style="text-align: right;"><span class="desktop-text">Total Points</span><span
+                      class="mobile-text">Total</span></th>
                 </tr>
               </thead>
               <tbody id="lobby-members-tbody">
@@ -219,7 +230,7 @@
          ==================================================================== -->
     <section id="view-game-arena" class="view-section">
       <div class="game-arena-wrapper">
-        
+
         <!-- Stage Steps Progress Bar -->
         <div class="stage-tracker-bar">
           <div class="stage-step active" id="step-pill-1">
@@ -246,8 +257,9 @@
           <div class="hero-badge">ARENA PRE-STAGE PROTOCOL</div>
           <h2 id="brief-stage-title">Stage 1 Briefing</h2>
           <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto 20px auto;">
-            Numbers will flash one by one on the screen. Memorize both the numbers and their sequential order. 
-            Once all numbers are shown, the OpenCV Vision Box will open and you must show each number in order using hand gestures!
+            Numbers will flash one by one on the screen. Memorize both the numbers and their sequential order.
+            Once all numbers are shown, the OpenCV Vision Box will open and you must show each number in order using
+            hand gestures!
           </p>
 
           <div class="stage-rules-pills">
@@ -310,50 +322,72 @@
           </p>
         </div>
 
-        <!-- 3.3 OpenCV Output Box (Hand Gesture Answering Phase - Split Layout) -->
+        <!-- 3.3 OpenCV Output Box (Hand Gesture Answering Phase - 3 Column Layout) -->
         <div id="opencv-box-screen" style="display: none;">
-          
-          <!-- TOP-LEFT IDENTITY BAR: Team Name + Current Participating Member Name -->
-          <div class="arena-top-bar">
-            <div class="arena-identity-left">
-              <div class="arena-team-row">
-                <span class="identity-tag">TEAM</span>
-                <span class="arena-team-name" id="arena-team-name">Loading...</span>
-              </div>
-              <div class="arena-member-row">
-                <span class="identity-tag member">ACTIVE PLAYER</span>
-                <span class="arena-member-name" id="arena-member-name">Loading...</span>
-                <span class="arena-member-roll" id="arena-member-roll"></span>
-              </div>
-            </div>
-            <div class="arena-top-badge" id="arena-stage-title-pill">
-              <span class="status-dot"></span>
-              <span>STAGE 1 IN PROGRESS</span>
-            </div>
-          </div>
 
           <div class="gesture-arena-container">
-            
-            <!-- CENTRAL PART: Target Sequence Position, Timer, and Large Detected Digit -->
-            <div class="gesture-center-panel">
-              
-              <!-- 1. Central Top: Current Sequence Number Prominently Displayed -->
-              <div class="central-target-header">
-                <div class="central-position-badge" id="central-position-pill">
-                  <span class="badge-icon">🎯</span>
-                  <span class="badge-text" id="central-pos-number">SHOW SEQUENCE #1 OF 5</span>
+
+            <!-- 1. LEFT PANEL: Grid of the number of digits to be shown as gestures (colourless until answered) -->
+            <aside class="gesture-left-panel">
+              <div class="sequence-grid-header">
+                <div>
+                  <h4 class="left-panel-title">🔢 Sequence Grid</h4>
+                  <span class="left-panel-subtitle" id="sequence-grid-subtitle">Stage 1 (5 Digits)</span>
                 </div>
-                <h2 class="central-target-title" id="central-pos-instruction">
-                  Present the 1st number from memory
-                </h2>
+                <div class="sequence-legend">
+                  <span class="legend-item"><span class="legend-dot neutral"></span><small>Pending</small></span>
+                  <span class="legend-item"><span class="legend-dot green"></span><small>Correct</small></span>
+                  <span class="legend-item"><span class="legend-dot red"></span><small>Wrong</small></span>
+                </div>
               </div>
 
-              <!-- 2. Below that: Show the Timer Prominently -->
-              <div class="central-timer-card" id="central-timer-card">
+              <!-- Dynamically populated sequence slots: Colourless until answered, Green if correct, Red if wrong -->
+              <div class="stage-sequence-grid" id="stage-sequence-grid">
+                <!-- Generated by gameEngine.renderStageSequenceGrid() -->
+              </div>
+
+              <div class="sequence-grid-footer">
+                <span id="sequence-progress-count">Answered: 0 / 5</span>
+              </div>
+            </aside>
+
+            <!-- 2. CENTRAL PART (LARGER AREA): Team Name + Participant Name at Top, Timer Just Below, Camera View Below That -->
+            <main class="gesture-center-panel">
+
+              <!-- Central Top: Team Name and Participant's Name -->
+              <div class="central-identity-bar">
+                <div class="identity-group">
+                  <div class="identity-item team-item">
+                    <span class="identity-tag">TEAM</span>
+                    <span class="arena-team-name" id="arena-team-name">Team Alpha</span>
+                  </div>
+                  <div class="identity-item player-item">
+                    <span class="identity-tag member">PLAYER</span>
+                    <span class="arena-member-name" id="arena-member-name">Participant</span>
+                    <span class="arena-member-roll" id="arena-member-roll"></span>
+                  </div>
+                </div>
+
+                <div class="identity-status-group">
+                  <div class="arena-top-badge" id="arena-stage-title-pill">
+                    <span class="status-dot"></span>
+                    <span>STAGE 1 IN PROGRESS</span>
+                  </div>
+                  <div class="central-position-badge" id="central-position-pill">
+                    <span class="badge-icon">🎯</span>
+                    <span class="badge-text" id="central-pos-number">SEQUENCE #1 OF 5</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Just below that: Timer with all existing functionalities -->
+              <div class="central-timer-card timer-normal" id="central-timer-card">
                 <div class="central-timer-row">
                   <div class="central-timer-label">
                     <span class="timer-icon">⏱️</span>
-                    <span>TIME REMAINING FOR THIS NUMBER</span>
+                    <span class="timer-title-text">TIME REMAINING FOR THIS GESTURE</span>
+                    <span class="central-target-instruction" id="central-pos-instruction">Present the 1st number from
+                      memory</span>
                   </div>
                   <div class="central-timer-digits" id="central-countdown-text">5.0s</div>
                 </div>
@@ -362,52 +396,7 @@
                 </div>
               </div>
 
-              <!-- 3. Below that: Show Detected Digit Clearly in Large Size + Large Green Tick Mark -->
-              <div class="central-detected-card" id="central-detected-card">
-                <div class="detected-badge-label">LIVE DETECTED GESTURE DIGIT</div>
-                
-                <div class="detected-display-wrapper" id="detected-display-wrapper">
-                  <div class="central-giant-digit" id="central-detected-digit">--</div>
-                  <div class="giant-tick-overlay" id="giant-tick-overlay">✓</div>
-                </div>
-
-                <div class="detected-hands-text" id="central-hands-breakdown">
-                  Show your hand in the camera (1 to 9)
-                </div>
-
-                <!-- 1s Threshold Continuous Hold Progress Meter -->
-                <div class="gesture-hold-meter-box" id="gesture-hold-meter-box">
-                  <div class="hold-meter-header">
-                    <span class="hold-meter-title" id="hold-meter-title">⏱️ Hold correct gesture for 1.0s to confirm</span>
-                    <span class="hold-meter-timer" id="hold-meter-timer">0.0s / 1.0s</span>
-                  </div>
-                  <div class="hold-meter-track">
-                    <div class="hold-meter-fill" id="hold-meter-fill"></div>
-                  </div>
-                </div>
-
-                <div class="detected-prompt-ribbon" id="central-status-ribbon">
-                  <span class="ribbon-icon" id="central-status-icon">⏱️</span>
-                  <span class="ribbon-msg" id="central-status-text">Hold correct gesture continuously for 1.0s to confirm &middot; Else waits for timer</span>
-                </div>
-              </div>
-
-              <!-- Bottom Fallback & Controls -->
-              <div class="central-bottom-bar">
-                <div class="central-fallback-tip">
-                  💡 <strong>Tip:</strong> If camera is not detecting, press keyboard keys <strong>1-9</strong> for immediate fallback.
-                </div>
-                <button class="btn btn-secondary btn-sm" id="btn-manual-lock">
-                  Lock Current Digit
-                </button>
-              </div>
-
-            </div>
-
-            <!-- RIGHT COLUMN: Camera Top Right + Sequence Grid Bottom Right -->
-            <div class="gesture-right-sidebar">
-              
-              <!-- Top Right: Camera View (Covering ~20% of screen) -->
+              <!-- Below that: Camera View (Nearly 25% of total screen area, spontaneous, no scroll needed) -->
               <div class="camera-feed-card">
                 <div class="camera-feed-header">
                   <div class="camera-feed-title">
@@ -426,30 +415,66 @@
                 </div>
 
                 <div class="camera-feed-footer">
-                  <span>1-5=One Hand &middot; 6-9=Two Hands</span>
+                  <span>1-5 = One Hand &middot; 6-9 = Two Hands &middot; Live OpenCV AI Tracker</span>
                 </div>
               </div>
 
-              <!-- Bottom Right: Grid of Sequence Numbers of Specific Stage -->
-              <div class="sequence-grid-card">
-                <div class="sequence-grid-header">
-                  <div>
-                    <h4 style="font-size: 1.05rem; font-weight: 700; color: #fff;">Stage Sequence Grid</h4>
-                    <span style="font-size: 0.78rem; color: var(--text-muted);" id="sequence-grid-subtitle">Stage 1 (5 Numbers)</span>
+            </main>
+
+            <!-- 3. RIGHT PANEL: Digit which the model detects from the participant's gestures -->
+            <aside class="gesture-right-panel">
+
+              <div class="right-panel-header">
+                <div class="right-panel-title">
+                  <span class="panel-icon">🖐️</span>
+                  <span>Detected Gesture</span>
+                </div>
+                <span class="detection-live-tag">LIVE MODEL</span>
+              </div>
+
+              <!-- Detected Digit Card with 1.0s Continuous Hold Confirmation -->
+              <div class="central-detected-card" id="central-detected-card">
+                <div class="detected-badge-label">MODEL DETECTED DIGIT</div>
+
+                <div class="detected-display-wrapper" id="detected-display-wrapper">
+                  <div class="central-giant-digit" id="central-detected-digit">--</div>
+                  <div class="giant-tick-overlay" id="giant-tick-overlay">✓</div>
+                </div>
+
+                <div class="detected-hands-text" id="central-hands-breakdown">
+                  Show your hand in the camera (0 to 9)
+                </div>
+
+                <!-- 1s Threshold Continuous Hold Progress Meter -->
+                <div class="gesture-hold-meter-box" id="gesture-hold-meter-box">
+                  <div class="hold-meter-header">
+                    <span class="hold-meter-title" id="hold-meter-title">⏱️ Hold correct gesture for 1.0s to
+                      confirm</span>
+                    <span class="hold-meter-timer" id="hold-meter-timer">0.0s / 1.0s</span>
                   </div>
-                  <div class="sequence-legend">
-                    <span class="legend-dot green"></span> <span>Correct</span>
-                    <span class="legend-dot red" style="margin-left: 6px;"></span> <span>Wrong</span>
+                  <div class="hold-meter-track">
+                    <div class="hold-meter-fill" id="hold-meter-fill"></div>
                   </div>
                 </div>
 
-                <!-- Dynamically populated sequence slots: Green if correct, Red if wrong -->
-                <div class="stage-sequence-grid" id="stage-sequence-grid">
-                  <!-- Generated by gameEngine.renderStageSequenceGrid() -->
+                <div class="detected-prompt-ribbon" id="central-status-ribbon">
+                  <span class="ribbon-icon" id="central-status-icon">⏱️</span>
+                  <span class="ribbon-msg" id="central-status-text">Hold correct gesture continuously for 1.0s to
+                    confirm &middot; Else waits for timer</span>
                 </div>
               </div>
 
-            </div>
+              <!-- Bottom Fallback & Controls -->
+              <div class="right-fallback-card">
+                <div class="central-fallback-tip">
+                  💡 <strong>Tip:</strong> Press keyboard keys <strong>1-9</strong> for immediate manual fallback.
+                </div>
+                <button class="btn btn-secondary btn-sm" id="btn-manual-lock">
+                  Lock Current Digit
+                </button>
+              </div>
+
+            </aside>
 
           </div>
         </div>
@@ -471,7 +496,8 @@
             <!-- Populated via JS -->
           </div>
 
-          <div id="review-team-total" style="font-family: var(--font-mono); font-size: 1.1rem; color: var(--accent-cyan); margin-bottom: 28px;">
+          <div id="review-team-total"
+            style="font-family: var(--font-mono); font-size: 1.1rem; color: var(--accent-cyan); margin-bottom: 28px;">
             Team Total: updating...
           </div>
 
@@ -482,7 +508,8 @@
 
         <!-- 3.5 Final Game Results Certificate -->
         <div id="final-results-screen" class="results-card" style="display: none;">
-          <div class="hero-badge" style="background: rgba(16,185,129,0.15); border-color: rgba(16,185,129,0.3); color: var(--accent-green);">
+          <div class="hero-badge"
+            style="background: rgba(16,185,129,0.15); border-color: rgba(16,185,129,0.3); color: var(--accent-green);">
             🏆 ALL 3 STAGES COMPLETED
           </div>
           <h2 style="font-family: var(--font-main); font-size: 2.4rem; margin-top: 10px;">Event Score Certificate</h2>
@@ -490,7 +517,8 @@
 
           <div style="margin: 24px 0;">
             <div style="font-size: 1.3rem; font-weight: 700;" id="final-player-name">Player Name</div>
-            <div style="font-size: 0.9rem; font-family: var(--font-mono); color: var(--accent-cyan);" id="final-player-roll">Roll No: 123456</div>
+            <div style="font-size: 0.9rem; font-family: var(--font-mono); color: var(--accent-cyan);"
+              id="final-player-roll">Roll No: 123456</div>
           </div>
 
           <!-- Stage Breakdown Cards -->
@@ -506,12 +534,16 @@
             </div>
           </div>
 
-          <div style="background: rgba(0,245,212,0.08); border: 1px solid var(--accent-cyan); border-radius: var(--radius-md); padding: 20px; max-width: 320px; margin: 0 auto 30px auto;">
-            <div style="font-size: 0.8rem; text-transform: uppercase; color: var(--text-muted);">Your Personal Total</div>
-            <div style="font-family: var(--font-mono); font-size: 3rem; font-weight: 800; color: #fff;">
-              <span id="final-total-score">0</span> <small style="font-size: 1rem; color: var(--accent-cyan);">PTS</small>
+          <div
+            style="background: rgba(0,245,212,0.08); border: 1px solid var(--accent-cyan); border-radius: var(--radius-md); padding: 20px; max-width: 320px; margin: 0 auto 30px auto;">
+            <div style="font-size: 0.8rem; text-transform: uppercase; color: var(--text-muted);">Your Personal Total
             </div>
-            <div style="font-size: 0.78rem; color: var(--text-muted);">Successfully contributed to your team's total score!</div>
+            <div style="font-family: var(--font-mono); font-size: 3rem; font-weight: 800; color: #fff;">
+              <span id="final-total-score">0</span> <small
+                style="font-size: 1rem; color: var(--accent-cyan);">PTS</small>
+            </div>
+            <div style="font-size: 0.78rem; color: var(--text-muted);">Successfully contributed to your team's total
+              score!</div>
           </div>
 
           <div style="display: flex; justify-content: center; gap: 16px;">
@@ -528,13 +560,15 @@
          VIEW 4: ADMIN COMMAND CENTER (LEADERBOARD & METRICS RESTRICTED TO ADMIN)
          ==================================================================== -->
     <section id="view-admin-hub" class="view-section">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 16px;">
+      <div
+        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 12px;">
         <div>
-          <div class="hero-badge" style="margin-bottom: 8px;">ADMINISTRATIVE ACCESS ONLY</div>
-          <h2 style="font-family: var(--font-main); font-size: 2.2rem; font-weight: 800;">
+          <div class="hero-badge" style="margin-bottom: 6px; padding: 3px 12px; font-size: 0.72rem;">ADMINISTRATIVE
+            ACCESS ONLY</div>
+          <h2 style="font-family: var(--font-main); font-size: 1.65rem; font-weight: 800; line-height: 1.2;">
             Host Admin Command Center
           </h2>
-          <p style="color: var(--text-muted); font-size: 0.9rem;">
+          <p style="color: var(--text-muted); font-size: 0.84rem;">
             Official tournament leaderboard, live event telemetry, stage controls, and data export
           </p>
         </div>
@@ -618,7 +652,7 @@
       </div>
 
       <div class="admin-grid">
-        
+
         <!-- Left: Stage Configurations Form -->
         <div class="config-card">
           <h3 style="font-family: var(--font-main); margin-bottom: 16px;">Stage Parameters</h3>
@@ -685,7 +719,8 @@
             <h3>Registered Teams & Participants Live Monitor</h3>
             <div style="display: flex; gap: 8px; align-items: center;">
               <div class="table-scroll-hint"><span>↔ Scroll table</span></div>
-              <button class="btn btn-secondary btn-sm" onclick="window.adminManager.renderAdminMonitor()">Refresh</button>
+              <button class="btn btn-secondary btn-sm"
+                onclick="window.adminManager.renderAdminMonitor()">Refresh</button>
             </div>
           </div>
 
@@ -740,7 +775,8 @@
           <div class="form-group">
             <label for="ct-roll-number">Roll Number (Unique ID) *</label>
             <input type="text" class="form-control" id="ct-roll-number" placeholder="e.g. 2026CS101" required>
-            <span class="form-text" style="color: var(--accent-cyan);">Strict constraint: A student with this roll number cannot register in any other team.</span>
+            <span class="form-text" style="color: var(--accent-cyan);">Strict constraint: A student with this roll
+              number cannot register in any other team.</span>
           </div>
           <div class="form-group">
             <label for="ct-email">Email Address *</label>
@@ -748,11 +784,13 @@
           </div>
           <div class="form-group">
             <label for="ct-phone">Phone Number *</label>
-            <input type="tel" class="form-control" id="ct-phone" placeholder="e.g. 9876543210" pattern="[0-9]{10}" maxlength="10" inputmode="numeric" title="Please enter a valid 10-digit mobile number" required>
+            <input type="tel" class="form-control" id="ct-phone" placeholder="e.g. 9876543210" pattern="[0-9]{10}"
+              maxlength="10" inputmode="numeric" title="Please enter a valid 10-digit mobile number" required>
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" onclick="window.app.closeModal('modal-create-team')">Cancel</button>
+          <button type="button" class="btn btn-secondary"
+            onclick="window.app.closeModal('modal-create-team')">Cancel</button>
           <button type="submit" class="btn btn-primary">Create Team & Generate Code</button>
         </div>
       </form>
@@ -770,7 +808,8 @@
         <div class="modal-body">
           <div class="form-group">
             <label for="jt-team-code">Team Code *</label>
-            <input type="text" class="form-control" id="jt-team-code" placeholder="e.g. MEM-4891" style="text-transform: uppercase;" required>
+            <input type="text" class="form-control" id="jt-team-code" placeholder="e.g. MEM-4891"
+              style="text-transform: uppercase;" required>
             <span class="form-text">Ask your team leader for the 6-character code.</span>
           </div>
           <div class="form-group">
@@ -780,7 +819,8 @@
           <div class="form-group">
             <label for="jt-roll-number">Your Roll Number (Unique ID) *</label>
             <input type="text" class="form-control" id="jt-roll-number" placeholder="e.g. 2026CS102" required>
-            <span class="form-text" style="color: var(--accent-cyan);">Strict constraint: A student with this roll number cannot register in any other team.</span>
+            <span class="form-text" style="color: var(--accent-cyan);">Strict constraint: A student with this roll
+              number cannot register in any other team.</span>
           </div>
           <div class="form-group">
             <label for="jt-email">Email Address *</label>
@@ -788,11 +828,13 @@
           </div>
           <div class="form-group">
             <label for="jt-phone">Phone Number *</label>
-            <input type="tel" class="form-control" id="jt-phone" placeholder="e.g. 9876543210" pattern="[0-9]{10}" maxlength="10" inputmode="numeric" title="Please enter a valid 10-digit mobile number" required>
+            <input type="tel" class="form-control" id="jt-phone" placeholder="e.g. 9876543210" pattern="[0-9]{10}"
+              maxlength="10" inputmode="numeric" title="Please enter a valid 10-digit mobile number" required>
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" onclick="window.app.closeModal('modal-join-team')">Cancel</button>
+          <button type="button" class="btn btn-secondary"
+            onclick="window.app.closeModal('modal-join-team')">Cancel</button>
           <button type="submit" class="btn btn-primary">Join Team</button>
         </div>
       </form>
@@ -811,11 +853,13 @@
         <div class="modal-body">
           <div class="form-group">
             <label for="admin-password">Host Security Key / Password *</label>
-            <input type="password" class="form-control" id="admin-password" placeholder="Enter host password (default: admin2026)" required>
+            <input type="password" class="form-control" id="admin-password"
+              placeholder="Enter host password (default: admin2026)" required>
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" onclick="window.app.closeModal('modal-admin-login')">Cancel</button>
+          <button type="button" class="btn btn-secondary"
+            onclick="window.app.closeModal('modal-admin-login')">Cancel</button>
           <button type="submit" class="btn btn-primary">Unlock Command Center</button>
         </div>
       </form>
@@ -830,15 +874,19 @@
         <button class="modal-close" onclick="window.app.closePracticeModal()">&times;</button>
       </div>
       <div class="modal-body" style="text-align: center;">
-        <div style="position: relative; width: 100%; height: 380px; background: #000; border-radius: var(--radius-md); overflow: hidden; margin-bottom: 16px;">
+        <div
+          style="position: relative; width: 100%; height: 380px; background: #000; border-radius: var(--radius-md); overflow: hidden; margin-bottom: 16px;">
           <video id="practice-video" style="display: none;" playsinline muted></video>
           <canvas id="practice-canvas" style="width: 100%; height: 100%; transform: scaleX(-1);"></canvas>
-          <div style="position: absolute; top: 12px; right: 12px; background: rgba(0,0,0,0.8); border: 2px solid var(--accent-cyan); padding: 8px 16px; border-radius: 8px;">
+          <div
+            style="position: absolute; top: 12px; right: 12px; background: rgba(0,0,0,0.8); border: 2px solid var(--accent-cyan); padding: 8px 16px; border-radius: 8px;">
             <div style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase;">Detected Digit</div>
-            <div id="practice-detected-digit" style="font-family: var(--font-mono); font-size: 2.2rem; font-weight: 800; color: #fff;">--</div>
+            <div id="practice-detected-digit"
+              style="font-family: var(--font-mono); font-size: 2.2rem; font-weight: 800; color: #fff;">--</div>
           </div>
         </div>
-        <div id="practice-breakdown" style="font-size: 0.9rem; color: var(--accent-cyan); font-family: var(--font-mono); margin-bottom: 12px;">
+        <div id="practice-breakdown"
+          style="font-size: 0.9rem; color: var(--accent-cyan); font-family: var(--font-mono); margin-bottom: 12px;">
           Hold hand in front of camera
         </div>
         <p style="font-size: 0.85rem; color: var(--text-muted);">
@@ -863,14 +911,19 @@
           As specified in the competition guidelines, fingers should be held facing the camera:
         </p>
         <div style="display: flex; flex-direction: column; gap: 12px; font-size: 0.92rem;">
-          <div style="padding: 12px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); border-radius: 8px;">
+          <div
+            style="padding: 12px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); border-radius: 8px;">
             <strong style="color: var(--accent-cyan);">0 :</strong> Closed fist (0 extended fingers)
           </div>
-          <div style="padding: 12px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); border-radius: 8px;">
-            <strong style="color: var(--accent-cyan);">1 to 5 :</strong> 1 to 5 fingers extended on one hand (Thumb, Index, Middle, Ring, Pinky)
+          <div
+            style="padding: 12px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); border-radius: 8px;">
+            <strong style="color: var(--accent-cyan);">1 to 5 :</strong> 1 to 5 fingers extended on one hand (Thumb,
+            Index, Middle, Ring, Pinky)
           </div>
-          <div style="padding: 12px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); border-radius: 8px;">
-            <strong style="color: var(--accent-cyan);">6 to 9 :</strong> Open hand (5 fingers on one hand) + 1 to 4 fingers on the second hand
+          <div
+            style="padding: 12px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); border-radius: 8px;">
+            <strong style="color: var(--accent-cyan);">6 to 9 :</strong> Open hand (5 fingers on one hand) + 1 to 4
+            fingers on the second hand
           </div>
         </div>
         <p style="font-size: 0.82rem; color: var(--text-dim); margin-top: 16px;">
@@ -878,7 +931,8 @@
         </p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" onclick="window.app.closeModal('modal-gesture-guide')">Got It!</button>
+        <button type="button" class="btn btn-primary" onclick="window.app.closeModal('modal-gesture-guide')">Got
+          It!</button>
       </div>
     </div>
   </div>
@@ -894,4 +948,5 @@
   <script src="js/admin.js"></script>
   <script src="js/app.js"></script>
 </body>
+
 </html>

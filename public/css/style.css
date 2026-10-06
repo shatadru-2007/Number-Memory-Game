@@ -105,9 +105,9 @@ header.app-header {
   top: 0;
   z-index: 100;
   backdrop-filter: blur(16px);
-  background: rgba(9, 13, 22, 0.9);
+  background: rgba(9, 13, 22, 0.92);
   border-bottom: 1px solid var(--border-color);
-  padding: 8px 0;
+  padding: 4px 0;
   transition: var(--transition-normal);
 }
 
@@ -120,27 +120,27 @@ header.app-header {
 .brand {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   cursor: pointer;
   text-decoration: none;
 }
 
 .brand-icon {
-  width: 34px;
-  height: 34px;
-  border-radius: 9px;
+  width: 28px;
+  height: 28px;
+  border-radius: 7px;
   background: linear-gradient(135deg, var(--accent-cyan), var(--accent-violet));
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 17px;
-  box-shadow: 0 0 16px rgba(0, 245, 212, 0.35);
+  font-size: 14px;
+  box-shadow: 0 0 12px rgba(0, 245, 212, 0.3);
   flex-shrink: 0;
 }
 
 .brand-text h1 {
   font-family: var(--font-main);
-  font-size: 1.15rem;
+  font-size: 1.02rem;
   font-weight: 700;
   letter-spacing: -0.02em;
   background: linear-gradient(90deg, #fff, #94a3b8);
@@ -152,10 +152,10 @@ header.app-header {
 }
 
 .badge-tag {
-  font-size: 0.65rem;
+  font-size: 0.6rem;
   font-family: var(--font-mono);
   font-weight: 600;
-  padding: 2px 8px;
+  padding: 1px 6px;
   border-radius: var(--radius-full);
   background: rgba(0, 245, 212, 0.12);
   color: var(--accent-cyan);
@@ -164,35 +164,35 @@ header.app-header {
 }
 
 .brand-text p {
-  font-size: 0.78rem;
+  font-size: 0.7rem;
   color: var(--text-muted);
 }
 
 .header-nav {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 12px;
 }
 
 .status-pill {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 6px 14px;
+  gap: 6px;
+  padding: 4px 10px;
   border-radius: var(--radius-full);
   background: rgba(16, 185, 129, 0.1);
   border: 1px solid rgba(16, 185, 129, 0.3);
-  font-size: 0.8rem;
+  font-size: 0.74rem;
   font-weight: 500;
   color: var(--accent-green);
 }
 
 .status-dot {
-  width: 8px;
-  height: 8px;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
   background: var(--accent-green);
-  box-shadow: 0 0 10px var(--accent-green);
+  box-shadow: 0 0 8px var(--accent-green);
   animation: pulse-glow 2s infinite;
 }
 
@@ -203,7 +203,7 @@ header.app-header {
 
 .nav-links {
   display: flex;
-  gap: 8px;
+  gap: 6px;
 }
 
 .btn-nav {
@@ -212,9 +212,9 @@ header.app-header {
   color: var(--text-muted);
   font-family: var(--font-main);
   font-weight: 600;
-  font-size: 0.9rem;
-  padding: 8px 16px;
-  border-radius: var(--radius-md);
+  font-size: 0.82rem;
+  padding: 5px 12px;
+  border-radius: var(--radius-sm);
   cursor: pointer;
   transition: var(--transition-fast);
 }
@@ -252,30 +252,30 @@ header.app-header {
 
 .hero-section {
   text-align: center;
-  padding: 30px 0 50px 0;
+  padding: 16px 0 32px 0;
 }
 
 .hero-badge {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 6px 16px;
+  gap: 6px;
+  padding: 4px 14px;
   border-radius: var(--radius-full);
   background: rgba(121, 40, 202, 0.15);
   border: 1px solid rgba(121, 40, 202, 0.4);
   color: #c084fc;
-  font-size: 0.85rem;
+  font-size: 0.78rem;
   font-weight: 600;
-  margin-bottom: 20px;
+  margin-bottom: 12px;
 }
 
 .hero-title {
   font-family: var(--font-main);
-  font-size: 3.2rem;
+  font-size: 2.6rem;
   font-weight: 800;
   letter-spacing: -0.03em;
   line-height: 1.15;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
 }
 
 .hero-title span.gradient-text {
@@ -285,19 +285,19 @@ header.app-header {
 }
 
 .hero-desc {
-  font-size: 1.15rem;
+  font-size: 1.02rem;
   color: var(--text-muted);
   max-width: 680px;
-  margin: 0 auto 32px auto;
+  margin: 0 auto 20px auto;
 }
 
 /* Quick Event Info Strip */
 .info-strip {
   display: flex;
   justify-content: center;
-  gap: 24px;
+  gap: 16px;
   flex-wrap: wrap;
-  margin-bottom: 48px;
+  margin-bottom: 30px;
 }
 
 .info-chip {
@@ -682,38 +682,38 @@ header.app-header {
 .team-banner {
   background: linear-gradient(135deg, rgba(121, 40, 202, 0.2), rgba(0, 245, 212, 0.15));
   border: 1px solid var(--border-glow);
-  border-radius: var(--radius-lg);
-  padding: 30px;
-  margin-bottom: 30px;
+  border-radius: var(--radius-md);
+  padding: 14px 20px;
+  margin-bottom: 16px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 14px;
 }
 
 .team-meta h2 {
   font-family: var(--font-main);
-  font-size: 1.8rem;
+  font-size: 1.35rem;
   font-weight: 700;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
 }
 
 .team-code-pill {
   font-family: var(--font-mono);
-  font-size: 1.1rem;
+  font-size: 0.92rem;
   background: #090e18;
   border: 1px solid var(--accent-cyan);
   color: var(--accent-cyan);
-  padding: 6px 16px;
-  border-radius: var(--radius-md);
+  padding: 4px 12px;
+  border-radius: var(--radius-sm);
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   cursor: pointer;
-  box-shadow: 0 0 15px rgba(0, 245, 212, 0.2);
+  box-shadow: 0 0 12px rgba(0, 245, 212, 0.2);
 }
 
 .team-code-pill:hover {
@@ -723,13 +723,13 @@ header.app-header {
 .team-score-card {
   background: rgba(0, 0, 0, 0.4);
   border: 1px solid var(--border-color);
-  padding: 16px 28px;
-  border-radius: var(--radius-md);
+  padding: 8px 18px;
+  border-radius: var(--radius-sm);
   text-align: right;
 }
 
 .team-score-card .score-label {
-  font-size: 0.8rem;
+  font-size: 0.72rem;
   color: var(--text-muted);
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -737,7 +737,7 @@ header.app-header {
 
 .team-score-card .score-val {
   font-family: var(--font-mono);
-  font-size: 2.2rem;
+  font-size: 1.6rem;
   font-weight: 800;
   color: var(--accent-cyan);
 }
@@ -970,18 +970,18 @@ header.app-header {
   justify-content: space-between;
   background: var(--bg-card);
   border: 1px solid var(--border-color);
-  padding: 6px 18px;
+  padding: 4px 14px;
   border-radius: var(--radius-sm);
-  margin-bottom: 8px;
+  margin-bottom: 6px;
   flex-shrink: 0;
 }
 
 .stage-step {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   font-weight: 600;
-  font-size: 0.82rem;
+  font-size: 0.76rem;
   color: var(--text-muted);
 }
 
@@ -994,14 +994,14 @@ header.app-header {
 }
 
 .step-number {
-  width: 22px;
-  height: 22px;
+  width: 19px;
+  height: 19px;
   border-radius: 50%;
-  border: 2px solid currentColor;
+  border: 1.5px solid currentColor;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.74rem;
+  font-size: 0.68rem;
   font-family: var(--font-mono);
 }
 
@@ -1017,20 +1017,20 @@ header.app-header {
   background: var(--bg-card);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
-  padding: 24px 20px;
+  padding: 16px 18px;
 }
 
 .stage-brief-card h2 {
   font-family: var(--font-main);
-  font-size: 1.8rem;
-  margin-bottom: 8px;
+  font-size: 1.5rem;
+  margin-bottom: 6px;
 }
 
 .stage-rules-pills {
   display: flex;
   justify-content: center;
-  gap: 12px;
-  margin: 14px 0 20px 0;
+  gap: 10px;
+  margin: 10px 0 16px 0;
   flex-wrap: wrap;
 }
 
@@ -1044,7 +1044,7 @@ header.app-header {
   border: 2px solid var(--accent-cyan);
   box-shadow: 0 0 35px rgba(0, 245, 212, 0.2);
   border-radius: var(--radius-md);
-  padding: 16px 20px;
+  padding: 12px 16px;
   text-align: center;
   position: relative;
   min-height: 0;
@@ -1052,18 +1052,18 @@ header.app-header {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 6px;
 }
 
 .memorize-banner-badge {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   background: rgba(0, 245, 212, 0.1);
   border: 1px solid rgba(0, 245, 212, 0.3);
-  padding: 6px 14px;
+  padding: 4px 12px;
   border-radius: var(--radius-full);
-  font-size: 0.76rem;
+  font-size: 0.72rem;
   font-family: var(--font-mono);
   letter-spacing: 0.08em;
   color: var(--accent-cyan);
@@ -1072,21 +1072,21 @@ header.app-header {
 .memorize-counter-chip {
   display: inline-block;
   background: rgba(0, 245, 212, 0.18);
-  border: 2px solid var(--accent-cyan);
+  border: 1.5px solid var(--accent-cyan);
   color: var(--accent-cyan);
   font-family: var(--font-mono);
-  font-size: 1.35rem;
+  font-size: 1.15rem;
   font-weight: 800;
-  letter-spacing: 0.06em;
-  padding: 8px 24px;
-  border-radius: var(--radius-md);
-  box-shadow: 0 0 25px rgba(0, 245, 212, 0.35);
-  margin-bottom: 8px;
+  letter-spacing: 0.05em;
+  padding: 5px 18px;
+  border-radius: var(--radius-sm);
+  box-shadow: 0 0 20px rgba(0, 245, 212, 0.3);
+  margin-bottom: 4px;
 }
 
 .memorize-heading {
   font-family: var(--font-main);
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   font-weight: 700;
   color: #fff;
 }
@@ -1193,112 +1193,228 @@ header.app-header {
 }
 
 /* ==========================================================================
-   ARENA TOP BAR (TOP LEFT: TEAM NAME & ACTIVE PARTICIPANT NAME)
-   ========================================================================== */
-
-.arena-top-bar {
-  background: linear-gradient(135deg, rgba(14, 21, 38, 0.96), rgba(9, 14, 25, 0.96));
-  border: 1.5px solid rgba(0, 245, 212, 0.3);
-  border-radius: var(--radius-sm);
-  padding: 6px 14px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 8px;
-  gap: 10px;
-  flex-wrap: wrap;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
-  flex-shrink: 0;
-}
-
-.arena-identity-left {
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-}
-
-.arena-team-row, .arena-member-row {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-
-.identity-tag {
-  background: rgba(0, 245, 212, 0.15);
-  border: 1px solid var(--accent-cyan);
-  color: var(--accent-cyan);
-  font-family: var(--font-mono);
-  font-size: 0.62rem;
-  font-weight: 800;
-  padding: 2px 6px;
-  border-radius: 4px;
-  letter-spacing: 0.05em;
-}
-
-.identity-tag.member {
-  background: rgba(157, 78, 221, 0.18);
-  border-color: var(--accent-purple);
-  color: #d8b4fe;
-}
-
-.arena-team-name {
-  font-family: var(--font-main);
-  font-size: 1.05rem;
-  font-weight: 800;
-  color: #ffffff;
-}
-
-.arena-member-name {
-  font-family: var(--font-body);
-  font-size: 0.88rem;
-  font-weight: 600;
-  color: #e2e8f0;
-}
-
-.arena-member-roll {
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-  color: var(--accent-cyan);
-}
-
-.arena-top-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: rgba(0, 0, 0, 0.5);
-  border: 1px solid var(--border-color);
-  padding: 4px 12px;
-  border-radius: var(--radius-full);
-  font-family: var(--font-mono);
-  font-size: 0.74rem;
-  color: var(--text-muted);
-}
-
-/* ==========================================================================
-   SPLIT LAYOUT GESTURE ARENA (TOP-RIGHT CAMERA + BOTTOM-RIGHT GRID)
+   3-COLUMN LAYOUT GESTURE ARENA
+   - Left Panel: Stage Sequence Grid (colourless until answered; green if correct, red if wrong)
+   - Central Part: Team & Participant Name at top, Timer below, Camera view below that (~25% screen area, spontaneous, no scroll)
+   - Right Panel: Model Detected Digit
    ========================================================================== */
 
 .gesture-arena-container {
   display: grid;
-  grid-template-columns: minmax(0, 1.15fr) clamp(440px, 32vw, 560px);
-  gap: 14px;
+  grid-template-columns: minmax(190px, 1fr) minmax(460px, 2.4fr) minmax(220px, 1.15fr);
+  gap: 12px;
   align-items: stretch;
+  width: 100%;
 }
 
-/* CENTRAL PANEL (TARGET POSITION, TIMER, LARGE DETECTED DIGIT) */
+/* ==========================================================================
+   1. LEFT PANEL: STAGE SEQUENCE GRID
+   ========================================================================== */
+.gesture-left-panel {
+  background: var(--bg-card);
+  border: 1.5px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+}
+
+.sequence-grid-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 6px;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.left-panel-title {
+  font-family: var(--font-main);
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.2;
+}
+
+.left-panel-subtitle {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+}
+
+.sequence-legend {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.65rem;
+  font-family: var(--font-mono);
+  color: var(--text-dim);
+}
+
+.legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.legend-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.legend-dot.neutral {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.legend-dot.green {
+  background: var(--accent-green);
+  box-shadow: 0 0 5px var(--accent-green);
+}
+
+.legend-dot.red {
+  background: var(--accent-red);
+  box-shadow: 0 0 5px var(--accent-red);
+}
+
+/* Grid of sequence numbers for current stage */
+.stage-sequence-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 6px;
+  flex: 1;
+  overflow-y: auto;
+  align-content: start;
+  padding-right: 2px;
+}
+
+/* Cell corresponding to the sequence: COLOURLESS until answered */
+.stage-grid-item {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1.5px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-sm);
+  padding: 6px 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  font-family: var(--font-mono);
+  color: var(--text-dim);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  min-height: 48px;
+}
+
+.stage-grid-item .slot-idx {
+  font-size: 0.62rem;
+  font-weight: 600;
+  color: var(--text-dim);
+  letter-spacing: 0.04em;
+}
+
+.stage-grid-item .slot-icon {
+  font-size: 0.8rem;
+  line-height: 1;
+  color: var(--text-dim);
+}
+
+.stage-grid-item .slot-val {
+  font-size: 1.05rem;
+  font-weight: 800;
+  line-height: 1;
+  color: #94a3b8;
+}
+
+/* Current active cell being answered: remains COLOURLESS (subtle neutral outline only) */
+.stage-grid-item.slot-active {
+  border-color: rgba(255, 255, 255, 0.45);
+  background: rgba(255, 255, 255, 0.07);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.12);
+  transform: scale(1.02);
+}
+
+.stage-grid-item.slot-active .slot-idx {
+  color: #f1f5f9;
+  font-weight: 700;
+}
+
+.stage-grid-item.slot-active .slot-val {
+  color: #ffffff;
+}
+
+/* Answered Correctly: GREEN */
+.stage-grid-item.slot-correct {
+  background: rgba(16, 185, 129, 0.22) !important;
+  border: 2px solid #10b981 !important;
+  color: #10b981 !important;
+  box-shadow: 0 0 14px rgba(16, 185, 129, 0.45) !important;
+  transform: none;
+}
+
+.stage-grid-item.slot-correct .slot-idx {
+  color: #6ee7b7 !important;
+}
+
+.stage-grid-item.slot-correct .slot-icon {
+  color: #10b981 !important;
+}
+
+.stage-grid-item.slot-correct .slot-val {
+  color: #10b981 !important;
+  text-shadow: 0 0 8px rgba(16, 185, 129, 0.5);
+}
+
+/* Answered Wrong: RED */
+.stage-grid-item.slot-wrong {
+  background: rgba(239, 68, 68, 0.22) !important;
+  border: 2px solid #ef4444 !important;
+  color: #ef4444 !important;
+  box-shadow: 0 0 14px rgba(239, 68, 68, 0.45) !important;
+  transform: none;
+}
+
+.stage-grid-item.slot-wrong .slot-idx {
+  color: #fca5a5 !important;
+}
+
+.stage-grid-item.slot-wrong .slot-icon {
+  color: #ef4444 !important;
+}
+
+.stage-grid-item.slot-wrong .slot-val {
+  color: #ef4444 !important;
+  text-shadow: 0 0 8px rgba(239, 68, 68, 0.5);
+}
+
+.sequence-grid-footer {
+  border-top: 1px solid var(--border-color);
+  padding-top: 6px;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-dim);
+}
+
+/* ==========================================================================
+   2. CENTRAL PART (LARGER AREA): IDENTITY AT TOP -> TIMER -> CAMERA VIEW (~25% SCREEN)
+   ========================================================================== */
 .gesture-center-panel {
   background: var(--bg-card);
   border: 1.5px solid var(--border-glow);
   border-radius: var(--radius-md);
-  padding: 12px 18px;
+  padding: 10px 14px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   gap: 8px;
   box-shadow: var(--shadow-md);
   position: relative;
   overflow: hidden;
+  min-height: 0;
 }
 
 .gesture-center-panel::before {
@@ -1311,50 +1427,121 @@ header.app-header {
   background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple));
 }
 
-/* 1. Central Target Header */
-.central-target-header {
-  text-align: center;
+/* Central Top: Team Name and Participant Name */
+.central-identity-bar {
+  background: linear-gradient(135deg, rgba(14, 21, 38, 0.95), rgba(9, 14, 25, 0.95));
+  border: 1px solid rgba(0, 245, 212, 0.25);
+  border-radius: var(--radius-sm);
+  padding: 5px 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+}
+
+.identity-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.identity-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.identity-tag {
+  background: rgba(0, 245, 212, 0.15);
+  border: 1px solid var(--accent-cyan);
+  color: var(--accent-cyan);
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 800;
+  padding: 1px 5px;
+  border-radius: 4px;
+  letter-spacing: 0.04em;
+}
+
+.identity-tag.member {
+  background: rgba(157, 78, 221, 0.18);
+  border-color: var(--accent-purple);
+  color: #d8b4fe;
+}
+
+.arena-team-name {
+  font-family: var(--font-main);
+  font-size: 0.98rem;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.arena-member-name {
+  font-family: var(--font-body);
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: #e2e8f0;
+}
+
+.arena-member-roll {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--accent-cyan);
+}
+
+.identity-status-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.arena-top-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--border-color);
+  padding: 2px 10px;
+  border-radius: var(--radius-full);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-muted);
 }
 
 .central-position-badge {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
   background: rgba(0, 245, 212, 0.12);
   border: 1.5px solid var(--accent-cyan);
-  padding: 4px 16px;
+  padding: 2px 10px;
   border-radius: var(--radius-full);
-  box-shadow: 0 0 16px rgba(0, 245, 212, 0.25);
-  margin-bottom: 4px;
+  box-shadow: 0 0 12px rgba(0, 245, 212, 0.2);
 }
 
 .central-position-badge .badge-icon {
-  font-size: 1rem;
+  font-size: 0.82rem;
 }
 
 .central-position-badge .badge-text {
   font-family: var(--font-mono);
-  font-size: 0.92rem;
+  font-size: 0.76rem;
   font-weight: 800;
   color: var(--accent-cyan);
-  letter-spacing: 0.05em;
+  letter-spacing: 0.04em;
 }
 
-.central-target-title {
-  font-family: var(--font-main);
-  font-size: 1.12rem;
-  font-weight: 700;
-  color: #fff;
-  margin: 0;
-}
-
-/* 2. Central Timer Card */
+/* Central Timer Card (Just below identity) */
 .central-timer-card {
-  background: rgba(6, 10, 20, 0.85);
+  background: rgba(6, 10, 20, 0.9);
   border: 1.5px solid rgba(0, 245, 212, 0.3);
   border-radius: var(--radius-sm);
-  padding: 6px 14px;
+  padding: 5px 12px;
   transition: all 0.25s ease;
+  flex-shrink: 0;
 }
 
 .central-timer-card.timer-urgent {
@@ -1377,23 +1564,37 @@ header.app-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 4px;
+  margin-bottom: 3px;
 }
 
 .central-timer-label {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.timer-title-text {
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   color: var(--text-muted);
   font-weight: 700;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.04em;
+}
+
+.central-target-instruction {
+  font-family: var(--font-main);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.06);
+  padding: 1px 8px;
+  border-radius: 4px;
 }
 
 .central-timer-digits {
   font-family: var(--font-mono);
-  font-size: 1.6rem;
+  font-size: 1.45rem;
   font-weight: 900;
   line-height: 1;
   color: #fff;
@@ -1401,7 +1602,7 @@ header.app-header {
 
 .central-timer-track {
   width: 100%;
-  height: 6px;
+  height: 5px;
   background: rgba(255, 255, 255, 0.1);
   border-radius: var(--radius-full);
   overflow: hidden;
@@ -1423,12 +1624,160 @@ header.app-header {
   background: linear-gradient(90deg, var(--accent-red), #d90429);
 }
 
-/* 3. Central Detected Digit Card (CLEAR & LARGE SIZE + LARGE TICK MARK) */
+/* Below that: Camera View (Nearly 25% of total screen area, spontaneous, no scroll needed) */
+.camera-feed-card {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  background: var(--bg-card);
+  border: 1.5px solid var(--border-glow);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+}
+
+.camera-feed-header {
+  background: #0d1424;
+  padding: 5px 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border-color);
+  flex-shrink: 0;
+}
+
+.camera-feed-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--accent-cyan);
+}
+
+.camera-status-pill {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.06);
+  padding: 2px 7px;
+  border-radius: var(--radius-full);
+  font-family: var(--font-mono);
+  transition: all 0.2s ease;
+}
+
+.camera-status-pill.status-pill-holding {
+  background: rgba(16, 185, 129, 0.2);
+  color: #10b981;
+  border: 1px solid rgba(16, 185, 129, 0.5);
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.4);
+}
+
+.camera-viewport-box {
+  width: 100%;
+  flex: 1;
+  min-height: 260px;
+  height: clamp(280px, 46vh, 440px);
+  background: #03060c;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.camera-viewport-box video {
+  display: none;
+}
+
+.camera-viewport-box canvas {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scaleX(-1); /* Mirror camera */
+}
+
+.camera-hud-bottom-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: rgba(0, 0, 0, 0.45);
+  overflow: hidden;
+  z-index: 5;
+}
+
+.camera-hud-hold-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #00f5d4, #10b981);
+  box-shadow: 0 0 10px #10b981;
+  transition: width 0.05s linear;
+}
+
+.camera-feed-footer {
+  background: #090e1a;
+  padding: 3px 10px;
+  font-size: 0.68rem;
+  color: var(--text-dim);
+  text-align: center;
+  border-top: 1px solid var(--border-color);
+  flex-shrink: 0;
+}
+
+/* ==========================================================================
+   3. RIGHT PANEL: DIGIT DETECTED BY MODEL FROM GESTURES
+   ========================================================================== */
+.gesture-right-panel {
+  background: var(--bg-card);
+  border: 1.5px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 8px;
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+}
+
+.right-panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 6px;
+  flex-shrink: 0;
+}
+
+.right-panel-title {
+  font-family: var(--font-main);
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.detection-live-tag {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: var(--radius-full);
+  background: rgba(0, 245, 212, 0.12);
+  border: 1px solid rgba(0, 245, 212, 0.3);
+  color: var(--accent-cyan);
+}
+
 .central-detected-card {
   background: rgba(8, 13, 24, 0.95);
   border: 2px solid var(--accent-cyan);
-  border-radius: var(--radius-md);
-  padding: 10px 16px;
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1442,7 +1791,7 @@ header.app-header {
 
 .detected-badge-label {
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   color: var(--text-muted);
@@ -1454,14 +1803,14 @@ header.app-header {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  margin: 2px 0;
-  min-width: 140px;
-  min-height: 80px;
+  margin: 4px 0;
+  min-width: 120px;
+  min-height: 70px;
 }
 
 .central-giant-digit {
   font-family: var(--font-mono);
-  font-size: clamp(3.2rem, 7vh, 4.8rem);
+  font-size: clamp(3rem, 7vh, 4.4rem);
   font-weight: 900;
   color: #ffffff;
   line-height: 1;
@@ -1469,14 +1818,13 @@ header.app-header {
   transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-/* User requirement: "if the shown digit is correct, make the digit icon green, show a large tick mark and then move to the next number" */
 .giant-tick-overlay {
   position: absolute;
   inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: clamp(3.2rem, 7vh, 4.8rem);
+  font-size: clamp(3rem, 7vh, 4.4rem);
   font-weight: 900;
   color: #10b981;
   text-shadow: 0 0 40px #10b981, 0 0 15px #ffffff;
@@ -1505,20 +1853,20 @@ header.app-header {
 }
 
 .detected-hands-text {
-  font-size: 0.78rem;
+  font-size: 0.74rem;
   color: var(--accent-cyan);
   font-family: var(--font-mono);
   margin-bottom: 6px;
+  text-align: center;
 }
 
 /* 1s Threshold Continuous Hold Progress Meter */
 .gesture-hold-meter-box {
   width: 100%;
-  max-width: 440px;
   background: rgba(4, 9, 20, 0.7);
   border: 1px solid rgba(0, 245, 212, 0.25);
   border-radius: var(--radius-sm);
-  padding: 6px 12px;
+  padding: 5px 10px;
   margin: 2px 0 6px 0;
   transition: all 0.2s ease;
 }
@@ -1546,9 +1894,9 @@ header.app-header {
   justify-content: space-between;
   align-items: center;
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   color: var(--text-muted);
-  margin-bottom: 4px;
+  margin-bottom: 3px;
 }
 
 .holding-correct .hold-meter-header {
@@ -1557,7 +1905,7 @@ header.app-header {
 
 .hold-meter-title {
   font-weight: 600;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.02em;
 }
 
 .hold-meter-timer {
@@ -1573,7 +1921,7 @@ header.app-header {
 
 .hold-meter-track {
   width: 100%;
-  height: 6px;
+  height: 5px;
   background: rgba(255, 255, 255, 0.08);
   border-radius: var(--radius-full);
   overflow: hidden;
@@ -1597,276 +1945,34 @@ header.app-header {
 .detected-prompt-ribbon {
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid var(--border-color);
-  padding: 4px 14px;
+  padding: 3px 10px;
   border-radius: var(--radius-full);
   display: flex;
   align-items: center;
-  gap: 6px;
-  font-size: 0.74rem;
+  gap: 5px;
+  font-size: 0.68rem;
   color: var(--text-muted);
+  text-align: center;
+  justify-content: center;
 }
 
-/* Central Bottom Controls */
-.central-bottom-bar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+/* Right Panel Fallback Card */
+.right-fallback-card {
   border-top: 1px solid var(--border-color);
-  padding-top: 8px;
-  flex-wrap: wrap;
-  gap: 8px;
+  padding-top: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex-shrink: 0;
 }
 
 .central-fallback-tip {
-  font-size: 0.74rem;
+  font-size: 0.7rem;
   color: var(--text-dim);
 }
 
 .central-fallback-tip strong {
   color: var(--accent-cyan);
-}
-
-/* ==========================================================================
-   RIGHT SIDEBAR: TOP RIGHT CAMERA + BOTTOM RIGHT SEQUENCE GRID
-   ========================================================================== */
-
-.gesture-right-sidebar {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-/* TOP RIGHT: Camera Feed Card */
-.camera-feed-card {
-  background: var(--bg-card);
-  border: 1.5px solid var(--border-color);
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  box-shadow: var(--shadow-md);
-  flex-shrink: 0;
-}
-
-.camera-feed-header {
-  background: #0d1424;
-  padding: 6px 12px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid var(--border-color);
-}
-
-.camera-feed-title {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-family: var(--font-mono);
-  font-size: 0.74rem;
-  font-weight: 700;
-  color: var(--accent-cyan);
-}
-
-.camera-status-pill {
-  font-size: 0.68rem;
-  color: var(--text-muted);
-  background: rgba(255, 255, 255, 0.06);
-  padding: 2px 6px;
-  border-radius: var(--radius-full);
-  font-family: var(--font-mono);
-  transition: all 0.2s ease;
-}
-
-.camera-status-pill.status-pill-holding {
-  background: rgba(16, 185, 129, 0.2);
-  color: #10b981;
-  border: 1px solid rgba(16, 185, 129, 0.5);
-  box-shadow: 0 0 10px rgba(16, 185, 129, 0.4);
-}
-
-.camera-viewport-box {
-  width: 100%;
-  height: clamp(230px, 32vh, 340px);
-  background: #03060c;
-  position: relative;
-  overflow: hidden;
-}
-
-.camera-viewport-box video {
-  display: none;
-}
-
-.camera-viewport-box canvas {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transform: scaleX(-1); /* Mirror camera */
-}
-
-/* In-camera bottom hold progress meter */
-.camera-hud-bottom-bar {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: rgba(0, 0, 0, 0.45);
-  overflow: hidden;
-  z-index: 5;
-}
-
-.camera-hud-hold-fill {
-  height: 100%;
-  width: 0%;
-  background: linear-gradient(90deg, #00f5d4, #10b981);
-  box-shadow: 0 0 10px #10b981;
-  transition: width 0.05s linear;
-}
-
-.camera-feed-footer {
-  background: #090e1a;
-  padding: 4px 10px;
-  font-size: 0.7rem;
-  color: var(--text-dim);
-  text-align: center;
-  border-top: 1px solid var(--border-color);
-}
-
-/* BOTTOM RIGHT: Stage Sequence Grid Card */
-.sequence-grid-card {
-  background: var(--bg-card);
-  border: 1.5px solid var(--border-color);
-  border-radius: var(--radius-md);
-  padding: 10px 14px;
-  box-shadow: var(--shadow-md);
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  flex: 1;
-  min-height: 0;
-}
-
-.sequence-grid-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.sequence-legend {
-  display: flex;
-  align-items: center;
-  font-size: 0.7rem;
-  color: var(--text-muted);
-}
-
-.legend-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  display: inline-block;
-  margin-right: 4px;
-}
-
-.legend-dot.green {
-  background: var(--accent-green);
-  box-shadow: 0 0 6px var(--accent-green);
-}
-
-.legend-dot.red {
-  background: var(--accent-red);
-  box-shadow: 0 0 6px var(--accent-red);
-}
-
-/* GRID OF SEQUENCE NUMBERS FOR SPECIFIC STAGE */
-.stage-sequence-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(65px, 1fr));
-  gap: 6px;
-  flex: 1;
-  align-content: start;
-}
-
-.stage-grid-item {
-  background: rgba(10, 16, 28, 0.85);
-  border: 1.5px solid var(--border-color);
-  border-radius: 8px;
-  padding: 6px 2px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 2px;
-  font-family: var(--font-mono);
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.stage-grid-item .slot-idx {
-  font-size: 0.65rem;
-  color: var(--text-dim);
-  text-transform: uppercase;
-}
-
-.stage-grid-item .slot-icon {
-  font-size: 0.85rem;
-  line-height: 1;
-}
-
-.stage-grid-item .slot-val {
-  font-size: 1.1rem;
-  font-weight: 800;
-  line-height: 1;
-  color: #fff;
-}
-
-/* Active Slot: Cyan Glow */
-.stage-grid-item.slot-active {
-  border-color: var(--accent-cyan);
-  box-shadow: 0 0 18px rgba(0, 245, 212, 0.45);
-  transform: translateY(-2px);
-  background: rgba(0, 245, 212, 0.1);
-}
-
-.stage-grid-item.slot-active .slot-idx {
-  color: var(--accent-cyan);
-  font-weight: 700;
-}
-
-/* Correct Answer: GREEN ICON (User: "if answered correctly make the number icon green") */
-.stage-grid-item.slot-correct {
-  background: rgba(16, 185, 129, 0.18) !important;
-  border: 2px solid #10b981 !important;
-  color: #10b981 !important;
-  box-shadow: 0 0 16px rgba(16, 185, 129, 0.4) !important;
-}
-
-.stage-grid-item.slot-correct .slot-idx {
-  color: #a7f3d0 !important;
-}
-
-.stage-grid-item.slot-correct .slot-icon {
-  color: #10b981 !important;
-}
-
-.stage-grid-item.slot-correct .slot-val {
-  color: #10b981 !important;
-}
-
-/* Wrong Answer: RED ICON (User: "if wrong then red") */
-.stage-grid-item.slot-wrong {
-  background: rgba(239, 68, 68, 0.18) !important;
-  border: 2px solid #ef4444 !important;
-  color: #ef4444 !important;
-  box-shadow: 0 0 16px rgba(239, 68, 68, 0.4) !important;
-}
-
-.stage-grid-item.slot-wrong .slot-idx {
-  color: #fca5a5 !important;
-}
-
-.stage-grid-item.slot-wrong .slot-icon {
-  color: #ef4444 !important;
-}
-
-.stage-grid-item.slot-wrong .slot-val {
-  color: #ef4444 !important;
 }
 
 /* Stage Review Cards */
@@ -2130,10 +2236,10 @@ header.app-header {
   #view-game-arena.view-section.active {
     display: flex !important;
     flex-direction: column;
-    height: calc(100vh - 52px);
-    max-height: calc(100vh - 52px);
+    height: calc(100vh - 46px);
+    max-height: calc(100vh - 46px);
     overflow: hidden;
-    padding: 6px 0;
+    padding: 4px 0;
     box-sizing: border-box;
   }
 
@@ -2157,31 +2263,40 @@ header.app-header {
     flex: 1;
     min-height: 0;
     overflow: hidden;
-    grid-template-columns: minmax(0, 1.15fr) clamp(440px, 32vw, 560px);
-    gap: 14px;
+    display: grid;
+    grid-template-columns: minmax(180px, 1fr) minmax(460px, 2.4fr) minmax(220px, 1.15fr);
+    gap: 12px;
+  }
+
+  .gesture-left-panel {
+    height: 100%;
+    min-height: 0;
+    overflow: hidden;
   }
 
   .gesture-center-panel {
     height: 100%;
     min-height: 0;
     overflow: hidden;
-    padding: 10px 16px;
-    gap: 8px;
+    padding: 8px 12px;
+    gap: 6px;
   }
 
-  .gesture-right-sidebar {
-    height: 100%;
+  .camera-feed-card {
+    flex: 1;
     min-height: 0;
-    overflow: hidden;
-    gap: 10px;
+    display: flex;
+    flex-direction: column;
   }
 
   .camera-viewport-box {
-    height: clamp(220px, 31vh, 330px);
+    flex: 1;
+    min-height: 240px;
+    height: clamp(280px, 46vh, 440px);
   }
 
-  .sequence-grid-card {
-    flex: 1;
+  .gesture-right-panel {
+    height: 100%;
     min-height: 0;
     overflow: hidden;
   }
@@ -2192,17 +2307,17 @@ header.app-header {
   }
 
   .memorize-screen {
-    max-height: calc(100vh - 110px);
+    max-height: calc(100vh - 90px);
     overflow: hidden;
   }
 
   .stage-brief-card {
-    max-height: calc(100vh - 110px);
+    max-height: calc(100vh - 90px);
     overflow-y: auto;
   }
 
   .results-card {
-    max-height: calc(100vh - 110px);
+    max-height: calc(100vh - 90px);
     overflow-y: auto;
   }
 }
@@ -2217,7 +2332,7 @@ header.app-header {
     height: auto;
     max-height: none;
     overflow-y: visible;
-    padding: 10px 0 24px 0;
+    padding: 8px 0 24px 0;
   }
 
   .game-arena-wrapper {
@@ -2236,44 +2351,41 @@ header.app-header {
     height: auto;
   }
 
-  /* On phone/tablet, show camera view first so user can check framing */
-  .gesture-right-sidebar {
+  /* On tablet/mobile, Central panel with Camera appears first so participant sees camera spontaneously! */
+  .gesture-center-panel {
     order: 1;
-    gap: 10px;
+    padding: 10px 12px;
+    gap: 8px;
     height: auto;
   }
 
   .camera-viewport-box {
-    height: 185px;
+    height: clamp(220px, 36vh, 320px);
   }
 
-  .sequence-grid-card {
-    padding: 10px 14px;
+  .gesture-right-panel {
+    order: 2;
+    height: auto;
+    padding: 12px;
+  }
+
+  .gesture-left-panel {
+    order: 3;
+    padding: 12px;
     height: auto;
   }
 
   .stage-sequence-grid {
-    grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(56px, 1fr));
     gap: 6px;
   }
 
-  .gesture-center-panel {
-    order: 2;
-    padding: 14px 14px;
-    gap: 10px;
-    height: auto;
-  }
-
   .central-giant-digit {
-    font-size: 5rem;
+    font-size: 4.4rem;
   }
 
   .giant-tick-overlay {
-    font-size: 4.6rem;
-  }
-
-  .arena-top-bar {
-    padding: 8px 12px;
+    font-size: 4.2rem;
   }
 }
 
@@ -2495,11 +2607,11 @@ header.app-header {
   }
 
   /* Gesture Arena on smartphones */
-  .arena-top-bar {
+  .central-identity-bar {
     flex-direction: column;
     align-items: flex-start;
-    gap: 5px;
-    padding: 8px 10px;
+    gap: 4px;
+    padding: 6px 8px;
   }
 
   .arena-team-name {

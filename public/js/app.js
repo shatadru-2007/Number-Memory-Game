@@ -35,6 +35,15 @@ class App {
     if (hash === 'admin' && window.adminManager.isLoggedIn()) {
       this.switchView('admin-hub');
       window.adminManager.loadAdminView();
+    } else if (hash === 'gesture-test') {
+      this.switchView('game-arena');
+      if (window.gameEngine) {
+        window.gameEngine.team = { name: 'Alpha Squad' };
+        window.gameEngine.participant = { name: 'Player One', rollNumber: 'CS-2026' };
+        window.gameEngine.activeSequence = [4, 7, 2, 9, 1];
+        window.gameEngine.currentStage = 1;
+        window.gameEngine.openOpenCVOutputBox();
+      }
     } else if (this.participant && this.team) {
       this.refreshTeamLobby();
     } else {
