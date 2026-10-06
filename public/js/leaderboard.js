@@ -28,13 +28,17 @@ class LeaderboardManager {
 
   connectWebSocket() {
     const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-    const wsUrl = `${protocol}//${window.location.host}`;
+    const wsUrl = window.BACKEND_WS_URL || `${protocol}//${window.location.host}/ws`;
 
     try {
       this.ws = new WebSocket(wsUrl);
 
       this.ws.onopen = () => {
         console.log('WebSocket connected for live leaderboard updates');
+        if (this.pollInterval) {
+          clearInterval(this.pollInterval);
+          this.pollInterval = null;
+        }
         const pill = document.getElementById('server-status-pill');
         if (pill) {
           pill.innerHTML = `<span class="status-dot"></span> Live Sync Active`;
@@ -53,11 +57,22 @@ class LeaderboardManager {
       };
 
       this.ws.onclose = () => {
-        console.warn('WebSocket disconnected, reconnecting in 3s...');
-        setTimeout(() => this.connectWebSocket(), 3000);
+        console.warn('WebSocket disconnected or unsupported on this host. Falling back to HTTP polling...');
+        const pill = document.getElementById('server-status-pill');
+        if (pill) {
+          pill.innerHTML = `<span class="status-dot" style="background:#ffb703; box-shadow:0 0 10px #ffb703;"></span> Polling Active`;
+        }
+        if (!this.pollInterval) {
+          this.fetchData();
+          this.pollInterval = setInterval(() => this.fetchData(), 3000);
+        }
       };
     } catch (e) {
       console.error('WebSocket connection error:', e);
+      if (!this.pollInterval) {
+        this.fetchData();
+        this.pollInterval = setInterval(() => this.fetchData(), 3000);
+      }
     }
   }
 
