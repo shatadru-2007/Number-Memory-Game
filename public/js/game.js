@@ -123,7 +123,11 @@ class GameEngine {
     // Show Stage Briefing Screen
     document.getElementById('stage-brief-screen').style.display = 'block';
     document.getElementById('memorize-phase-screen').style.display = 'none';
-    document.getElementById('opencv-box-screen').style.display = 'none';
+    const cvEl = document.getElementById('opencv-box-screen');
+    if (cvEl) {
+      cvEl.classList.remove('active');
+      cvEl.style.display = 'none';
+    }
     document.getElementById('stage-review-screen').style.display = 'none';
     document.getElementById('final-results-screen').style.display = 'none';
 
@@ -139,6 +143,11 @@ class GameEngine {
   beginCountdown() {
     document.getElementById('stage-brief-screen').style.display = 'none';
     document.getElementById('memorize-phase-screen').style.display = 'flex';
+    const cvEl = document.getElementById('opencv-box-screen');
+    if (cvEl) {
+      cvEl.classList.remove('active');
+      cvEl.style.display = 'none';
+    }
 
     // Render sequence step slots strip
     this.renderMemorizeSlotsStrip();
@@ -251,7 +260,10 @@ class GameEngine {
     const memEl = document.getElementById('memorize-phase-screen');
     if (memEl) memEl.style.display = 'none';
     const cvEl = document.getElementById('opencv-box-screen');
-    if (cvEl) cvEl.style.display = 'block';
+    if (cvEl) {
+      cvEl.classList.add('active');
+      cvEl.style.display = 'flex';
+    }
 
     // Populate Top Left: Team Name and Active Participant Name
     const tName = this.team ? this.team.name : (localStorage.getItem('aarohan_team') ? JSON.parse(localStorage.getItem('aarohan_team')).name : 'Team Alpha');
@@ -679,7 +691,11 @@ class GameEngine {
       this._keyListener = null;
     }
     window.visionEngine.stopCamera();
-    document.getElementById('opencv-box-screen').style.display = 'none';
+    const cvEl = document.getElementById('opencv-box-screen');
+    if (cvEl) {
+      cvEl.classList.remove('active');
+      cvEl.style.display = 'none';
+    }
     document.getElementById('stage-review-screen').style.display = 'block';
 
     // Judging criteria: Count of right numbers in matching positions = points
@@ -761,6 +777,12 @@ class GameEngine {
 
   // 8. Show Final Results Certificate
   showFinalResults() {
+    window.visionEngine.stopCamera();
+    const cvEl = document.getElementById('opencv-box-screen');
+    if (cvEl) {
+      cvEl.classList.remove('active');
+      cvEl.style.display = 'none';
+    }
     document.getElementById('stage-review-screen').style.display = 'none';
     document.getElementById('final-results-screen').style.display = 'block';
 

@@ -106,8 +106,7 @@
             </p>
             <div
               style="font-size: 0.78rem; color: #a5f3fc; background: rgba(0,245,212,0.08); padding: 8px 12px; border-radius: 8px; margin-bottom: 20px; border: 1px solid rgba(0,245,212,0.2);">
-              ℹ️ Note: Team names can be duplicated, but a student with one roll number cannot register in any other
-              team.
+              ℹ️ Note: Maximum 3 people per team. If a 4th person tries to join a team already having 3 members, joining will be denied. A student with one roll number cannot register in any other team.
             </div>
             <div class="role-actions">
               <button class="btn btn-primary" onclick="window.app.openModal('modal-create-team')">
@@ -373,10 +372,14 @@
                     <span class="status-dot"></span>
                     <span>STAGE 1 IN PROGRESS</span>
                   </div>
-                  <div class="central-position-badge" id="central-position-pill">
-                    <span class="badge-icon">🎯</span>
-                    <span class="badge-text" id="central-pos-number">SEQUENCE #1 OF 5</span>
-                  </div>
+                </div>
+              </div>
+
+              <!-- Prominent Enhanced 'Show Sequence' Status Badge located above live camera feed -->
+              <div class="central-sequence-badge-wrapper">
+                <div class="central-position-badge" id="central-position-pill">
+                  <span class="badge-icon">🎯</span>
+                  <span class="badge-text" id="central-pos-number">SHOW SEQUENCE #1 OF 5</span>
                 </div>
               </div>
 
@@ -766,7 +769,7 @@
           <div class="form-group">
             <label for="ct-team-name">Team Name *</label>
             <input type="text" class="form-control" id="ct-team-name" placeholder="e.g. CyberVisions" required>
-            <span class="form-text">Note: Team names can be duplicated if needed.</span>
+            <span class="form-text">Note: Maximum 3 members per team (1 Leader + 2 Teammates).</span>
           </div>
           <div class="form-group">
             <label for="ct-leader-name">Team Leader Full Name *</label>
@@ -806,6 +809,10 @@
       </div>
       <form id="form-join-team">
         <div class="modal-body">
+          <div
+            style="font-size: 0.78rem; color: #a5f3fc; background: rgba(0,245,212,0.08); padding: 8px 12px; border-radius: 8px; margin-bottom: 14px; border: 1px solid rgba(0,245,212,0.2);">
+            👥 <strong>Team Capacity Limit:</strong> A maximum of 3 members can join a single team. If the team already has 3 members, joining will be rejected.
+          </div>
           <div class="form-group">
             <label for="jt-team-code">Team Code *</label>
             <input type="text" class="form-control" id="jt-team-code" placeholder="e.g. MEM-4891"

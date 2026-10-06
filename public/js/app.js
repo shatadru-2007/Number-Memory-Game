@@ -207,6 +207,7 @@ class App {
 
           if (!res.ok) {
             alert(data.error || 'Failed to join team');
+            this.showToast(data.error || 'Failed to join team', 'error');
             return;
           }
 

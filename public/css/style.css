@@ -1511,27 +1511,51 @@ header.app-header {
   color: var(--text-muted);
 }
 
+.central-sequence-badge-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  flex-shrink: 0;
+  margin: 1px 0 3px 0;
+}
+
 .central-position-badge {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
-  background: rgba(0, 245, 212, 0.12);
-  border: 1.5px solid var(--accent-cyan);
-  padding: 2px 10px;
+  justify-content: center;
+  gap: 12px;
+  width: 96%;
+  max-width: 540px;
+  min-height: 44px;
+  padding: 8px 24px;
   border-radius: var(--radius-full);
-  box-shadow: 0 0 12px rgba(0, 245, 212, 0.2);
+  background: linear-gradient(135deg, rgba(0, 245, 212, 0.16) 0%, rgba(121, 40, 202, 0.22) 100%);
+  border: 2px solid var(--accent-cyan);
+  box-shadow: 0 0 22px rgba(0, 245, 212, 0.35), inset 0 0 12px rgba(0, 245, 212, 0.1);
+  text-align: center;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.central-position-badge:hover {
+  box-shadow: 0 0 28px rgba(0, 245, 212, 0.5), inset 0 0 16px rgba(0, 245, 212, 0.2);
+  border-color: #55ffe4;
 }
 
 .central-position-badge .badge-icon {
-  font-size: 0.82rem;
+  font-size: 1.25rem;
+  line-height: 1;
+  filter: drop-shadow(0 0 8px var(--accent-cyan));
 }
 
 .central-position-badge .badge-text {
   font-family: var(--font-mono);
-  font-size: 0.76rem;
-  font-weight: 800;
-  color: var(--accent-cyan);
-  letter-spacing: 0.04em;
+  font-size: clamp(1.05rem, 1.8vw, 1.3rem);
+  font-weight: 900;
+  color: #ffffff;
+  letter-spacing: 0.1em;
+  text-shadow: 0 0 12px rgba(0, 245, 212, 0.7);
+  white-space: nowrap;
 }
 
 /* Central Timer Card (Just below identity) */
@@ -1676,9 +1700,9 @@ header.app-header {
 
 .camera-viewport-box {
   width: 100%;
-  flex: 1;
-  min-height: 260px;
-  height: clamp(280px, 46vh, 440px);
+  flex: 1 1 0;
+  min-height: 0;
+  height: 100%;
   background: #03060c;
   position: relative;
   overflow: hidden;
@@ -1694,7 +1718,8 @@ header.app-header {
 .camera-viewport-box canvas {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  max-height: 100%;
+  object-fit: contain;
   transform: scaleX(-1); /* Mirror camera */
 }
 
@@ -2252,47 +2277,65 @@ header.app-header {
   }
 
   #opencv-box-screen {
-    flex: 1;
+    display: none !important;
+  }
+
+  #opencv-box-screen.active {
+    flex: 1 1 0;
     min-height: 0;
-    display: flex;
+    display: flex !important;
     flex-direction: column;
     overflow: hidden;
+    width: 100%;
+    height: 100%;
   }
 
   .gesture-arena-container {
-    flex: 1;
+    flex: 1 1 0;
     min-height: 0;
     overflow: hidden;
     display: grid;
-    grid-template-columns: minmax(180px, 1fr) minmax(460px, 2.4fr) minmax(220px, 1.15fr);
-    gap: 12px;
+    grid-template-columns: minmax(170px, 1.1fr) minmax(440px, 2.5fr) minmax(210px, 1.2fr);
+    gap: 10px;
+    height: 100%;
   }
 
   .gesture-left-panel {
     height: 100%;
     min-height: 0;
     overflow: hidden;
+    padding: 8px 10px;
+    gap: 6px;
   }
 
   .gesture-center-panel {
     height: 100%;
     min-height: 0;
     overflow: hidden;
-    padding: 8px 12px;
-    gap: 6px;
+    padding: 6px 10px;
+    gap: 5px;
   }
 
   .camera-feed-card {
-    flex: 1;
+    flex: 1 1 0;
     min-height: 0;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
   }
 
   .camera-viewport-box {
-    flex: 1;
-    min-height: 240px;
-    height: clamp(280px, 46vh, 440px);
+    flex: 1 1 0;
+    min-height: 0;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .camera-viewport-box canvas {
+    width: 100%;
+    height: 100%;
+    max-height: 100%;
+    object-fit: contain;
   }
 
   .gesture-right-panel {
@@ -2623,11 +2666,13 @@ header.app-header {
   }
 
   .central-position-badge {
-    padding: 3px 12px;
+    width: 98%;
+    min-height: 40px;
+    padding: 6px 18px;
   }
 
   .central-position-badge .badge-text {
-    font-size: 0.82rem;
+    font-size: clamp(0.95rem, 2.8vw, 1.18rem);
   }
 
   .central-target-title {

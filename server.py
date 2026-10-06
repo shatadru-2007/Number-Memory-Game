@@ -368,6 +368,16 @@ async def api_participant_join_team(request):
                 "error": f'Team with Code "{cleaned_code}" does not exist. Please check the code with your team leader.'
             }, status=404)
 
+        # Team capacity restriction: Maximum 3 people in a single team
+        existing_members = [
+            p for p in db["participants"]
+            if str(p.get("teamCode", "")).upper() == cleaned_code
+        ]
+        if len(existing_members) >= 3:
+            return web.json_response({
+                "error": f'You are not allowed to join team "{team.get("name")}" (Code: {cleaned_code}) as the team size is full. A team cannot have more than 3 members.'
+            }, status=400)
+
         # Strict constraint: One roll number cannot register in any other team
         existing_student = next(
             (p for p in db["participants"] if str(p.get("rollNumber", "")).upper() == cleaned_roll),
